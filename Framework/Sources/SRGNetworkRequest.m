@@ -20,7 +20,7 @@
 
 #pragma marl Object lifecycle
 
-- (instancetype)initWithRequest:(NSURLRequest *)request session:(NSURLSession *)session withCompletionBlock:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completionBlock;
+- (instancetype)initWithRequest:(NSURLRequest *)request session:(NSURLSession *)session completionBlock:(void (^)(NSData * _Nullable data, NSError * _Nullable error))completionBlock;
 {
     if (self = [super init]) {
         self.sessionTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -74,9 +74,9 @@
     return self;
 }
 
-- (instancetype)initWithJSONDictionaryRequest:(NSURLRequest *)request session:(NSURLSession *)session withCompletionBlock:(void (^)(NSDictionary * _Nullable, NSError * _Nullable))completionBlock
+- (instancetype)initWithJSONDictionaryRequest:(NSURLRequest *)request session:(NSURLSession *)session completionBlock:(void (^)(NSDictionary * _Nullable, NSError * _Nullable))completionBlock
 {
-    return [self initWithRequest:request session:session withCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+    return [self initWithRequest:request session:session completionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             completionBlock(nil, error);
             return;
@@ -94,9 +94,9 @@
     }];
 }
 
-- (instancetype)initWithJSONArrayRequest:(NSURLRequest *)request session:(NSURLSession *)session withCompletionBlock:(void (^)(NSArray * _Nullable, NSError * _Nullable))completionBlock
+- (instancetype)initWithJSONArrayRequest:(NSURLRequest *)request session:(NSURLSession *)session completionBlock:(void (^)(NSArray * _Nullable, NSError * _Nullable))completionBlock
 {
-    return [self initWithRequest:request session:session withCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+    return [self initWithRequest:request session:session completionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error) {
             completionBlock(nil, error);
             return;
@@ -117,7 +117,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithRequest:[NSURLRequest new] session:[NSURLSession new] withCompletionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+    return [self initWithRequest:[NSURLRequest new] session:[NSURLSession new] completionBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         // Nothing
     }];
 }
