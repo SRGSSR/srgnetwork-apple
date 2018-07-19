@@ -18,11 +18,6 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
      */
     SRGNetworkErrorHTTP,
     /**
-     *  A redirect was encountered. This is e.g. often encountered on public wifis with a login page. Use the 
-     *  `SRGNetworkRedirectionURLKey` info key to retrieve the redirection URL (as an `NSURL`).
-     */
-    SRGNetworkErrorRedirect,
-    /**
      *  The data which was received is invalid.
      */
     SRGNetworkErrorInvalidData
@@ -37,6 +32,5 @@ OBJC_EXPORT NSString * const SRGNetworkErrorDomain;
  *  Error user information keys, @see `SRGNetworkErrorCode`.
  */
 OBJC_EXPORT NSString * const SRGNetworkHTTPStatusCodeKey;
-OBJC_EXPORT NSString * const SRGNetworkRedirectionURLKey;
 
 NS_ASSUME_NONNULL_END

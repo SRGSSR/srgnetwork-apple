@@ -48,24 +48,6 @@
                     completionBlock(nil, HTTPError);
                     return;
                 }
-                // Block redirects and return an error with URL information. Currently no redirection is expected for services we use, this
-                // means redirection is probably related to a public hotspot with login page (e.g. SBB)
-                else if (HTTPStatusCode >= 300) {
-                    NSMutableDictionary *userInfo = [@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"You are likely connected to a public wifi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)"),
-                                                        NSURLErrorKey : response.URL } mutableCopy];
-                    
-                    NSString *redirectionURLString = HTTPURLResponse.allHeaderFields[@"Location"];
-                    if (redirectionURLString) {
-                        NSURL *redirectionURL = [NSURL URLWithString:redirectionURLString];
-                        userInfo[SRGNetworkRedirectionURLKey] = redirectionURL;
-                    }
-                    
-                    NSError *redirectError = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                                 code:SRGNetworkErrorRedirect
-                                                             userInfo:[userInfo copy]];
-                    completionBlock(nil, redirectError);
-                    return;
-                }
             }
             
             completionBlock(data, nil);
