@@ -20,6 +20,8 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
 - (instancetype)initWithJSONDictionaryRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 - (instancetype)initWithJSONArrayRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 
+@property (nonatomic, readonly) NSURLRequest *URLRequest;
+
 - (void)resume;
 - (void)cancel;
 

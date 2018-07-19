@@ -12,6 +12,7 @@
 
 @interface  SRGNetworkRequest ()
 
+@property (nonatomic) NSURLRequest *URLRequest;
 @property (nonatomic) NSURLSessionTask *sessionTask;
 
 @end
@@ -23,6 +24,7 @@
 - (instancetype)initWithRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 {
     if (self = [super init]) {
+        self.URLRequest = request;
         self.sessionTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error) {
                 if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
