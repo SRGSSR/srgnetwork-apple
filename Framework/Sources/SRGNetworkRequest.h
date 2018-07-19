@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
     SRGNetworkRequestOptionIgnoreCancellationErrors = (1UL << 0),
-    SRGNetworkRequestOptionIgnoreHTTPErrors = (1UL << 0),
+    SRGNetworkRequestOptionIgnoreHTTPErrors = (1UL << 1),
 };
 
 @interface SRGNetworkRequest : NSObject
