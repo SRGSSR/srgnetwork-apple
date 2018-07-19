@@ -14,7 +14,7 @@
 		6F8A94472100566F00AA6434 /* NSBundle+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94402100566F00AA6434 /* NSBundle+SRGNetwork.m */; };
 		6F8A94482100566F00AA6434 /* SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94412100566F00AA6434 /* SRGNetwork.m */; };
 		6F8A944C2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944A2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m */; };
-		6F8A944D2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944B2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h */; };
+		6F8A944D2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944B2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8A945021005D9400AA6434 /* SRGNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944E21005D9400AA6434 /* SRGNetworkError.m */; };
 		6F8A945121005D9400AA6434 /* SRGNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944F21005D9400AA6434 /* SRGNetworkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
