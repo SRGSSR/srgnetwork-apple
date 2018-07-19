@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
     /**
      *  The data which was received is invalid.
      */
-    SRGNetworkErrorCodeInvalidData
+    SRGNetworkErrorInvalidData
 };
 
 /**

@@ -85,7 +85,7 @@
         id JSONDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
         if (! JSONDictionary || ! [JSONDictionary isKindOfClass:[NSDictionary class]]) {
             completionBlock(nil, [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                     code:SRGNetworkErrorCodeInvalidData
+                                                     code:SRGNetworkErrorInvalidData
                                                  userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"The error message when the response from IL server is incorrect.") }]);
             return;
         }
@@ -105,7 +105,7 @@
         id JSONArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
         if (! JSONArray || ! [JSONArray isKindOfClass:[NSArray class]]) {
             completionBlock(nil, [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                     code:SRGNetworkErrorCodeInvalidData
+                                                     code:SRGNetworkErrorInvalidData
                                                  userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"The error message when the response from IL server is incorrect.") }]);
             return;
         }
