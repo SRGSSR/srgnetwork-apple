@@ -16,7 +16,7 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
      *  By default, cancelled requests will not call the associated completion block. If this flag is set, though,
      *  cancelled requests will call the completion block with an associated error.
      */
-    SRGNetworkRequestOptionCancellationErrorsDisabled = (1UL << 0),
+    SRGNetworkRequestOptionCancellationErrorsProcessed = (1UL << 0),
     /**
      *  By default, and unlike `NSURLSession` tasks, requests return an `NSError` when an HTTP error status code has
      *  been received. If this flag is set, though, this mechanism is disabled, and the behavior is similar to the

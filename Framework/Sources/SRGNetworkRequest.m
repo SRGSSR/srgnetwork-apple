@@ -28,7 +28,7 @@
         self.sessionTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error) {
                 if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
-                    if ((options & SRGNetworkRequestOptionCancellationErrorsDisabled) == 0) {
+                    if ((options & SRGNetworkRequestOptionCancellationErrorsProcessed) == 0) {
                         return;
                     }
                 }

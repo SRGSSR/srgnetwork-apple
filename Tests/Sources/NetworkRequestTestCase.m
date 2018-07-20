@@ -128,7 +128,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/bytes/100"];
-    SRGNetworkRequest *request = [[SRGNetworkRequest alloc] initWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkRequestOptionCancellationErrorsDisabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGNetworkRequest *request = [[SRGNetworkRequest alloc] initWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkRequestOptionCancellationErrorsProcessed completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertFalse([NSThread isMainThread]);
         XCTAssertNil(data);
         XCTAssertNil(response);
