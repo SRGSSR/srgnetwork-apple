@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
+		6F6A0A012101BEB7004568BD /* SRGNetworkRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */; };
 		6F8A94432100566F00AA6434 /* SRGNetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8A94442100566F00AA6434 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8A94452100566F00AA6434 /* SRGNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A943D2100566F00AA6434 /* SRGNetworkRequest.m */; };
@@ -19,7 +21,20 @@
 		6F8A945121005D9400AA6434 /* SRGNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944F21005D9400AA6434 /* SRGNetworkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6F6A09F82101BD11004568BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F8A941A20FF21EB00AA6434 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F8A942220FF21EB00AA6434;
+			remoteInfo = SRGNetwork;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6F6A09F22101BD11004568BD /* SRGNetwork-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SRGNetwork-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkRequestTestCase.m; sourceTree = "<group>"; };
+		6F6A0A002101BEB7004568BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SRGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkRequest.h; sourceTree = "<group>"; };
 		6F8A943C2100566F00AA6434 /* SRGNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetwork.h; sourceTree = "<group>"; };
@@ -35,6 +50,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6F6A09EF2101BD11004568BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F8A941F20FF21EB00AA6434 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,10 +68,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F6A09FD2101BEB7004568BD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6F6A09FE2101BEB7004568BD /* Sources */,
+				6F6A0A002101BEB7004568BD /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		6F6A09FE2101BEB7004568BD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		6F8A941920FF21EB00AA6434 = {
 			isa = PBXGroup;
 			children = (
 				6F8A94392100566F00AA6434 /* Framework */,
+				6F6A09FD2101BEB7004568BD /* Tests */,
 				6F8A942420FF21EB00AA6434 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */,
+				6F6A09F22101BD11004568BD /* SRGNetwork-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +155,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6F6A09F12101BD11004568BD /* SRGNetwork-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-tests" */;
+			buildPhases = (
+				6F6A09EE2101BD11004568BD /* Sources */,
+				6F6A09EF2101BD11004568BD /* Frameworks */,
+				6F6A09F02101BD11004568BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F6A09F92101BD11004568BD /* PBXTargetDependency */,
+			);
+			name = "SRGNetwork-tests";
+			productName = "SRGNetwork-tests";
+			productReference = 6F6A09F22101BD11004568BD /* SRGNetwork-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6F8A942220FF21EB00AA6434 /* SRGNetwork */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F8A942B20FF21EB00AA6434 /* Build configuration list for PBXNativeTarget "SRGNetwork" */;
@@ -140,6 +200,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
+					6F6A09F12101BD11004568BD = {
+						CreatedOnToolsVersion = 9.4;
+					};
 					6F8A942220FF21EB00AA6434 = {
 						CreatedOnToolsVersion = 9.4;
 					};
@@ -158,11 +221,19 @@
 			projectRoot = "";
 			targets = (
 				6F8A942220FF21EB00AA6434 /* SRGNetwork */,
+				6F6A09F12101BD11004568BD /* SRGNetwork-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F6A09F02101BD11004568BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F8A942120FF21EB00AA6434 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,6 +244,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F6A09EE2101BD11004568BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6A0A012101BEB7004568BD /* SRGNetworkRequestTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F8A941E20FF21EB00AA6434 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -187,7 +266,49 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6F6A09F92101BD11004568BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F8A942220FF21EB00AA6434 /* SRGNetwork */;
+			targetProxy = 6F6A09F82101BD11004568BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6F6A09FB2101BD11004568BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6F6A09FC2101BD11004568BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6F8A942920FF21EB00AA6434 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -357,6 +478,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F6A09FB2101BD11004568BD /* Debug */,
+				6F6A09FC2101BD11004568BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6F8A941D20FF21EB00AA6434 /* Build configuration list for PBXProject "SRGNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
