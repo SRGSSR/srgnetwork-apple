@@ -159,16 +159,4 @@
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
 
-- (void)testDeallocation
-{
-    __weak SRGNetworkRequest *request;
-    @autoreleasepool {
-        NSURL *URL = [NSURL URLWithString:@"http://httpbin.org/bytes/100"];
-        request = [[SRGNetworkRequest alloc] initWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            XCTFail(@"Completion block must not be called");
-        }];
-    }
-    XCTAssertNil(request);
-}
-
 @end
