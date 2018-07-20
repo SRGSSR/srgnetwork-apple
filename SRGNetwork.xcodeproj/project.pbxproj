@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
-		6F6A0A012101BEB7004568BD /* SRGNetworkRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */; };
+		6F6A0A012101BEB7004568BD /* NetworkRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */; };
 		6F8A94432100566F00AA6434 /* SRGNetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8A94442100566F00AA6434 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8A94452100566F00AA6434 /* SRGNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A943D2100566F00AA6434 /* SRGNetworkRequest.m */; };
@@ -33,7 +33,7 @@
 
 /* Begin PBXFileReference section */
 		6F6A09F22101BD11004568BD /* SRGNetwork-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SRGNetwork-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkRequestTestCase.m; sourceTree = "<group>"; };
+		6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequestTestCase.m; sourceTree = "<group>"; };
 		6F6A0A002101BEB7004568BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SRGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkRequest.h; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		6F6A09FE2101BEB7004568BD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6F6A09FF2101BEB7004568BD /* SRGNetworkRequestTestCase.m */,
+				6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F6A0A012101BEB7004568BD /* SRGNetworkRequestTestCase.m in Sources */,
+				6F6A0A012101BEB7004568BD /* NetworkRequestTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
