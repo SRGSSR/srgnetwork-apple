@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSBundle (SRGLetterbox)
 
 /**
- *  The SRGNetwork resource bundle.
+ *  The framework resource bundle.
  */
 + (NSBundle *)srg_networkBundle;
 

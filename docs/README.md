@@ -4,6 +4,10 @@
 
 ## About
 
+A simple network library.
+
+🚧 **3rd party applications should not use this library until it reaches version 1.0, as its precise scope and API has not been defined yet.** 🚧
+
 ## Compatibility
 
 The library is suitable for applications running on iOS 9 and above. The project is meant to be opened with the latest Xcode version (currently Xcode 9).
