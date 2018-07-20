@@ -28,7 +28,7 @@
         self.sessionTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if (error) {
                 if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
-                    if ((options & SRGNetworkRequestOptionIgnoreCancellationErrors) == 0) {
+                    if ((options & SRGNetworkRequestOptionCancellationErrorsDisabled) == 0) {
                         return;
                     }
                 }
@@ -37,21 +37,24 @@
                 return;
             }
             
-            if ((options & SRGNetworkRequestOptionIgnoreHTTPErrors) == 0) {
-                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                    NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
-                    NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
-                    
-                    // Properly handle HTTP error codes >= 400 as real errors
-                    if (HTTPStatusCode >= 400) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
+                NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
+                
+                // Properly handle HTTP error codes >= 400 as real errors
+                if (HTTPStatusCode >= 400) {
+                    if ((options & SRGNetworkRequestOptionHTTPErrorsDisabled) == 0) {
                         NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
                                                                  code:SRGNetworkErrorHTTP
                                                              userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
                                                                          NSURLErrorKey : response.URL,
                                                                          SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
                         completionBlock(nil, response, HTTPError);
-                        return;
                     }
+                    else {
+                        completionBlock(nil, response, nil);
+                    }
+                    return;
                 }
             }
             
@@ -61,7 +64,7 @@
     return self;
 }
 
-- (instancetype)initWithJSONDictionaryRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable, NSURLResponse * _Nullable response, NSError * _Nullable))completionBlock
+- (instancetype)initWithJSONDictionaryURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable, NSURLResponse * _Nullable response, NSError * _Nullable))completionBlock
 {
     return [self initWithURLRequest:request session:session options:options completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
@@ -81,7 +84,7 @@
     }];
 }
 
-- (instancetype)initWithJSONArrayRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable, NSURLResponse * _Nullable response, NSError * _Nullable))completionBlock
+- (instancetype)initWithJSONArrayURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable, NSURLResponse * _Nullable response, NSError * _Nullable))completionBlock
 {
     return [self initWithURLRequest:request session:session options:options completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {

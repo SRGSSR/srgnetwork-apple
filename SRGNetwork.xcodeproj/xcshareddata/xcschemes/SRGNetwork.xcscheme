@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F6A09F12101BD11004568BD"
+               BuildableName = "SRGNetwork-tests.xctest"
+               BlueprintName = "SRGNetwork-tests"
+               ReferencedContainer = "container:SRGNetwork.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6F8A942220FF21EB00AA6434"
+            BuildableName = "SRGNetwork.framework"
+            BlueprintName = "SRGNetwork"
+            ReferencedContainer = "container:SRGNetwork.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

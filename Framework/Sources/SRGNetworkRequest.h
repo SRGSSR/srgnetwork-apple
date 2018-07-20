@@ -16,13 +16,13 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
      *  By default, cancelled requests will not call the associated completion block. If this flag is set, though,
      *  cancelled requests will call the completion block with an associated error.
      */
-    SRGNetworkRequestOptionIgnoreCancellationErrors = (1UL << 0),
+    SRGNetworkRequestOptionCancellationErrorsDisabled = (1UL << 0),
     /**
      *  By default, and unlike `NSURLSession` tasks, requests return an `NSError` when an HTTP error status code has
      *  been received. If this flag is set, though, this mechanism is disabled, and the behavior is similar to the
      *  one of `NSURLSession` tasks (the status code can be retrieved from the response).
      */
-    SRGNetworkRequestOptionIgnoreHTTPErrors = (1UL << 1),
+    SRGNetworkRequestOptionHTTPErrorsDisabled = (1UL << 1),
 };
 
 /**
@@ -45,14 +45,14 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
  *
  *  @discussion An error is returned if the response is not a valid JSON dictionary.
  */
-- (instancetype)initWithJSONDictionaryRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+- (instancetype)initWithJSONDictionaryURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 
 /**
  *  Same as `-initWithURLRequest:session:options:completionBlock:`, returning the response as a JSON array.
  *
  *  @discussion An error is returned if the response is not a valid JSON array.
  */
-- (instancetype)initWithJSONArrayRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+- (instancetype)initWithJSONArrayURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 
 /**
  *  The original URL request.
