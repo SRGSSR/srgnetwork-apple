@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 #define SRGNetworkLocalizedString(key, comment) [[NSBundle srg_networkBundle] localizedStringForKey:(key) value:@"" table:nil]
 
-@interface NSBundle (SRGLetterbox)
+@interface NSBundle (SRGNetwork)
 
 /**
  *  The framework resource bundle.
