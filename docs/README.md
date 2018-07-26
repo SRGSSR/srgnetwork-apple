@@ -6,7 +6,7 @@
 
 A simple network library.
 
-🚧 **3rd party applications should not use this library until it reaches version 1.0, as its precise scope and API has not been defined yet.** 🚧
+🚧 **3rd party applications should not use this library until it reaches version 1.0, as its precise scope and API have not been defined yet.** 🚧
 
 ## Compatibility
 
