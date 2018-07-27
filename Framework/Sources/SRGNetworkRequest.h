@@ -26,7 +26,7 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
 };
 
 /**
- *  A simple network request.
+ *  A simple network request. Can be created from any thread.
  */
 @interface SRGNetworkRequest : NSObject
 
@@ -36,7 +36,8 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
  *  @param request         The request to execute.
  *  @param session         The session for which the request is executed.
  *  @param options         Options to apply (0 if none).
- *  @param completionBlock The completion block which will be called when the request ends. Beware that the block is called on a background thread.
+ *  @param completionBlock The completion block which will be called when the request ends. Beware that the block might be
+ *                         called on a background thread, depending on how the session has been configured.
  */
 - (instancetype)initWithURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response,  NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
 
