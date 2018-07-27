@@ -112,9 +112,9 @@
 		6F8A94392100566F00AA6434 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				6F8A94422100566F00AA6434 /* Info.plist */,
-				6FCBFEEE210B564B006BC355 /* Resources */,
 				6F8A943A2100566F00AA6434 /* Sources */,
+				6FCBFEEE210B564B006BC355 /* Resources */,
+				6F8A94422100566F00AA6434 /* Info.plist */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
