@@ -14,9 +14,9 @@
 
 + (NSBundle *)srg_networkBundle
 {
-    static NSBundle *bundle;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
+    static NSBundle *s_bundle;
+    static dispatch_once_t s_once;
+    dispatch_once(&s_once, ^{
         NSString *bundlePath = [[NSBundle bundleForClass:[SRGNetworkRequest class]].bundlePath stringByAppendingPathComponent:@"SRGNetwork.bundle"];
         bundle = [NSBundle bundleWithPath:bundlePath];
         NSAssert(bundle, @"Please add SRGNetwork.bundle to your project resources");
