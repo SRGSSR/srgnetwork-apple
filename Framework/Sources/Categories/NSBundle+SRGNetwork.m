@@ -18,10 +18,10 @@
     static dispatch_once_t s_once;
     dispatch_once(&s_once, ^{
         NSString *bundlePath = [[NSBundle bundleForClass:[SRGNetworkRequest class]].bundlePath stringByAppendingPathComponent:@"SRGNetwork.bundle"];
-        bundle = [NSBundle bundleWithPath:bundlePath];
-        NSAssert(bundle, @"Please add SRGNetwork.bundle to your project resources");
+        s_bundle = [NSBundle bundleWithPath:bundlePath];
+        NSAssert(s_bundle, @"Please add SRGNetwork.bundle to your project resources");
     });
-    return bundle;
+    return s_bundle;
 }
 
 @end
