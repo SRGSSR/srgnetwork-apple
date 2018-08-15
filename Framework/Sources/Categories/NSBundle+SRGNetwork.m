@@ -14,12 +14,14 @@
 
 + (NSBundle *)srg_networkBundle
 {
-    static NSBundle *bundle;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        bundle = [NSBundle bundleForClass:[SRGNetworkRequest class]];
+    static NSBundle *s_bundle;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        NSString *bundlePath = [[NSBundle bundleForClass:[SRGNetworkRequest class]].bundlePath stringByAppendingPathComponent:@"SRGNetwork.bundle"];
+        s_bundle = [NSBundle bundleWithPath:bundlePath];
+        NSAssert(s_bundle, @"Please add SRGNetwork.bundle to your project resources");
     });
-    return bundle;
+    return s_bundle;
 }
 
 @end
