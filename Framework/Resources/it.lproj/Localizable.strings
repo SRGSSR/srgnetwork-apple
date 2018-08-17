@@ -1,2 +1,2 @@
 /* Error message returned when a server response data is incorrect. */
-"The data is invalid." = "The data is invalid.";
+"The data is invalid." = "I dati non sono validi.";
