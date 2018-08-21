@@ -777,7 +777,6 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
@@ -793,7 +792,6 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
@@ -809,7 +807,6 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
@@ -825,7 +822,6 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
