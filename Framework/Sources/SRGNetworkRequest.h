@@ -39,7 +39,7 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
  *  @param completionBlock The completion block which will be called when the request ends. Beware that the block might be
  *                         called on a background thread, depending on how the session has been configured.
  */
-- (instancetype)initWithURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response,  NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithURLRequest:(NSURLRequest *)request session:(NSURLSession *)session options:(SRGNetworkRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Same as `-initWithURLRequest:session:options:completionBlock:`, returning the response as a JSON dictionary.
