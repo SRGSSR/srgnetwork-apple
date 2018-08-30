@@ -73,6 +73,16 @@ Import the module where needed:
 import SRGNetwork
 ```
 
+## Building the project
+
+A [Makefile](../Makefile) provides several targets to build and package the library. The available targets can be listed by running the following command from the project root folder:
+
+```
+make help
+```
+
+Alternatively, you can of course open the project with Xcode and use the available schemes.
+
 ## License
 
 See the [LICENSE](../LICENSE) file for more information.
