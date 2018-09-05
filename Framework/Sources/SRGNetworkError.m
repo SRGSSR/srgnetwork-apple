@@ -9,3 +9,4 @@
 NSString * const SRGNetworkErrorDomain = @"ch.srgssr.network";
 
 NSString * const SRGNetworkHTTPStatusCodeKey = @"SRGNetworkHTTPStatusCodeKey";
+NSString * const SRGNetworkFailingURLKey = @"SRGNetworkFailingURLKey";
