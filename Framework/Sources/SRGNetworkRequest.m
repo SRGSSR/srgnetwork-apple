@@ -47,7 +47,7 @@
                         NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
                                                                  code:SRGNetworkErrorHTTP
                                                              userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
-                                                                         NSURLErrorKey : response.URL,
+                                                                         SRGNetworkFailingURLKey : response.URL,
                                                                          SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
                         completionBlock(nil, response, HTTPError);
                     }

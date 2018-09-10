@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
     /**
      *  An HTTP error has been encountered. The HTTP status code is available from the user info under the
-     *  `SRGNetworkHTTPStatusCodeKey` key (as an `NSNumber`).
+     *  `SRGNetworkHTTPStatusCodeKey` key.
      */
     SRGNetworkErrorHTTP,
     /**
@@ -28,9 +28,8 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
  */
 OBJC_EXPORT NSString * const SRGNetworkErrorDomain;
 
-/**
- *  Error user information keys, @see `SRGNetworkErrorCode`.
- */
-OBJC_EXPORT NSString * const SRGNetworkHTTPStatusCodeKey;
+// Information available for `SRGNetworkErrorHTTP`.
+OBJC_EXPORT NSString * const SRGNetworkHTTPStatusCodeKey;           // Key to access the HTTP status code as an `NSNumber` (wrapping an `NSInteger` value).
+OBJC_EXTERN NSString * const SRGNetworkFailingURLKey;               // Key to access the failing URL.
 
 NS_ASSUME_NONNULL_END

@@ -84,6 +84,8 @@
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(error.domain, SRGNetworkErrorDomain);
         XCTAssertEqual(error.code, SRGNetworkErrorHTTP);
+        XCTAssertEqualObjects(error.userInfo[SRGNetworkHTTPStatusCodeKey], @404);
+        XCTAssertEqualObjects(error.userInfo[SRGNetworkFailingURLKey], URL);
         [expectation fulfill];
     }];
     [request resume];
