@@ -11,14 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Convenience macro for localized strings associated with the framework.
  */
-#define SRGNetworkLocalizedString(key, comment) [[NSBundle srg_networkBundle] localizedStringForKey:(key) value:@"" table:nil]
+#define SRGNetworkLocalizedString(key, comment) [NSBundle.srg_networkBundle localizedStringForKey:(key) value:@"" table:nil]
 
 @interface NSBundle (SRGNetwork)
 
 /**
  *  The framework resource bundle.
  */
-+ (NSBundle *)srg_networkBundle;
+@property (class, nonatomic, readonly) NSBundle *srg_networkBundle;
 
 @end
 
