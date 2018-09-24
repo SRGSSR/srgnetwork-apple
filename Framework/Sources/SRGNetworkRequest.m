@@ -37,7 +37,7 @@
                 return;
             }
             
-            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            if ([response isKindOfClass:NSHTTPURLResponse.class]) {
                 NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
                 NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
                 
@@ -73,7 +73,7 @@
         }
         
         id JSONDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        if (! JSONDictionary || ! [JSONDictionary isKindOfClass:[NSDictionary class]]) {
+        if (! JSONDictionary || ! [JSONDictionary isKindOfClass:NSDictionary.class]) {
             completionBlock(nil, response, [NSError errorWithDomain:SRGNetworkErrorDomain
                                                                code:SRGNetworkErrorInvalidData
                                                            userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }]);
@@ -93,7 +93,7 @@
         }
         
         id JSONArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        if (! JSONArray || ! [JSONArray isKindOfClass:[NSArray class]]) {
+        if (! JSONArray || ! [JSONArray isKindOfClass:NSArray.class]) {
             completionBlock(nil, response, [NSError errorWithDomain:SRGNetworkErrorDomain
                                                                code:SRGNetworkErrorInvalidData
                                                            userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }]);
