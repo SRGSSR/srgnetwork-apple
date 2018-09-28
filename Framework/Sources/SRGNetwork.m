@@ -10,5 +10,5 @@
 
 NSString *SRGNetworkMarketingVersion(void)
 {
-    return [NSBundle srg_networkBundle].infoDictionary[@"CFBundleShortVersionString"];
+    return NSBundle.srg_networkBundle.infoDictionary[@"CFBundleShortVersionString"];
 }
