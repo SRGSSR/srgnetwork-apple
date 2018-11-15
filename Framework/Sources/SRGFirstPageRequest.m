@@ -6,10 +6,8 @@
 
 #import "SRGFirstPageRequest.h"
 
-#import "SRGFirstPageRequest+Private.h"
 #import "SRGPage+Private.h"
 #import "SRGPageRequest+Private.h"
-#import "SRGRequest+Private.h"
 
 @interface SRGFirstPageRequest ()
 

@@ -8,10 +8,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// Block signatures.
+typedef void (^SRGPageCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSNumber * _Nullable total, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error);
+
 /**
  *  Request for the first page of a list of results.
  */
 @interface SRGFirstPageRequest : SRGPageRequest
+
+/**
+ *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
+ *
+ *  @discussion The completion block is called on the main thread.
+ */
+// TODO: Page / total extractor block or field names
+- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session pageCompletionBlock:(SRGPageCompletionBlock)pageCompletionBlock;
 
 /**
  *  Return an equivalent request, but with the specified page size.

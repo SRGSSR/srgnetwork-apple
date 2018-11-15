@@ -9,6 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Block signatures.
+// TODO: id, JSON dictionary and array, as for SRGNetworkRequest
 typedef void (^SRGPageCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSNumber * _Nullable total, SRGPage *page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error);
 
 /**

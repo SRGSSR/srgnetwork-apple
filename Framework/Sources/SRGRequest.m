@@ -7,7 +7,6 @@
 #import "SRGRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
-#import "SRGRequest+Private.h"
 
 #import <SRGNetwork/SRGNetwork.h>
 #import <UIKit/UIKit.h>
