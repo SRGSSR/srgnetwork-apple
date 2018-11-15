@@ -23,6 +23,12 @@ typedef NS_OPTIONS(NSUInteger, SRGNetworkRequestOptions) {
      *  one of `NSURLSession` tasks (the status code can be retrieved from the response).
      */
     SRGNetworkRequestOptionHTTPErrorsDisabled = (1UL << 1),
+    /**
+     *  By default, certificate trust issues are described as probably related to a public WiFi being used. This
+     *  behavior can be disabled, in which case the original error message is returned. The error domain and code
+     *  and left unaltered.
+     */
+    SRGNetworkRequestPublicWiFiIssuesDisabled = (1UL << 2)
 };
 
 /**

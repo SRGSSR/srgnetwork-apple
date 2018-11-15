@@ -29,6 +29,7 @@ typedef void (^SRGRequestCompletionBlock)(NSDictionary * _Nullable JSONDictionar
 /**
  *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
  */
+// TODO: Options
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session completionBlock:(SRGRequestCompletionBlock)completionBlock;
 
 /**

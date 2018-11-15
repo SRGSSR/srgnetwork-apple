@@ -91,16 +91,6 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
             if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
                 requestCompletionBlock(NO, nil, HTTPResponse, error);
             }
-            // TODO: Probably move as optional behavior of SRGNetworkRequest
-#if 0
-            else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
-                NSError *friendlyError = [NSError errorWithDomain:error.domain
-                                                             code:error.code
-                                                         userInfo:@{ NSLocalizedDescriptionKey : SRGDataProviderLocalizedString(@"You are likely connected to a public wifi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)"),
-                                                                     NSURLErrorKey : self.URLRequest.URL }];
-                requestCompletionBlock(YES, nil, HTTPResponse, friendlyError);
-            }
-#endif
             else {
                 requestCompletionBlock(YES, nil, HTTPResponse, error);
             }

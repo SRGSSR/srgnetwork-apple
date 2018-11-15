@@ -22,6 +22,7 @@ typedef void (^SRGPageCompletionBlock)(NSDictionary * _Nullable JSONDictionary, 
  *  @discussion The completion block is called on the main thread.
  */
 // TODO: Page / total extractor block or field names
+// TODO: Options
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session pageCompletionBlock:(SRGPageCompletionBlock)pageCompletionBlock;
 
 /**

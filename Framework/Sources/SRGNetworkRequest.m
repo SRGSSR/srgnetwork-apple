@@ -32,6 +32,18 @@
                         return;
                     }
                 }
+                else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
+                    if ((options & SRGNetworkRequestPublicWiFiIssuesDisabled) == 0) {
+                        // TODO: Use SRGNetworkFailingURLKey, or keep NSURLErrorKey? (probably keep if it was in the original error, so that
+                        //       only the message is changed)
+                        NSError *publicWiFiError = [NSError errorWithDomain:error.domain
+                                                                       code:error.code
+                                                                   userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"You are likely connected to a public wifi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)"),
+                                                                               NSURLErrorKey : self.URLRequest.URL }];
+                        completionBlock(nil, response, publicWiFiError);
+                        return;
+                    }
+                }
                 
                 completionBlock(nil, response, error);
                 return;
