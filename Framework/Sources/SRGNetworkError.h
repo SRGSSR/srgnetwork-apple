@@ -20,7 +20,12 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
     /**
      *  The data which was received is invalid.
      */
-    SRGNetworkErrorInvalidData
+    SRGNetworkErrorInvalidData,
+    /**
+     *  Several errors have been encountered. Use the `SRGDataProviderErrorsKey` user info key to retrieve the
+     *  error list.
+     */
+    SRGNetworkErrorMultiple
 };
 
 /**
@@ -28,8 +33,16 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
  */
 OBJC_EXPORT NSString * const SRGNetworkErrorDomain;
 
-// Information available for `SRGNetworkErrorHTTP`.
+/**
+ *  Information available for `SRGNetworkErrorHTTP`.
+ */
 OBJC_EXPORT NSString * const SRGNetworkHTTPStatusCodeKey;           // Key to access the HTTP status code as an `NSNumber` (wrapping an `NSInteger` value).
 OBJC_EXTERN NSString * const SRGNetworkFailingURLKey;               // Key to access the failing URL.
+
+/**
+ *  Information available for `SRGDataProviderErrorsKey`.
+ */
+OBJC_EXPORT NSString * const SRGNetworkErrorsKey;                   // Error list as as an `NSArray<NSError *>`.
+
 
 NS_ASSUME_NONNULL_END
