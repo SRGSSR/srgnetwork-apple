@@ -8,9 +8,33 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Block signatures.
-// TODO: id, JSON dictionary and array, as for SRGNetworkRequest
-typedef void (^SRGRequestCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error);
+/**
+ *  Rquest options.
+ */
+typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
+    /**
+     *  By default, cancelled requests will not call the associated completion block. If this flag is set, though,
+     *  cancelled requests will call the completion block with an associated error.
+     */
+    SRGRequestOptionCancellationErrorsEnabled = (1UL << 0),
+    /**
+     *  By default, and unlike `NSURLSession` tasks, requests return an `NSError` when an HTTP error status code has
+     *  been received. If this flag is set, though, this mechanism is disabled, and the behavior is similar to the
+     *  one of `NSURLSession` tasks (the status code can be retrieved from the response).
+     */
+    SRGRequestOptionHTTPErrorsDisabled = (1UL << 1),
+    /**
+     *  By default, certificate trust issues are described as probably related to a public WiFi being used. This
+     *  behavior can be disabled, in which case the original error message is returned. The error domain and code
+     *  and left unaltered.
+     */
+    SRGNetworkRequestPublicWiFiIssuesDisabled = (1UL << 2),
+    /**
+     *  By default, request completion blocks are called on a background thread. Enable this flag to have them called
+     *  on the main thread.
+     */
+    SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
+};
 
 /**
  *  `SRGRequest` objects provide a way to manage the data retrieval process associated with a data provider 
@@ -27,10 +51,22 @@ typedef void (^SRGRequestCompletionBlock)(NSDictionary * _Nullable JSONDictionar
 @interface SRGRequest : NSObject
 
 /**
- *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
+ *  Convenience initializers. JSON requests will fail with an error if the data cannot be parsed in the expected format.
  */
-// TODO: Options
-- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session completionBlock:(SRGRequestCompletionBlock)completionBlock;
++ (SRGRequest *)requestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
++ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
++ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+
+/**
+ *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
+ *
+ *  @param URLRequest      The request to execute.
+ *  @param session         The session for which the request is executed.
+ *  @param options         Options to apply (0 if none).
+ *  @param completionBlock The completion block which will be called when the request ends. Beware that the block might be
+ *                         called on a background thread, depending on how the session has been configured.
+ */
+- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Start performing the request.
@@ -107,6 +143,12 @@ typedef void (^SRGRequestCompletionBlock)(NSDictionary * _Nullable JSONDictionar
  *              indicator management, the indicator is hidden as well.
  */
 + (void)disableNetworkActivityManagement;
+
+@end
+
+@interface SRGRequest (Unavailable)
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
