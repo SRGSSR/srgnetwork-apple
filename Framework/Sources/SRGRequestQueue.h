@@ -119,9 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Return `YES` iff the queue is running.
  *
- *  @discussion This property is KVO-observable.
+ *  @discussion This property is KVO-observable (changes are not necessarily observed on the main thread, though).
  */
-@property (nonatomic, readonly, getter=isRunning) BOOL running;
+@property (readonly, getter=isRunning) BOOL running;
 
 @end
 

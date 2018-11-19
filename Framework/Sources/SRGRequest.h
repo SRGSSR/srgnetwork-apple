@@ -47,18 +47,6 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  manually afterwards). If you want to be able to cancel a request, keep a reference to it. 
  *
  *  To manage several related requests, use an `SRGRequestQueue`.
- *
- *  TODO: Thread-safety guarantees? Can requests be created from any thread? Can running be tested from
- *        any thread (e.g. dispatch_sync running changes when not on main thread)? Write associated tests
- *        if improved. Strategy:
- *          - Migrate all queue tests.
- *          - Remove all running updates on the main thread. Make no such promises, document that KVO
- *            is called on any thread
- *          - Ensure that network status management is correctly performed from the main thread.
- *          - Update queue code to observe notifications and call all code on the main thread. Document
- *            queues as meant to be instantiated and used on the main thread only. Check that all tests
- *            still work.
- *          - If everything is ok, add unit tests for requests created on background threads.
  */
 @interface SRGRequest : NSObject
 
@@ -103,19 +91,19 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *              completion block (@see `SRGDataProvider`) has been executed. It is immediately reset to `NO`
  *              when the request is cancelled.
  *
- *              This property is KVO-observable.
+ *              This property is KVO-observable (changes are not necessarily observed on the main thread, though).
  */
-@property (nonatomic, readonly, getter=isRunning) BOOL running;
+@property (readonly, getter=isRunning) BOOL running;
 
 /**
  *  The underlying low-level request.
  */
-@property (nonatomic, readonly) NSURLRequest *URLRequest;
+@property (readonly) NSURLRequest *URLRequest;
 
 /**
  *  The session.
  */
-@property (nonatomic, readonly) NSURLSession *session;
+@property (readonly) NSURLSession *session;
 
 @end
 
@@ -144,7 +132,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  if desired. The method can be called at any time though, the network activity indicator will be updated accordingly.
  *
  *  @discussion Any previously registered handler is replaced. If automatic indicator management was used, it is
- *              disabled as well.
+ *              disabled as well. The handler is always called on the main thread.
  */
 + (void)enableNetworkActivityManagementWithHandler:(void (^)(BOOL active))handler;
 

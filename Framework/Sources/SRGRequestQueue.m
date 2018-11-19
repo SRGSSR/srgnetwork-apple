@@ -9,6 +9,7 @@
 #import "NSBundle+SRGNetwork.h"
 #import "SRGNetworkError.h"
 #import "SRGNetworkLogger.h"
+#import "SRGQueueDispatch.h"
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
@@ -17,14 +18,16 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 
 @interface SRGRequestQueue ()
 
-@property (nonatomic, readonly) NSSet<SRGRequest *> *requests;
-@property (nonatomic, copy) void (^stateChangeBlock)(BOOL running, NSError *error);
-@property (nonatomic) NSMutableArray<NSError *> *errors;
-@property (nonatomic, getter=isRunning) BOOL running;
+@property (readonly) NSSet<SRGRequest *> *requests;
+@property (copy) void (^stateChangeBlock)(BOOL running, NSError *error);
+@property NSMutableArray<NSError *> *errors;
+@property (getter=isRunning) BOOL running;
 
 @end
 
 @implementation SRGRequestQueue
+
+@synthesize running = _running;
 
 #pragma mark Class methods
 
@@ -78,6 +81,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
     @weakify(self)
     [request addObserver:self keyPath:@keypath(request, running) options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
         @strongify(self)
+        
         [self checkStateChange];
     }];
     
@@ -146,12 +150,16 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
         if (running) {
             [self.errors removeAllObjects];
             SRGNetworkLogDebug(@"Request Queue", @"Started %@", self);
-            self.stateChangeBlock ? self.stateChangeBlock(NO, nil) : nil;
+            dispatch_sync_on_main_queue_if_needed(^{
+                self.stateChangeBlock ? self.stateChangeBlock(NO, nil) : nil;
+            });
         }
         else {
             NSError *error = [self consolidatedError];
             SRGNetworkLogDebug(@"Request Queue", @"Ended %@ with error: %@", self, error);
-            self.stateChangeBlock ? self.stateChangeBlock(YES, error) : nil;
+            dispatch_sync_on_main_queue_if_needed(^{
+                self.stateChangeBlock ? self.stateChangeBlock(YES, error) : nil;
+            });
         }
     }
 }

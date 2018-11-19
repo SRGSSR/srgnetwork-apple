@@ -10,6 +10,21 @@
 //   - https://httpbin.org for HTTP-related tests.
 //   - https://badssl.com for SSL-related tests.
 
+/**
+ *
+ *  TODO: Thread-safety guarantees? Can requests be created from any thread? Can running be tested from
+ *        any thread (e.g. dispatch_sync running changes when not on main thread)? Write associated tests
+ *        if improved. Strategy:
+ *          - (OK) Migrate all queue tests.
+ *          - (OK) Remove all running updates on the main thread. Make no such promises, document that KVO
+ *            is called on any thread
+ *          - Ensure that network status management is correctly performed from the main thread.
+ *          - Update queue code to observe notifications and call all code on the main thread. Document
+ *            queues as meant to be instantiated and used on the main thread only. Check that all tests
+ *            still work.
+ *          - If everything is ok, add unit tests for requests created on background threads.
+ */
+
 @interface RequestTestCase : NetworkBaseTestCase
 
 @end
@@ -256,7 +271,7 @@
         XCTAssertTrue(request.running);
         
         // Fulfill expectation after block execution to capture the `running` update occurring after it
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
         });
     }];
@@ -311,7 +326,6 @@
     
     // Wait until the request is not running anymore
     [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@NO];
     }];
     
@@ -321,7 +335,6 @@
     
     // Restart it
     [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@YES];
     }];
     
@@ -393,7 +406,7 @@
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
         });
     }];
@@ -412,7 +425,7 @@
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
         });
     }];
@@ -443,7 +456,7 @@
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
         });
     }];
@@ -467,7 +480,7 @@
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
         });
     }];

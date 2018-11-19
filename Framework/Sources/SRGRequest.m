@@ -7,6 +7,7 @@
 #import "SRGRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
+#import "SRGQueueDispatch.h"
 
 #import <SRGNetwork/SRGNetwork.h>
 #import <UIKit/UIKit.h>
@@ -29,6 +30,8 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 @end
 
 @implementation SRGRequest
+
+@synthesize running = _running;
 
 #pragma mark Class methods
 
@@ -77,6 +80,30 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
     }];
 }
 
++ (void)increaseNumberOfRunningRequests
+{
+    @synchronized (self.class) {
+        if (s_numberOfRunningRequests == 0) {
+            dispatch_sync_on_main_queue_if_needed(^{
+                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(YES) : nil;
+            });
+        }
+        ++s_numberOfRunningRequests;
+    }
+}
+
++ (void)decreaseNumberOfRunningRequests
+{
+    @synchronized (self.class) {
+        --s_numberOfRunningRequests;
+        if (s_numberOfRunningRequests == 0) {
+            dispatch_sync_on_main_queue_if_needed(^{
+                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
+            });
+        }
+    }
+}
+
 #pragma mark Object lifecycle
 
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionBlock
@@ -112,22 +139,25 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 - (void)setRunning:(BOOL)running
 {
-    if (running != _running) {
-        if (running) {
-            if (s_numberOfRunningRequests == 0) {
-                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(YES) : nil;
+    @synchronized (self) {
+        if (running != _running) {
+            if (running) {
+                // [SRGRequest increaseNumberOfRunningRequests];
             }
-            ++s_numberOfRunningRequests;
-        }
-        else {
-            --s_numberOfRunningRequests;
-            if (s_numberOfRunningRequests == 0) {
-                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
+            else {
+                // [SRGRequest decreaseNumberOfRunningRequests];
             }
         }
+        
+        _running = running;
     }
-    
-    _running = running;
+}
+
+- (BOOL)isRunning
+{
+    @synchronized (self) {
+        return _running;
+    }
 }
 
 #pragma mark Session task management
@@ -149,9 +179,7 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
             });
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.running = NO;
-        });
+        self.running = NO;
     };
     
     self.sessionTask = [self.session dataTaskWithRequest:self.URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -231,8 +259,10 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 + (void)enableNetworkActivityManagementWithHandler:(void (^)(BOOL))handler
 {
-    s_networkActivityManagementHandler = handler;
-    handler(s_numberOfRunningRequests != 0);
+    @synchronized (self.class) {
+        s_networkActivityManagementHandler = handler;
+        handler(s_numberOfRunningRequests != 0);
+    }
 }
 
 + (void)enableNetworkActivityIndicatorManagement
@@ -244,8 +274,10 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 + (void)disableNetworkActivityManagement
 {
-    s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
-    s_networkActivityManagementHandler = nil;
+    @synchronized (self.class) {
+        s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
+        s_networkActivityManagementHandler = nil;
+    }
 }
 
 @end

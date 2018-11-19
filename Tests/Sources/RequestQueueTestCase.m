@@ -395,7 +395,6 @@
     
     // Add a request to the queue and run it. Wait until the queue does not run anymore
     [self keyValueObservingExpectationForObject:requestQueue keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@NO];
     }];
     
@@ -410,7 +409,6 @@
     
     // Add a second request. The queue must run again
     [self keyValueObservingExpectationForObject:requestQueue keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@NO];
     }];
     
