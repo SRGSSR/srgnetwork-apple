@@ -140,13 +140,13 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
     
     // No weakify / strongify dance here, so that the request retains itself while it is running
     void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) != 0) {
+        if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
+            self.completionBlock(data, response, error);
+        }
+        else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.completionBlock(data, response, error);
             });
-        }
-        else {
-            self.completionBlock(data, response, error);
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -162,13 +162,13 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
                 }
             }
             else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
-                if ((self.options & SRGNetworkRequestPublicWiFiIssuesDisabled) == 0) {
-                    // TODO: Use SRGNetworkFailingURLKey, or keep NSURLErrorKey? (probably keep if it was in the original error, so that
-                    //       only the message is changed)
+                if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
+                    NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                    userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
+                    
                     NSError *publicWiFiError = [NSError errorWithDomain:error.domain
                                                                    code:error.code
-                                                               userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"You are likely connected to a public wifi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)"),
-                                                                           NSURLErrorKey : self.URLRequest.URL }];
+                                                               userInfo:[userInfo copy]];
                     completionBlock(nil, response, publicWiFiError);
                     return;
                 }

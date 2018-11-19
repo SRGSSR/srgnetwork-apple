@@ -24,11 +24,11 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
      */
     SRGRequestOptionHTTPErrorsDisabled = (1UL << 1),
     /**
-     *  By default, certificate trust issues are described as probably related to a public WiFi being used. This
-     *  behavior can be disabled, in which case the original error message is returned. The error domain and code
-     *  and left unaltered.
+     *  Some errors might be related to a public WiFi being used, which is why friendly error messages are returned
+     *  by default when this might be the case. The error domain and code are left unaltered. This behavior can be
+     *  disabled, in which case the original (non-friendly) error message is kept.
      */
-    SRGNetworkRequestPublicWiFiIssuesDisabled = (1UL << 2),
+    SRGNetworkOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
     /**
      *  By default, request completion blocks are called on a background thread. Enable this flag to have them called
      *  on the main thread.
