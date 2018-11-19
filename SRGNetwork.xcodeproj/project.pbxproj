@@ -34,6 +34,8 @@
 		6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
 		6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
+		6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
+		6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,9 @@
 		6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
 		6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
 		6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkLogger.h; sourceTree = "<group>"; };
+		6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestQueueTestCase.m; sourceTree = "<group>"; };
+		6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkBaseTestCase.m; sourceTree = "<group>"; };
+		6FE9DBAC21A2CEAD00BE1DD6 /* NetworkBaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkBaseTestCase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +148,10 @@
 		6F6A09FE2101BEB7004568BD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6F6A09FF2101BEB7004568BD /* RequestTestCase.m */,
+				6FE9DBAA21A2CEAD00BE1DD6 /* Helpers */,
 				6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */,
+				6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */,
+				6F6A09FF2101BEB7004568BD /* RequestTestCase.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -223,6 +230,15 @@
 				6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6FE9DBAA21A2CEAD00BE1DD6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */,
+				6FE9DBAC21A2CEAD00BE1DD6 /* NetworkBaseTestCase.h */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +391,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */,
+				6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */,
+				6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */,
 				6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

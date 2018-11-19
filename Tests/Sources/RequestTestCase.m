@@ -4,30 +4,17 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <SRGNetwork/SRGNetwork.h>
-#import <XCTest/XCTest.h>
+#import "NetworkBaseTestCase.h"
 
 // For tests, you can use:
 //   - https://httpbin.org for HTTP-related tests.
 //   - https://badssl.com for SSL-related tests.
 
-@interface RequestTestCase : XCTestCase
+@interface RequestTestCase : NetworkBaseTestCase
 
 @end
 
 @implementation RequestTestCase
-
-#pragma mark Helpers
-
-- (XCTestExpectation *)expectationForElapsedTimeInterval:(NSTimeInterval)timeInterval withHandler:(void (^)(void))handler
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:[NSString stringWithFormat:@"Wait for %@ seconds", @(timeInterval)]];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [expectation fulfill];
-        handler ? handler() : nil;
-    });
-    return expectation;
-}
 
 #pragma mark Tests
 
@@ -223,6 +210,275 @@
     [request resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
+}
+
+// Use autorelease pools to force pool drain before testing weak variables (otherwise objects might have been added to
+// a pool by ARC depending on how they are used, and might therefore still be alive before a pool is drained)
+- (void)testDeallocation
+{
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    
+    // Non-resumed requests are deallocated when not used
+    __weak SRGRequest *request1;
+    @autoreleasepool {
+        request1 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            XCTFail(@"Must not be called since the request has not been resumed");
+        }];
+    }
+    XCTAssertNil(request1);
+    
+    // Resumed requests are self-retained during their lifetime
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"Request finished"];
+    
+    __block SRGRequest *request2;
+    @autoreleasepool {
+        request2 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            // Release the local strong reference
+            request2 = nil;
+            [expectation2 fulfill];
+        }];
+        [request2 resume];
+    }
+    XCTAssertNotNil(request2);
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    XCTAssertNil(request2);
+}
+
+- (void)testStatus
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    __block SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // The request is considered running until after the completion block has been executed
+        XCTAssertTrue(request.running);
+        
+        // Fulfill expectation after block execution to capture the `running` update occurring after it
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [expectation fulfill];
+        });
+    }];
+    XCTAssertFalse(request.running);
+    
+    [request resume];
+    XCTAssertTrue(request.running);
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    XCTAssertFalse(request.running);
+}
+
+- (void)testRunningKVO
+{
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Nothing
+    }];
+    
+    [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
+        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertEqualObjects(change[NSKeyValueChangeNewKey], @YES);
+        return YES;
+    }];
+    
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
+- (void)testMultipleResumes
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [expectation fulfill];
+    }];
+    [request resume];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
+- (void)testReuse
+{
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Nothing
+    }];
+    
+    // Wait until the request is not running anymore
+    [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
+        XCTAssertTrue([NSThread isMainThread]);
+        return [change[NSKeyValueChangeNewKey] isEqual:@NO];
+    }];
+    
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    // Restart it
+    [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
+        XCTAssertTrue([NSThread isMainThread]);
+        return [change[NSKeyValueChangeNewKey] isEqual:@YES];
+    }];
+    
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
+- (void)testReuseAfterCancel
+{
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Nothing
+    }];
+    
+    // Wait until the request is not running anymore
+    [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
+        XCTAssertTrue([NSThread isMainThread]);
+        return [change[NSKeyValueChangeNewKey] isEqual:@NO];
+    }];
+    
+    [request resume];
+    [request cancel];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    // Restart it
+    [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
+        XCTAssertTrue([NSThread isMainThread]);
+        return [change[NSKeyValueChangeNewKey] isEqual:@YES];
+    }];
+    
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
+- (void)testNestedRequests
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request1 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNotNil(data);
+        XCTAssertNil(error);
+        
+        SRGRequest *request2 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            XCTAssertNotNil(data);
+            XCTAssertNil(error);
+            
+            [expectation fulfill];
+        }];
+        [request2 resume];
+    }];
+    [request1 resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+}
+
+- (void)testNormalNetworkActivity
+{
+    NSMutableArray<NSNumber *> *states = [NSMutableArray array];
+    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+        [states addObject:@(active)];
+    }];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Fulfill expectation after block execution to capture the `running` update occurring after it
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [expectation fulfill];
+        });
+    }];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+    
+    NSArray<NSNumber *> *expectedStates = @[@NO, @YES, @NO];
+    XCTAssertEqualObjects(states, expectedStates);
+}
+
+- (void)testEnableNetworkActivityWhenActive
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Fulfill expectation after block execution to capture the `running` update occurring after it
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [expectation fulfill];
+        });
+    }];
+    [request resume];
+    
+    NSMutableArray<NSNumber *> *states = [NSMutableArray array];
+    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+        [states addObject:@(active)];
+    }];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+    
+    NSArray<NSNumber *> *expectedStates = @[@YES, @NO];
+    XCTAssertEqualObjects(states, expectedStates);
+}
+
+- (void)testDisableNetworkActivity
+{
+    NSMutableArray<NSNumber *> *states = [NSMutableArray array];
+    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+        [states addObject:@(active)];
+    }];
+    
+    [SRGRequest disableNetworkActivityManagement];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Fulfill expectation after block execution to capture the `running` update occurring after it
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [expectation fulfill];
+        });
+    }];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+    
+    NSArray<NSNumber *> *expectedStates = @[@NO, @NO];
+    XCTAssertEqualObjects(states, expectedStates);
+}
+
+- (void)testDisableNetworkActivityWhenActive
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
+    
+    NSMutableArray<NSNumber *> *states = [NSMutableArray array];
+    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+        [states addObject:@(active)];
+    }];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Fulfill expectation after block execution to capture the `running` update occurring after it
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [expectation fulfill];
+        });
+    }];
+    [request resume];
+    
+    [SRGRequest disableNetworkActivityManagement];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+    
+    NSArray<NSNumber *> *expectedStates = @[@NO, @YES, @NO];
+    XCTAssertEqualObjects(states, expectedStates);
 }
 
 @end
