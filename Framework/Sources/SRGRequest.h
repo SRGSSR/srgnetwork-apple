@@ -42,9 +42,9 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  when calling `SRGDataProvider` service methods.
  *
  *  Requests are not started by default. Once you have an `SRGRequest` instance, call the `-resume` method
- *  to start the request. A started request keeps itself alive while it is running. You can therefore send
- *  a request locally without keeping a reference to it (but this makes it impossible to cancel the request
- *  manually afterwards). If you want to be able to cancel a request, keep a reference to it. 
+ *  to start the request. A started request keeps itself alive while it is running. You can therefore execute
+ *  a request "locally" in your code, without keeping a reference to it (but this makes it impossible to cancel
+ *  the request manually afterwards). If you want to be able to cancel a request, keep a reference to it. 
  *
  *  To manage several related requests, use an `SRGRequestQueue`.
  */

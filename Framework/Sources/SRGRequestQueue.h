@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    - You can create a queue and add a batch of requests to it (parallel requests).
  *    - You can add a request to a queue, wait until you get an answer, and use this answer to perform another request
  *      (probably using some data you received), added to the same queue (cascading requests).
- *    - You can also pass a queue around so that subsets of your applications can add their own requests to it
+ *    - You can also pass a queue around so that subsystems of your applications can add their own requests to it
  *      as needed.
  *
  *  As a general rule, you should use a request queue to group requests for which you want a common behavior when
@@ -73,8 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion When `running` changes from `NO` to `YES`, the block is called with `finished` = `NO` and no error. This
  *              is e.g. the perfect time to update your UI to tell your user data is being requested. Conversely, when 
  *              `running` changes from `YES` to `NO`, the block is called with `finished` = `YES` and an optional error
- *              (if errors have been reported to the queue using). This is e.g. the perfect time to update your UI and 
- *              display errors if any.
+ *              (if errors have been reported to the queue using `-reportError:`). This is e.g. the perfect time to update
+ *              your UI and display errors if any.
  *
  *              When the state change block is called, the queue is already in the correct state. This means `running` 
  *              is `YES` within the state change block when it is called because the queue started, and `NO` if it is
