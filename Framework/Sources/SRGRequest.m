@@ -7,7 +7,6 @@
 #import "SRGRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
-#import "SRGQueueDispatch.h"
 
 #import <SRGNetwork/SRGNetwork.h>
 #import <UIKit/UIKit.h>
@@ -25,7 +24,7 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 @property (nonatomic) SRGRequestOptions options;
 
-@property (nonatomic, getter=isRunning) BOOL running;
+@property (getter=isRunning) BOOL running;
 
 @end
 
@@ -82,25 +81,39 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 + (void)increaseNumberOfRunningRequests
 {
-    @synchronized (self.class) {
-        if (s_numberOfRunningRequests == 0) {
-            dispatch_sync_on_main_queue_if_needed(^{
+    void (^increase)(void) = ^{
+        @synchronized (self.class) {
+            if (s_numberOfRunningRequests == 0) {
                 s_networkActivityManagementHandler ? s_networkActivityManagementHandler(YES) : nil;
-            });
+            }
+            ++s_numberOfRunningRequests;
         }
-        ++s_numberOfRunningRequests;
+    };
+    
+    if (NSThread.isMainThread) {
+        increase();
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), increase);
     }
 }
 
 + (void)decreaseNumberOfRunningRequests
 {
-    @synchronized (self.class) {
-        --s_numberOfRunningRequests;
-        if (s_numberOfRunningRequests == 0) {
-            dispatch_sync_on_main_queue_if_needed(^{
+    void (^decrease)(void) = ^{
+        @synchronized (self.class) {
+            --s_numberOfRunningRequests;
+            if (s_numberOfRunningRequests == 0) {
                 s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
-            });
+            }
         }
+    };
+    
+    if (NSThread.isMainThread) {
+        decrease();
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), decrease);
     }
 }
 
@@ -141,15 +154,15 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 {
     @synchronized (self) {
         if (running != _running) {
+            _running = running;
+            
             if (running) {
-                // [SRGRequest increaseNumberOfRunningRequests];
+                [SRGRequest increaseNumberOfRunningRequests];
             }
             else {
-                // [SRGRequest decreaseNumberOfRunningRequests];
+                [SRGRequest decreaseNumberOfRunningRequests];
             }
         }
-        
-        _running = running;
     }
 }
 
@@ -164,80 +177,86 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 - (void)resume
 {
-    if (self.running) {
-        return;
-    }
-    
-    // No weakify / strongify dance here, so that the request retains itself while it is running
-    void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
-            self.completionBlock(data, response, error);
-        }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.completionBlock(data, response, error);
-            });
-        }
-        
-        self.running = NO;
-    };
-    
-    self.sessionTask = [self.session dataTaskWithRequest:self.URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
-                if ((self.options & SRGRequestOptionCancellationErrorsEnabled) == 0) {
-                    return;
-                }
-            }
-            else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
-                if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
-                    NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
-                    userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
-                    
-                    NSError *publicWiFiError = [NSError errorWithDomain:error.domain
-                                                                   code:error.code
-                                                               userInfo:[userInfo copy]];
-                    completionBlock(nil, response, publicWiFiError);
-                    return;
-                }
-            }
-            
-            completionBlock(nil, response, error);
+    @synchronized (self) {
+        if (self.running) {
             return;
         }
         
-        if ([response isKindOfClass:NSHTTPURLResponse.class]) {
-            NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
-            NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
+        // No weakify / strongify dance here, so that the request retains itself while it is running
+        void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
+                self.completionBlock(data, response, error);
+            }
+            else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    self.completionBlock(data, response, error);
+                });
+            }
             
-            // Properly handle HTTP error codes >= 400 as real errors
-            if (HTTPStatusCode >= 400) {
-                if ((self.options & SRGRequestOptionHTTPErrorsDisabled) == 0) {
-                    NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                             code:SRGNetworkErrorHTTP
-                                                         userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
-                                                                     SRGNetworkFailingURLKey : response.URL,
-                                                                     SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
-                    completionBlock(nil, response, HTTPError);
+            @synchronized (self) {
+                self.running = NO;
+            }
+        };
+        
+        self.sessionTask = [self.session dataTaskWithRequest:self.URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error) {
+                if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+                    if ((self.options & SRGRequestOptionCancellationErrorsEnabled) == 0) {
+                        return;
+                    }
                 }
-                else {
-                    completionBlock(nil, response, nil);
+                else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
+                    if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
+                        NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                        userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
+                        
+                        NSError *publicWiFiError = [NSError errorWithDomain:error.domain
+                                                                       code:error.code
+                                                                   userInfo:[userInfo copy]];
+                        completionBlock(nil, response, publicWiFiError);
+                        return;
+                    }
                 }
+                
+                completionBlock(nil, response, error);
                 return;
             }
-        }
+            
+            if ([response isKindOfClass:NSHTTPURLResponse.class]) {
+                NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
+                NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
+                
+                // Properly handle HTTP error codes >= 400 as real errors
+                if (HTTPStatusCode >= 400) {
+                    if ((self.options & SRGRequestOptionHTTPErrorsDisabled) == 0) {
+                        NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
+                                                                 code:SRGNetworkErrorHTTP
+                                                             userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
+                                                                         SRGNetworkFailingURLKey : response.URL,
+                                                                         SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
+                        completionBlock(nil, response, HTTPError);
+                    }
+                    else {
+                        completionBlock(nil, response, nil);
+                    }
+                    return;
+                }
+            }
+            
+            completionBlock(data, response, nil);
+        }];
         
-        completionBlock(data, response, nil);
-    }];
-    
-    self.running = YES;
-    [self.sessionTask resume];
+        self.running = YES;
+        [self.sessionTask resume];
+    }
 }
 
 - (void)cancel
 {
-    self.running = NO;
-    [self.sessionTask cancel];
+    @synchronized (self) {
+        self.running = NO;
+        [self.sessionTask cancel];
+    }
 }
 
 #pragma mark Description

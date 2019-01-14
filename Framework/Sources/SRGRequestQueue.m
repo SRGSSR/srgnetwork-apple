@@ -9,7 +9,6 @@
 #import "NSBundle+SRGNetwork.h"
 #import "SRGNetworkError.h"
 #import "SRGNetworkLogger.h"
-#import "SRGQueueDispatch.h"
 
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
@@ -19,8 +18,8 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 @interface SRGRequestQueue ()
 
 @property (readonly) NSSet<SRGRequest *> *requests;
-@property (copy) void (^stateChangeBlock)(BOOL running, NSError *error);
-@property NSMutableArray<NSError *> *errors;
+@property (nonatomic, copy) void (^stateChangeBlock)(BOOL running, NSError *error);
+@property (nonatomic) NSMutableArray<NSError *> *errors;
 @property (getter=isRunning) BOOL running;
 
 @end
@@ -48,7 +47,10 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
     if (self = [super init]) {
         self.errors = [NSMutableArray array];
         self.stateChangeBlock = stateChangeBlock;
-        [s_relationshipTable setObject:[NSHashTable hashTableWithOptions:NSHashTableWeakMemory] forKey:self];
+        
+        @synchronized (self.class) {
+            [s_relationshipTable setObject:[NSHashTable hashTableWithOptions:NSHashTableWeakMemory] forKey:self];
+        }
     }
     return self;
 }
@@ -64,29 +66,52 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
         [request cancel];
     }
     
-    [s_relationshipTable removeObjectForKey:self];
+    @synchronized (self.class) {
+        [s_relationshipTable removeObjectForKey:self];
+    }
 }
 
 #pragma mark Getters and setters
 
 - (NSArray<SRGRequest *> *)requests
 {
-    return [[s_relationshipTable objectForKey:self] copy];
+    @synchronized (self.class) {
+        return [[s_relationshipTable objectForKey:self] copy];
+    }
+}
+
+- (BOOL)isRunning
+{
+    @synchronized (self) {
+        return _running;
+    }
+}
+
+- (void)setRunning:(BOOL)running
+{
+    @synchronized (self) {
+        _running = running;
+    }
 }
 
 #pragma mark Request management
 
 - (void)addRequest:(SRGRequest *)request resume:(BOOL)resume
 {
+    @synchronized (self) {
+        NSHashTable<SRGRequest *> *requests = [s_relationshipTable objectForKey:self];
+        if ([requests containsObject:request]) {
+            return;
+        }
+        [requests addObject:request];
+    }
+    
     @weakify(self)
     [request addObserver:self keyPath:@keypath(request, running) options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
         @strongify(self)
         
         [self checkStateChange];
     }];
-    
-    NSHashTable<SRGRequest *> *requests = [s_relationshipTable objectForKey:self];
-    [requests addObject:request];
     
     if (resume) {
         [request resume];
@@ -115,24 +140,13 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
         return;
     }
     
-    if (! self.running) {
-        SRGNetworkLogWarning(@"Request Queue", @"The error %@ was reported to a non-running queue and will therefore be lost.", error);
-        return;
-    }
-    
-    [self.errors addObject:error];
-}
-
-- (NSError *)consolidatedError
-{
-    if (self.errors.count <= 1) {
-        return self.errors.firstObject;
-    }
-    else {
-        return [NSError errorWithDomain:SRGNetworkErrorDomain
-                                   code:SRGNetworkErrorMultiple
-                               userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"Several errors have been encountered", @"The main error message if multiple errors have been encountered. Finally, the developer could should which one to display, and not show this message."),
-                                           SRGNetworkErrorsKey : self.errors }];
+    @synchronized (self) {
+        if (! self.running) {
+            SRGNetworkLogWarning(@"Request Queue", @"The error %@ was reported to a non-running queue and will therefore be lost.", error);
+            return;
+        }
+        
+        [self.errors addObject:error];
     }
 }
 
@@ -144,22 +158,41 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(SRGRequest.new, running)];
     BOOL running = ([self.requests.allObjects filteredArrayUsingPredicate:predicate].count != 0);
     
-    if (running != self.running) {
-        self.running = running;
-        
-        if (running) {
-            [self.errors removeAllObjects];
-            SRGNetworkLogDebug(@"Request Queue", @"Started %@", self);
-            dispatch_sync_on_main_queue_if_needed(^{
-                self.stateChangeBlock ? self.stateChangeBlock(NO, nil) : nil;
-            });
-        }
-        else {
-            NSError *error = [self consolidatedError];
-            SRGNetworkLogDebug(@"Request Queue", @"Ended %@ with error: %@", self, error);
-            dispatch_sync_on_main_queue_if_needed(^{
-                self.stateChangeBlock ? self.stateChangeBlock(YES, error) : nil;
-            });
+    @synchronized (self) {
+        if (running != self.running) {
+            self.running = running;
+            
+            if (running) {
+                [self.errors removeAllObjects];
+                
+                SRGNetworkLogDebug(@"Request Queue", @"Started %@", self);
+                
+                if (NSThread.isMainThread) {
+                    self.stateChangeBlock ? self.stateChangeBlock(NO, nil) : nil;
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.stateChangeBlock ? self.stateChangeBlock(NO, nil) : nil;
+                    });
+                }
+            }
+            else {
+                NSError *error = (self.errors.count <= 1) ? self.errors.firstObject : [NSError errorWithDomain:SRGNetworkErrorDomain
+                                                                                                          code:SRGNetworkErrorMultiple
+                                                                                                      userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"Several errors have been encountered", @"The main error message if multiple errors have been encountered. Finally, the developer could should which one to display, and not show this message."),
+                                                                                                                  SRGNetworkErrorsKey : self.errors }];
+                
+                SRGNetworkLogDebug(@"Request Queue", @"Ended %@ with error: %@", self, error);
+                
+                if (NSThread.isMainThread) {
+                    self.stateChangeBlock ? self.stateChangeBlock(YES, error) : nil;
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.stateChangeBlock ? self.stateChangeBlock(YES, error) : nil;
+                    });
+                }
+            }
         }
     }
 }
