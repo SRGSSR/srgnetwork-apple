@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; };
+		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
 		6F676B0121F856E70066DDE8 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F676B0221F856E70066DDE8 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
@@ -80,6 +82,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkParsers.h; sourceTree = "<group>"; };
+		6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkParsers.m; sourceTree = "<group>"; };
 		6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponse_NetworkTestCase.m; sourceTree = "<group>"; };
 		6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGPageRequest.h; sourceTree = "<group>"; };
 		6F676B0021F856E60066DDE8 /* SRGPageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGPageRequest.m; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 				6F8A944F21005D9400AA6434 /* SRGNetworkError.h */,
 				6F8A944E21005D9400AA6434 /* SRGNetworkError.m */,
 				6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */,
+				6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */,
+				6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */,
 				6F676B0321F857580066DDE8 /* SRGPage.h */,
 				6F676B0421F857580066DDE8 /* SRGPage.m */,
 				6F676B0B21F870650066DDE8 /* SRGPage+Private.h */,
@@ -285,6 +291,7 @@
 				6F676B1421F890B00066DDE8 /* SRGPageRequest+Private.h in Headers */,
 				6F676B0521F857580066DDE8 /* SRGPage.h in Headers */,
 				6F676B0921F8591B0066DDE8 /* SRGFirstPageRequest.h in Headers */,
+				6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */,
 				6F676B1121F88FFA0066DDE8 /* SRGRequest+Private.h in Headers */,
 				6FE9DB88219D5F0200BE1DD6 /* SRGRequestQueue.h in Headers */,
 				6FE9DB8B219D5F0200BE1DD6 /* SRGRequest.h in Headers */,
@@ -437,6 +444,7 @@
 				6F8A94472100566F00AA6434 /* NSBundle+SRGNetwork.m in Sources */,
 				6F8A945021005D9400AA6434 /* SRGNetworkError.m in Sources */,
 				6F676B0A21F8591B0066DDE8 /* SRGFirstPageRequest.m in Sources */,
+				6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */,
 				6F8A944C2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m in Sources */,
 				6F8A94482100566F00AA6434 /* SRGNetwork.m in Sources */,
 				6FE9DB95219D5F0200BE1DD6 /* SRGRequestQueue.m in Sources */,

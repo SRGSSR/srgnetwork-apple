@@ -9,18 +9,18 @@
 #import "NSBundle+SRGNetwork.h"
 
 #import "SRGNetworkError.h"
+#import "SRGNetworkParsers.h"
 #import "SRGPage+Private.h"
 #import "SRGPageRequest+Private.h"
 #import "SRGRequest+Private.h"
 
 // Agnostic block signatures.
-typedef id _Nullable (^SRGPageParser)(NSData * _Nullable data, NSError **pError);
 typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
 typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 @interface SRGFirstPageRequest ()
 
-@property (nonatomic, copy) SRGPageParser parser;
+@property (nonatomic, copy) SRGResponseParser parser;
 @property (nonatomic, copy) SRGObjectPageBuilder builder;
 @property (nonatomic, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
 
@@ -52,18 +52,7 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
-        id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:pError];
-        if (JSONObject && ! [JSONObject isKindOfClass:NSArray.class]) {
-            if (pError) {
-                *pError = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                              code:SRGNetworkErrorInvalidData
-                                          userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }];
-            }
-            return nil;
-        }
-        else {
-            return JSONObject;
-        }
+        return SRGNetworkJSONArrayParser(data, pError);
     } page:nil builder:^NSURLRequest * _Nullable(id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest) {
         return builder(response, size, number, firstPageURLRequest);
     } completionBlock:completionBlock];
@@ -76,18 +65,7 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
-        id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:pError];
-        if (JSONObject && ! [JSONObject isKindOfClass:NSDictionary.class]) {
-            if (pError) {
-                *pError = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                              code:SRGNetworkErrorInvalidData
-                                          userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }];
-            }
-            return nil;
-        }
-        else {
-            return JSONObject;
-        }
+        return SRGNetworkJSONDictionaryParser(data, pError);
     } page:nil builder:builder completionBlock:completionBlock];
 }
 
@@ -96,7 +74,7 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
                            options:(SRGRequestOptions)options
-                            parser:(SRGPageParser)parser
+                            parser:(SRGResponseParser)parser
                               page:(SRGPage *)page
                            builder:(SRGObjectPageBuilder)builder
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock
@@ -106,16 +84,9 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
         page = [self firstPageWithSize:10];
     }
     
-    if (self = [super initWithURLRequest:URLRequest session:session options:options completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    if (self = [super initWithURLRequest:URLRequest session:session options:options parser:parser completionBlock:^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             completionBlock(nil, page, nil, response, error);
-            return;
-        }
-        
-        NSError *parsingError = nil;
-        id object = parser ? parser(data, &parsingError) : data;
-        if (parsingError) {
-            completionBlock(nil, nil, nil, response, parsingError);
             return;
         }
         

@@ -7,6 +7,8 @@
 #import "SRGRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
+#import "SRGNetworkParsers.h"
+#import "SRGRequest+Private.h"
 
 #import <SRGNetwork/SRGNetwork.h>
 #import <UIKit/UIKit.h>
@@ -16,15 +18,15 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 @interface SRGRequest ()
 
-// TODO: Parser block, as for paginated requests
-
 @property (nonatomic) NSURLRequest *URLRequest;
-@property (nonatomic, copy) void (^completionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
+@property (nonatomic, copy) SRGObjectCompletionBlock completionBlock;
 
 @property (nonatomic) NSURLSession *session;
 @property (nonatomic) NSURLSessionTask *sessionTask;
 
 @property (nonatomic) SRGRequestOptions options;
+
+@property (nonatomic, copy) SRGResponseParser parser;
 
 @property (nonatomic, getter=isRunning) BOOL running;
 
@@ -36,49 +38,36 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 #pragma mark Class methods
 
-+ (SRGRequest *)requestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock
++ (SRGRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                  session:(NSURLSession *)session
+                                  options:(SRGRequestOptions)options
+                          completionBlock:(SRGDataCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options completionBlock:completionBlock];
+    return [[self.class alloc] initWithURLRequest:URLRequest
+                                          session:session
+                                          options:options
+                                           parser:nil
+                                  completionBlock:completionBlock];
 }
 
-+ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionBlock
++ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                       session:(NSURLSession *)session
+                                       options:(SRGRequestOptions)options
+                               completionBlock:(SRGJSONArrayCompletionBlock)completionBlock
 {
-    return [self requestWithURLRequest:URLRequest session:session options:options completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completionBlock(nil, response, error);
-            return;
-        }
-        
-        id JSONDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        if (! [JSONDictionary isKindOfClass:NSDictionary.class]) {
-            completionBlock(nil, response, [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                               code:SRGNetworkErrorInvalidData
-                                                           userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }]);
-            return;
-        }
-        
-        completionBlock(JSONDictionary, response, nil);
-    }];
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+        return SRGNetworkJSONArrayParser(data, pError);
+    } completionBlock:completionBlock];
 }
 
-+ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionBlock
++ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                            session:(NSURLSession *)session
+                                            options:(SRGRequestOptions)options
+                                    completionBlock:(SRGJSONDictionaryCompletionBlock)completionBlock
 {
-    return [self requestWithURLRequest:URLRequest session:session options:options completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completionBlock(nil, response, error);
-            return;
-        }
-        
-        id JSONArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-        if (! [JSONArray isKindOfClass:NSArray.class]) {
-            completionBlock(nil, response, [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                               code:SRGNetworkErrorInvalidData
-                                                           userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }]);
-            return;
-        }
-        
-        completionBlock(JSONArray, response, nil);
-    }];
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+        return SRGNetworkJSONDictionaryParser(data, pError);
+    } completionBlock:completionBlock];
 }
 
 + (void)increaseNumberOfRunningRequests
@@ -117,12 +106,17 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionBlock
+- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
+                           session:(NSURLSession *)session
+                           options:(SRGRequestOptions)options
+                            parser:(SRGResponseParser)parser
+                   completionBlock:(SRGObjectCompletionBlock)completionBlock
 {
     if (self = [super init]) {
         self.URLRequest = URLRequest;
         self.session = session;
         self.options = options;
+        self.parser = parser;
         self.completionBlock = completionBlock;
     }
     return self;
@@ -134,7 +128,7 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] options:0 parser:nil completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
 }
@@ -229,7 +223,14 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
             }
         }
         
-        completionBlock(data, response, nil);
+        NSError *parsingError = nil;
+        id object = self.parser ? self.parser(data, &parsingError) : data;
+        if (parsingError) {
+            completionBlock(nil, response, parsingError);
+            return;
+        }
+        
+        completionBlock(object, response, nil);
     }];
     
     self.running = YES;

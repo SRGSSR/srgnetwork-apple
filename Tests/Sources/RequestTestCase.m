@@ -38,7 +38,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(data);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
@@ -55,7 +55,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     
     dispatch_sync(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-        SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             XCTAssertNotNil(data);
             XCTAssertNotNil(response);
             XCTAssertNil(error);
@@ -88,7 +88,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     [self expectationForElapsedTimeInterval:3. withHandler:nil];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    __unused SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __unused SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTFail(@"Completion block must not be called");
     }];
     
@@ -117,7 +117,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     [self expectationForElapsedTimeInterval:3. withHandler:nil];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTFail(@"Completion block must not be called");
     }];
     [request resume];
@@ -131,7 +131,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGRequestOptionCancellationErrorsEnabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGRequestOptionCancellationErrorsEnabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNil(response);
         XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
@@ -149,7 +149,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/status/404"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(error.domain, SRGNetworkErrorDomain);
@@ -168,7 +168,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/status/404"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGRequestOptionHTTPErrorsDisabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGRequestOptionHTTPErrorsDisabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
@@ -184,7 +184,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://untrusted-root.badssl.com"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNil(response);
         XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
@@ -203,7 +203,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://untrusted-root.badssl.com"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkOptionFriendlyWiFiMessagesDisabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkOptionFriendlyWiFiMessagesDisabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNil(response);
         XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
@@ -222,7 +222,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertFalse([NSThread isMainThread]);
         [expectation fulfill];
     }];
@@ -236,7 +236,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkRequestMainThreadCompletionEnabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:SRGNetworkRequestMainThreadCompletionEnabled completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertTrue([NSThread isMainThread]);
         [expectation fulfill];
     }];
@@ -254,7 +254,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     // Non-resumed requests are deallocated when not used
     __weak SRGRequest *request1;
     @autoreleasepool {
-        request1 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             XCTFail(@"Must not be called since the request has not been resumed");
         }];
     }
@@ -265,7 +265,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     
     __block SRGRequest *request2;
     @autoreleasepool {
-        request2 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             // Release the local strong reference
             request2 = nil;
             [expectation2 fulfill];
@@ -284,7 +284,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    __block SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // The request is considered running until after the completion block has been executed
         XCTAssertTrue(request.running);
         
@@ -306,7 +306,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testRunningKVO
 {
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
     
@@ -326,7 +326,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [expectation fulfill];
     }];
     [request resume];
@@ -338,7 +338,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testReuse
 {
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
     
@@ -364,7 +364,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testReuseAfterCancel
 {
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
     
@@ -395,11 +395,11 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request1 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(data);
         XCTAssertNil(error);
         
-        SRGRequest *request2 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             XCTAssertNotNil(data);
             XCTAssertNil(error);
             
@@ -422,7 +422,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
@@ -447,7 +447,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     
     dispatch_sync(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-        SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             // Fulfill expectation after block execution to capture the `running` update occurring after it
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [expectation fulfill];
@@ -467,7 +467,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
@@ -498,7 +498,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
@@ -522,7 +522,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     }];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Fulfill expectation after block execution to capture the `running` update occurring after it
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];

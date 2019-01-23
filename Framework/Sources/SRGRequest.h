@@ -36,6 +36,14 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
     SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
 };
 
+// Completion block signatures.
+typedef void (^SRGDataCompletionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
+typedef void (^SRGJSONArrayCompletionBlock)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error);
+typedef void (^SRGJSONDictionaryCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error);
+
+// TODO: Later in Subclassing file
+typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
+
 /**
  *  `SRGRequest` objects provide a way to manage the data retrieval process associated with a data provider 
  *  service request. You never instantiate `SRGRequest` objects directly, you merely use the ones returned 
@@ -51,35 +59,30 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 @interface SRGRequest : NSObject
 
 /**
- *  Convenience initializers. JSON requests will fail with an error if the data cannot be parsed in the expected format.
- */
-// TODO: Rename as dataRequest
-+ (SRGRequest *)requestWithURLRequest:(NSURLRequest *)URLRequest
-                              session:(NSURLSession *)session
-                              options:(SRGRequestOptions)options
-                      completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
-
-+ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
-                                            session:(NSURLSession *)session
-                                            options:(SRGRequestOptions)options
-                                    completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
-
-+ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
-                                       session:(NSURLSession *)session
-                                       options:(SRGRequestOptions)options
-                               completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
-
-/**
- *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
+ *  Convenience initializers for requests started with the provided session and options, calling the specified block
+ *  on completion. Note that JSON requests will fail with an error if the data cannot be parsed in the expected format.
  *
  *  @param URLRequest      The request to execute.
  *  @param session         The session for which the request is executed.
  *  @param options         Options to apply (0 if none).
- *  @param completionBlock The completion block which will be called when the request ends. Beware that the block might be
- *                         called on a background thread, depending on how the session has been configured.
+ *  @param completionBlock The completion block which will be called when the request ends.
+ *
+ *  @discussion The block will likely be called on a background thread (this depends on how the session was configured).
  */
-// TODO: Hide
-- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
++ (SRGRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                  session:(NSURLSession *)session
+                                  options:(SRGRequestOptions)options
+                          completionBlock:(SRGDataCompletionBlock)completionBlock;
+
++ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                            session:(NSURLSession *)session
+                                            options:(SRGRequestOptions)options
+                                    completionBlock:(SRGJSONDictionaryCompletionBlock)completionBlock;
+
++ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                       session:(NSURLSession *)session
+                                       options:(SRGRequestOptions)options
+                               completionBlock:(SRGJSONArrayCompletionBlock)completionBlock;
 
 /**
  *  Start performing the request.

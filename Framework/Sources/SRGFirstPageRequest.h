@@ -24,7 +24,8 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
 @interface SRGFirstPageRequest : SRGPageRequest
 
 /**
- *  Convenience initializers. JSON requests will fail with an error if the data cannot be parsed in the expected format.
+ *  Convenience initializers for requests started with the provided session and options, calling the specified block
+ *  on completion. Note that JSON requests will fail with an error if the data cannot be parsed in the expected format.
  *
  *  @param URLRequest      The request to execute.
  *  @param session         The session for which the request is executed.
@@ -33,7 +34,7 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
  *                         directly from the first page URL request.
  *  @param completionBlock The completion block which will be called when the request ends.
  *
- *  @discussion Blocks will likely be called on a background thread (this can depend on how the session was configured).
+ *  @discussion Blocks will likely be called on a background thread (this depends on how the session was configured).
  */
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
