@@ -16,6 +16,8 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 @interface SRGRequest ()
 
+// TODO: Parser block, as for paginated requests
+
 @property (nonatomic) NSURLRequest *URLRequest;
 @property (nonatomic, copy) void (^completionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
 

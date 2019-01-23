@@ -53,9 +53,21 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 /**
  *  Convenience initializers. JSON requests will fail with an error if the data cannot be parsed in the expected format.
  */
-+ (SRGRequest *)requestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
-+ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
-+ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+// TODO: Rename as dataRequest
++ (SRGRequest *)requestWithURLRequest:(NSURLRequest *)URLRequest
+                              session:(NSURLSession *)session
+                              options:(SRGRequestOptions)options
+                      completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+
++ (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                            session:(NSURLSession *)session
+                                            options:(SRGRequestOptions)options
+                                    completionBlock:(void (^)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
+
++ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                       session:(NSURLSession *)session
+                                       options:(SRGRequestOptions)options
+                               completionBlock:(void (^)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock;
 
 /**
  *  Create a request from a URL request, starting it with the provided session, and calling the specified block on completion.
@@ -66,6 +78,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  @param completionBlock The completion block which will be called when the request ends. Beware that the block might be
  *                         called on a background thread, depending on how the session has been configured.
  */
+// TODO: Hide
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest session:(NSURLSession *)session options:(SRGRequestOptions)options completionBlock:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -104,6 +117,11 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  The session.
  */
 @property (nonatomic, readonly) NSURLSession *session;
+
+/**
+ *  The applied options.
+ */
+@property (nonatomic, readonly) SRGRequestOptions options;
 
 @end
 
