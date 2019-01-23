@@ -121,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion This property is KVO-observable (changes are not necessarily observed on the main thread, though).
  */
-@property (readonly, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 @end
 

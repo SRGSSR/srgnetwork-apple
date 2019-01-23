@@ -24,7 +24,7 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 @property (nonatomic) SRGRequestOptions options;
 
-@property (getter=isRunning) BOOL running;
+@property (nonatomic, getter=isRunning) BOOL running;
 
 @end
 
@@ -82,12 +82,10 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 + (void)increaseNumberOfRunningRequests
 {
     void (^increase)(void) = ^{
-        @synchronized (self.class) {
-            if (s_numberOfRunningRequests == 0) {
-                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(YES) : nil;
-            }
-            ++s_numberOfRunningRequests;
+        if (s_numberOfRunningRequests == 0) {
+            s_networkActivityManagementHandler ? s_networkActivityManagementHandler(YES) : nil;
         }
+        ++s_numberOfRunningRequests;
     };
     
     if (NSThread.isMainThread) {
@@ -101,11 +99,9 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 + (void)decreaseNumberOfRunningRequests
 {
     void (^decrease)(void) = ^{
-        @synchronized (self.class) {
-            --s_numberOfRunningRequests;
-            if (s_numberOfRunningRequests == 0) {
-                s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
-            }
+        --s_numberOfRunningRequests;
+        if (s_numberOfRunningRequests == 0) {
+            s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
         }
     };
     
@@ -152,24 +148,15 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 - (void)setRunning:(BOOL)running
 {
-    @synchronized (self) {
-        if (running != _running) {
-            _running = running;
-            
-            if (running) {
-                [SRGRequest increaseNumberOfRunningRequests];
-            }
-            else {
-                [SRGRequest decreaseNumberOfRunningRequests];
-            }
+    if (running != _running) {
+        _running = running;
+        
+        if (running) {
+            [SRGRequest increaseNumberOfRunningRequests];
         }
-    }
-}
-
-- (BOOL)isRunning
-{
-    @synchronized (self) {
-        return _running;
+        else {
+            [SRGRequest decreaseNumberOfRunningRequests];
+        }
     }
 }
 
@@ -177,86 +164,80 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 - (void)resume
 {
-    @synchronized (self) {
-        if (self.running) {
-            return;
+    if (self.running) {
+        return;
+    }
+    
+    // No weakify / strongify dance here, so that the request retains itself while it is running
+    void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
+            self.completionBlock(data, response, error);
+        }
+        else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.completionBlock(data, response, error);
+            });
         }
         
-        // No weakify / strongify dance here, so that the request retains itself while it is running
-        void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
-                self.completionBlock(data, response, error);
-            }
-            else {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    self.completionBlock(data, response, error);
-                });
-            }
-            
-            @synchronized (self) {
-                self.running = NO;
-            }
-        };
-        
-        self.sessionTask = [self.session dataTaskWithRequest:self.URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error) {
-                if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
-                    if ((self.options & SRGRequestOptionCancellationErrorsEnabled) == 0) {
-                        return;
-                    }
+        self.running = NO;
+    };
+    
+    self.sessionTask = [self.session dataTaskWithRequest:self.URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+                if ((self.options & SRGRequestOptionCancellationErrorsEnabled) == 0) {
+                    return;
                 }
-                else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
-                    if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
-                        NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
-                        userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
-                        
-                        NSError *publicWiFiError = [NSError errorWithDomain:error.domain
-                                                                       code:error.code
-                                                                   userInfo:[userInfo copy]];
-                        completionBlock(nil, response, publicWiFiError);
-                        return;
-                    }
-                }
-                
-                completionBlock(nil, response, error);
-                return;
             }
-            
-            if ([response isKindOfClass:NSHTTPURLResponse.class]) {
-                NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
-                NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
-                
-                // Properly handle HTTP error codes >= 400 as real errors
-                if (HTTPStatusCode >= 400) {
-                    if ((self.options & SRGRequestOptionHTTPErrorsDisabled) == 0) {
-                        NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                                 code:SRGNetworkErrorHTTP
-                                                             userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
-                                                                         SRGNetworkFailingURLKey : response.URL,
-                                                                         SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
-                        completionBlock(nil, response, HTTPError);
-                    }
-                    else {
-                        completionBlock(nil, response, nil);
-                    }
+            else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
+                if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
+                    NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                    userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
+                    
+                    NSError *publicWiFiError = [NSError errorWithDomain:error.domain
+                                                                   code:error.code
+                                                               userInfo:[userInfo copy]];
+                    completionBlock(nil, response, publicWiFiError);
                     return;
                 }
             }
             
-            completionBlock(data, response, nil);
-        }];
+            completionBlock(nil, response, error);
+            return;
+        }
         
-        self.running = YES;
-        [self.sessionTask resume];
-    }
+        if ([response isKindOfClass:NSHTTPURLResponse.class]) {
+            NSHTTPURLResponse *HTTPURLResponse = (NSHTTPURLResponse *)response;
+            NSInteger HTTPStatusCode = HTTPURLResponse.statusCode;
+            
+            // Properly handle HTTP error codes >= 400 as real errors
+            if (HTTPStatusCode >= 400) {
+                if ((self.options & SRGRequestOptionHTTPErrorsDisabled) == 0) {
+                    NSError *HTTPError = [NSError errorWithDomain:SRGNetworkErrorDomain
+                                                             code:SRGNetworkErrorHTTP
+                                                         userInfo:@{ NSLocalizedDescriptionKey : [NSHTTPURLResponse srg_localizedStringForStatusCode:HTTPStatusCode],
+                                                                     SRGNetworkFailingURLKey : response.URL,
+                                                                     SRGNetworkHTTPStatusCodeKey : @(HTTPStatusCode) }];
+                    completionBlock(nil, response, HTTPError);
+                }
+                else {
+                    completionBlock(nil, response, nil);
+                }
+                return;
+            }
+        }
+        
+        completionBlock(data, response, nil);
+    }];
+    
+    self.running = YES;
+    [self.sessionTask resume];
 }
 
 - (void)cancel
 {
-    @synchronized (self) {
-        self.running = NO;
-        [self.sessionTask cancel];
-    }
+    self.running = NO;
+    [self.sessionTask cancel];
 }
 
 #pragma mark Description
@@ -278,10 +259,8 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 + (void)enableNetworkActivityManagementWithHandler:(void (^)(BOOL))handler
 {
-    @synchronized (self.class) {
-        s_networkActivityManagementHandler = handler;
-        handler(s_numberOfRunningRequests != 0);
-    }
+    s_networkActivityManagementHandler = handler;
+    handler(s_numberOfRunningRequests != 0);
 }
 
 + (void)enableNetworkActivityIndicatorManagement
@@ -293,10 +272,8 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 + (void)disableNetworkActivityManagement
 {
-    @synchronized (self.class) {
-        s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
-        s_networkActivityManagementHandler = nil;
-    }
+    s_networkActivityManagementHandler ? s_networkActivityManagementHandler(NO) : nil;
+    s_networkActivityManagementHandler = nil;
 }
 
 @end

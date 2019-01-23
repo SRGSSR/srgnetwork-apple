@@ -93,17 +93,17 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *
  *              This property is KVO-observable (changes are not necessarily observed on the main thread, though).
  */
-@property (readonly, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  *  The underlying low-level request.
  */
-@property (readonly) NSURLRequest *URLRequest;
+@property (nonatomic, readonly) NSURLRequest *URLRequest;
 
 /**
  *  The session.
  */
-@property (readonly) NSURLSession *session;
+@property (nonatomic, readonly) NSURLSession *session;
 
 @end
 
