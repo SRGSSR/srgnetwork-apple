@@ -49,6 +49,24 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
 
+- (void)testSuccessfulFromBackgroundThread
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
+    
+    dispatch_sync(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+        NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+        SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            XCTAssertNotNil(data);
+            XCTAssertNotNil(response);
+            XCTAssertNil(error);
+            [expectation fulfill];
+        }];
+        [request resume];
+    });
+    
+    [self waitForExpectationsWithTimeout:10. handler:nil];
+}
+
 - (void)testSuccessfulJSONDictionary
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
@@ -411,6 +429,32 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
         });
     }];
     [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+    
+    NSArray<NSNumber *> *expectedStates = @[@NO, @YES, @NO];
+    XCTAssertTrue(NetworkActivtiyStatesAreConsistent(states, expectedStates));
+}
+
+- (void)testNormalNetworkActivityWithBackgroundRequest
+{
+    NSMutableArray<NSNumber *> *states = [NSMutableArray array];
+    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+        [states addObject:@(active)];
+    }];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
+    
+    dispatch_sync(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+        NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+        SRGRequest *request = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            // Fulfill expectation after block execution to capture the `running` update occurring after it
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [expectation fulfill];
+            });
+        }];
+        [request resume];
+    });
     
     [self waitForExpectationsWithTimeout:30. handler:nil];
     

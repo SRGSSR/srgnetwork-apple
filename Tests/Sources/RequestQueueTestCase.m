@@ -169,6 +169,71 @@
     XCTAssertFalse(requestQueue.running);
 }
 
+- (void)testParallelRequestsFromBackgroundThreads
+{
+    __block BOOL request1Finished = NO;
+    __block BOOL request2Finished = NO;
+    __block BOOL requestQueueFinished = NO;
+    
+    XCTestExpectation *queueStartedExpectation = [self expectationWithDescription:@"Queue started"];
+    XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
+    
+    XCTestExpectation *request1CompletionExpectation = [self expectationWithDescription:@"Request 1 completed"];
+    XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
+    
+    __block SRGRequestQueue *requestQueue = nil;
+    dispatch_sync(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+            XCTAssertTrue([NSThread isMainThread]);
+            XCTAssertNil(error);
+            
+            if (! finished) {
+                XCTAssertTrue(requestQueue.running);
+                [queueStartedExpectation fulfill];
+            }
+            else {
+                XCTAssertFalse(requestQueue.running);
+                XCTAssertTrue(request1Finished);
+                XCTAssertTrue(request2Finished);
+                
+                requestQueueFinished = YES;
+                [queueFinishedExpectation fulfill];
+            }
+        }];
+    });
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    
+    __block SRGRequest *request1 = nil;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_UNSPECIFIED, 0), ^{
+        request1 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            XCTAssertFalse(requestQueueFinished);
+            [requestQueue reportError:error];
+            
+            request1Finished = YES;
+            [request1CompletionExpectation fulfill];
+        }];
+        [requestQueue addRequest:request1 resume:YES];
+    });
+    
+    __block SRGRequest *request2 = nil;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_UTILITY, 0), ^{
+        request2 = [SRGRequest requestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            XCTAssertFalse(requestQueueFinished);
+            [requestQueue reportError:error];
+            
+            request2Finished = YES;
+            [request2CompletionExpectation fulfill];
+        }];
+        [requestQueue addRequest:request2 resume:YES];
+    });
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    XCTAssertFalse(request2.running);
+    XCTAssertFalse(requestQueue.running);
+}
+
 - (void)testCascadingRequests
 {
     XCTestExpectation *queueStartedExpectation = [self expectationWithDescription:@"Queue started"];
