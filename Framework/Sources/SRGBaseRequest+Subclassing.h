@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "SRGRequest+Private.h"
+#import "SRGBaseRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SRGRequest (Private)
-
-// Agnostic block signatures.
+// Block signatures.
+typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
 typedef void (^SRGObjectCompletionBlock)(id _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error);
+
+@interface SRGBaseRequest (Subclassing)
 
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
@@ -20,6 +21,7 @@ typedef void (^SRGObjectCompletionBlock)(id _Nullable object, NSURLResponse * _N
                    completionBlock:(SRGObjectCompletionBlock)completionBlock;
 
 @property (nonatomic, readonly, copy) void (^completionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
+
 
 @end
 

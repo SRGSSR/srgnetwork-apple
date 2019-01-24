@@ -4,15 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "SRGBaseRequest.h"
 #import "SRGPage.h"
-#import "SRGRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Request for a page of results.
  */
-@interface SRGPageRequest : SRGRequest
+@interface SRGPageRequest : SRGBaseRequest
 
 /**
  *  The page which is requested.

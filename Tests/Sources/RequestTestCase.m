@@ -415,7 +415,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testNormalNetworkActivity
 {
     NSMutableArray<NSNumber *> *states = [NSMutableArray array];
-    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+    [SRGNetworkActivityManagement enableWithHandler:^(BOOL active) {
         [states addObject:@(active)];
     }];
     
@@ -439,7 +439,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testNormalNetworkActivityWithBackgroundRequest
 {
     NSMutableArray<NSNumber *> *states = [NSMutableArray array];
-    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+    [SRGNetworkActivityManagement enableWithHandler:^(BOOL active) {
         [states addObject:@(active)];
     }];
     
@@ -476,7 +476,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     [request resume];
     
     NSMutableArray<NSNumber *> *states = [NSMutableArray array];
-    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+    [SRGNetworkActivityManagement enableWithHandler:^(BOOL active) {
         [states addObject:@(active)];
     }];
     
@@ -489,11 +489,11 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 - (void)testDisableNetworkActivity
 {
     NSMutableArray<NSNumber *> *states = [NSMutableArray array];
-    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+    [SRGNetworkActivityManagement enableWithHandler:^(BOOL active) {
         [states addObject:@(active)];
     }];
     
-    [SRGRequest disableNetworkActivityManagement];
+    [SRGNetworkActivityManagement disable];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
     
@@ -517,7 +517,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request succeeded"];
     
     NSMutableArray<NSNumber *> *states = [NSMutableArray array];
-    [SRGRequest enableNetworkActivityManagementWithHandler:^(BOOL active) {
+    [SRGNetworkActivityManagement enableWithHandler:^(BOOL active) {
         [states addObject:@(active)];
     }];
     
@@ -530,7 +530,7 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
     }];
     [request resume];
     
-    [SRGRequest disableNetworkActivityManagement];
+    [SRGNetworkActivityManagement disable];
     
     [self waitForExpectationsWithTimeout:30. handler:nil];
     

@@ -4,45 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+#import "SRGBaseRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- *  Rquest options.
- */
-typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
-    /**
-     *  By default, cancelled requests will not call the associated completion block. If this flag is set, though,
-     *  cancelled requests will call the completion block with an associated error.
-     */
-    SRGRequestOptionCancellationErrorsEnabled = (1UL << 0),
-    /**
-     *  By default, and unlike `NSURLSession` tasks, requests return an `NSError` when an HTTP error status code has
-     *  been received. If this flag is set, though, this mechanism is disabled, and the behavior is similar to the
-     *  one of `NSURLSession` tasks (the status code can be retrieved from the response).
-     */
-    SRGRequestOptionHTTPErrorsDisabled = (1UL << 1),
-    /**
-     *  Some errors might be related to a public WiFi being used, which is why friendly error messages are returned
-     *  by default when this might be the case. The error domain and code are left unaltered. This behavior can be
-     *  disabled, in which case the original (non-friendly) error message is kept.
-     */
-    SRGNetworkOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
-    /**
-     *  By default, request completion blocks are called on a background thread. Enable this flag to have them called
-     *  on the main thread.
-     */
-    SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
-};
 
 // Completion block signatures.
 typedef void (^SRGDataCompletionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
 typedef void (^SRGJSONArrayCompletionBlock)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error);
 typedef void (^SRGJSONDictionaryCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error);
-
-// TODO: Later in Subclassing file
-typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
 
 /**
  *  `SRGRequest` objects provide a way to manage the data retrieval process associated with a data provider 
@@ -56,7 +25,7 @@ typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pEr
  *
  *  To manage several related requests, use an `SRGRequestQueue`.
  */
-@interface SRGRequest : NSObject
+@interface SRGRequest : SRGBaseRequest
 
 /**
  *  Convenience initializers for requests started with the provided session and options, calling the specified block
@@ -83,93 +52,6 @@ typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pEr
                                        session:(NSURLSession *)session
                                        options:(SRGRequestOptions)options
                                completionBlock:(SRGJSONArrayCompletionBlock)completionBlock;
-
-/**
- *  Start performing the request.
- *
- *  @discussion `running` is immediately set to `YES`. Attempting to resume an already running request does nothing.
- *              You can restart a finished request by calling `-resume` again.
- */
-- (void)resume;
-
-/**
- *  Cancel the request.
- *
- *  @discussion `running` is immediately set to `NO`. Request completion blocks (@see `SRGDataProvider`) won't be called.
- *              You can restart a cancelled request by `-calling` resume again.
- */
-- (void)cancel;
-
-/**
- *  Return `YES` iff the request is running. 
- *
- *  @discussion The request is considered running from the time it has been started to right after the associated
- *              completion block (@see `SRGDataProvider`) has been executed. It is immediately reset to `NO`
- *              when the request is cancelled.
- *
- *              This property is KVO-observable (changes are not necessarily observed on the main thread, though).
- */
-@property (nonatomic, readonly, getter=isRunning) BOOL running;
-
-/**
- *  The underlying low-level request.
- */
-@property (nonatomic, readonly) NSURLRequest *URLRequest;
-
-/**
- *  The session.
- */
-@property (nonatomic, readonly) NSURLSession *session;
-
-/**
- *  The applied options.
- */
-@property (nonatomic, readonly) SRGRequestOptions options;
-
-@end
-
-/**
- *  Automatic network activity management for requests (opt-in).
- */
-@interface SRGRequest (AutomaticNetworkActivityManagement)
-
-/**
- *  Enable automatic network activity indicator management. The activity indicator is automatically shown when at least
- *  one request is running.
- *
- *  Automatic network activity management is an opt-in. You should call this method early in your application lifecycle
- *  if desired. The method can be called at any time though, the handler will be called accordingly.
- *
- *  @discussion Any handler previously registered with `+enableNetworkActivityManagementWithHandler:` is replaced.
- */
-+ (void)enableNetworkActivityIndicatorManagement NS_EXTENSION_UNAVAILABLE_IOS("Network activity indicator management is not available for extensions");
-
-/**
- *  Enable automatic network activity management with a custom handler. The handler is called when network activity
- *  changes (the network is considered to be active when at least one request is running), providing the new status as a
- *  boolean `active` parameter.
- *
- *  Automatic network activity management is an opt-in. You should call this method early in your application lifecycle
- *  if desired. The method can be called at any time though, the network activity indicator will be updated accordingly.
- *
- *  @discussion Any previously registered handler is replaced. If automatic indicator management was used, it is
- *              disabled as well. The handler is always called on the main thread.
- */
-+ (void)enableNetworkActivityManagementWithHandler:(void (^)(BOOL active))handler;
-
-/**
- *  Disable automatic network management (handler and automatic activity indicator management).
- *
- *  @discussion When called, any previous handler is called with `active` set to `NO`. If using automatic activity
- *              indicator management, the indicator is hidden as well.
- */
-+ (void)disableNetworkActivityManagement;
-
-@end
-
-@interface SRGRequest (Unavailable)
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 

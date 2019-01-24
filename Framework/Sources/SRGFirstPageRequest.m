@@ -7,12 +7,11 @@
 #import "SRGFirstPageRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
-
+#import "SRGBaseRequest+Subclassing.h"
 #import "SRGNetworkError.h"
 #import "SRGNetworkParsers.h"
 #import "SRGPage+Private.h"
 #import "SRGPageRequest+Private.h"
-#import "SRGRequest+Private.h"
 
 // Agnostic block signatures.
 typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
