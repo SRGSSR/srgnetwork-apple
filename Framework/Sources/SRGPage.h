@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Default page size as defined by the service.
-static const NSUInteger SRGPageSizeDefault = 0;
+static const NSUInteger SRGPageDefaultSize = 0;
 
 /**
  *  Describe a page of content. You never instantiate page objects directly, they are merely returned from requests

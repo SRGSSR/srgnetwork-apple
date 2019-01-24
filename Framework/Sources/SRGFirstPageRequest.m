@@ -7,22 +7,10 @@
 #import "SRGFirstPageRequest.h"
 
 #import "NSBundle+SRGNetwork.h"
-#import "SRGBaseRequest+Subclassing.h"
 #import "SRGNetworkError.h"
 #import "SRGNetworkParsers.h"
 #import "SRGPage+Private.h"
-#import "SRGPageRequest+Private.h"
-
-// Block signatures.
-typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
-typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
-
-@interface SRGFirstPageRequest ()
-
-@property (nonatomic, copy) SRGObjectPageBuilder builder;
-@property (nonatomic, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
-
-@end
+#import "SRGPageRequest+Subclassing.h"
 
 @implementation SRGFirstPageRequest
 
@@ -67,66 +55,32 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
     } page:nil builder:builder completionBlock:completionBlock];
 }
 
-#pragma mark Object lifecycle
-
-- (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
-                           session:(NSURLSession *)session
-                           options:(SRGRequestOptions)options
-                            parser:(SRGResponseParser)parser
-                              page:(SRGPage *)page
-                           builder:(SRGObjectPageBuilder)builder
-                   completionBlock:(SRGObjectPageCompletionBlock)completionBlock
-{
-    if (! page) {
-        page = [self firstPageWithSize:SRGPageSizeDefault];
-    }
-    
-    SRGObjectCompletionBlock pageCompletionBlock = ^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completionBlock(nil, page, nil, response, error);
-            return;
-        }
-        
-        NSURLRequest *nextURLRequest = self.builder(object, response, page.size, page.number, URLRequest);
-        SRGPage *nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
-        completionBlock(object, page, nextPage, response, nil);
-    };
-    
-    if (self = [super initWithURLRequest:URLRequest session:session options:options parser:parser completionBlock:pageCompletionBlock]) {
-        self.page = page;
-        self.builder = builder;
-        self.pageCompletionBlock = completionBlock;
-    }
-    return self;
-}
-
 #pragma mark Page management
-
-- (SRGPage *)firstPageWithSize:(NSUInteger)pageSize
-{
-    return [[SRGPage alloc] initWithSize:pageSize number:0 URLRequest:self.URLRequest];
-}
-
-- (__kindof SRGPageRequest *)requestWithPage:(SRGPage *)page withClass:(Class)cls
-{
-    return [[cls alloc] initWithURLRequest:self.URLRequest
-                                   session:self.session
-                                   options:self.options
-                                    parser:self.parser
-                                      page:page
-                                   builder:self.builder
-                           completionBlock:self.pageCompletionBlock];
-}
 
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize
 {
-    SRGPage *firstPage = [self firstPageWithSize:pageSize];
-    return [self requestWithPage:firstPage withClass:SRGFirstPageRequest.class];
+    SRGPage *firstPage = [[SRGPage alloc] initWithSize:pageSize number:0 URLRequest:self.URLRequest];
+    return [[SRGFirstPageRequest alloc] initWithURLRequest:self.URLRequest
+                                                   session:self.session
+                                                   options:self.options
+                                                    parser:self.parser
+                                                      page:firstPage
+                                                   builder:self.builder
+                                           completionBlock:self.pageCompletionBlock];
 }
 
 - (SRGPageRequest *)requestWithPage:(SRGPage *)page
 {
-    return [self requestWithPage:page withClass:SRGPageRequest.class];
+    if (! page) {
+        page = [[SRGPage alloc] initWithSize:self.page.size number:0 URLRequest:self.URLRequest];
+    }
+    return [[SRGPageRequest alloc] initWithURLRequest:self.URLRequest
+                                              session:self.session
+                                              options:self.options
+                                               parser:self.parser
+                                                 page:page
+                                              builder:self.builder
+                                      completionBlock:self.pageCompletionBlock];
 }
 
 @end

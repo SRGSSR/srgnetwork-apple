@@ -59,7 +59,7 @@
     return [NSString stringWithFormat:@"<%@: %p; size = %@; number = %@; URL = %@>",
             self.class,
             self,
-            (self.size == SRGPageSizeDefault) ? @"default" : @(self.size),
+            (self.size == SRGPageDefaultSize) ? @"default" : @(self.size),
             @(self.number),
             self.URLRequest.URL];
 }
