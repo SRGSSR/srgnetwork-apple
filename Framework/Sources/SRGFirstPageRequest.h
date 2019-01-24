@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Builder block signatures.
+// Page builder block signatures.
 typedef NSURLRequest * _Nullable (^SRGDataPageBuilder)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
 typedef NSURLRequest * _Nullable (^SRGJSONArrayPageBuilder)(NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
 typedef NSURLRequest * _Nullable (^SRGJSONDictionaryPageBuilder)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
@@ -63,8 +63,8 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
 
 /**
  *  Return an equivalent request, but for the specified page. You never instantiate pages yourself, you receive them
- *  in the completion block of a service request supporting pagination. Subsequent pages can then be retrieved by
- *  calling this method and executing the returned request.
+ *  in the completion block of a request supporting pagination. Subsequent pages can then be retrieved by calling this
+*   method and executing the returned request.
  *
  *  @param page The page to request. If `nil`, the first page is requested (for the same page size as the receiver).
  *

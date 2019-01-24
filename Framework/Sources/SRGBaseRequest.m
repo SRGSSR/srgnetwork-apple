@@ -21,7 +21,6 @@
 @property (nonatomic) NSURLSessionTask *sessionTask;
 
 @property (nonatomic) SRGRequestOptions options;
-
 @property (nonatomic, copy) SRGResponseParser parser;
 
 @property (nonatomic, getter=isRunning) BOOL running;

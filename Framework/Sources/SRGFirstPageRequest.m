@@ -13,13 +13,12 @@
 #import "SRGPage+Private.h"
 #import "SRGPageRequest+Private.h"
 
-// Agnostic block signatures.
+// Block signatures.
 typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
 typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 @interface SRGFirstPageRequest ()
 
-@property (nonatomic, copy) SRGResponseParser parser;
 @property (nonatomic, copy) SRGObjectPageBuilder builder;
 @property (nonatomic, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
 
@@ -83,7 +82,7 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
         page = [self firstPageWithSize:10];
     }
     
-    if (self = [super initWithURLRequest:URLRequest session:session options:options parser:parser completionBlock:^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGObjectCompletionBlock pageCompletionBlock = ^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             completionBlock(nil, page, nil, response, error);
             return;
@@ -92,9 +91,9 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
         NSURLRequest *nextURLRequest = self.builder(object, response, page.size, page.number, URLRequest);
         SRGPage *nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
         completionBlock(object, page, nextPage, response, nil);
-        
-    }]) {
-        self.parser = parser;
+    };
+    
+    if (self = [super initWithURLRequest:URLRequest session:session options:options parser:parser completionBlock:pageCompletionBlock]) {
         self.page = page;
         self.builder = builder;
         self.pageCompletionBlock = completionBlock;
@@ -111,7 +110,7 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
 
 - (__kindof SRGPageRequest *)requestWithPage:(SRGPage *)page withClass:(Class)cls
 {
-    return [[cls alloc] initWithURLRequest:page.URLRequest
+    return [[cls alloc] initWithURLRequest:self.URLRequest
                                    session:self.session
                                    options:self.options
                                     parser:self.parser

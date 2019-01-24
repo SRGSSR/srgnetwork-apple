@@ -37,7 +37,11 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 };
 
 /**
- *  Abstract base class for requests.
+ *  Abstract base class for requests, providing core start and stop capabilities.
+ *
+ *  This class is not meant to be instantiated as is. Use a concrete `SRGRequest` for a standard request, or
+ *  `SRGFirstPageRequest` for a request with pagination support. Concrete requests take a completion block as
+ *  parameter, called when they finish, either successfully or because of an error.
  */
 @interface SRGBaseRequest : NSObject
 
@@ -52,8 +56,8 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 /**
  *  Cancel the request.
  *
- *  @discussion `running` is immediately set to `NO`. Request completion blocks (@see `SRGDataProvider`) won't be called.
- *              You can restart a cancelled request by `-calling` resume again.
+ *  @discussion `running` is immediately set to `NO`. Request completion blocks won't be called. You can restart a
+ *              cancelled request by `-calling` resume again.
  */
 - (void)cancel;
 
@@ -61,8 +65,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
  *  Return `YES` iff the request is running.
  *
  *  @discussion The request is considered running from the time it has been started to right after the associated
- *              completion block (@see `SRGDataProvider`) has been executed. It is immediately reset to `NO`
- *              when the request is cancelled.
+ *              completion block has been executed. It is immediately reset to `NO` when the request is cancelled.
  *
  *              This property is KVO-observable (changes are not necessarily observed on the main thread, though).
  */
