@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Block signatures.
-typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
+typedef NSURLRequest * _Nullable (^SRGObjectPageBuilder)(id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
 typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 /**
@@ -27,8 +27,8 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
                            builder:(SRGObjectPageBuilder)builder
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock;
 
-@property (nonatomic, readonly, copy) SRGObjectPageBuilder builder;
-@property (nonatomic, readonly, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
+- (NSURLRequest *)URLRequestForPageWithSize:(NSUInteger)size number:(NSUInteger)number;
+- (__kindof SRGPageRequest *)requestWithPage:(nullable SRGPage *)page class:(Class)cls;
 
 @end
 

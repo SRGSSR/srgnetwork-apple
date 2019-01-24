@@ -39,8 +39,8 @@
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONArrayParser(data, pError);
-    } page:nil builder:^NSURLRequest * _Nullable(id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest) {
-        return builder(response, size, number, firstPageURLRequest);
+    } page:nil builder:^NSURLRequest * _Nullable(id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        return builder(response, size, number);
     } completionBlock:completionBlock];
 }
 
@@ -59,28 +59,14 @@
 
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize
 {
-    SRGPage *firstPage = [[SRGPage alloc] initWithSize:pageSize number:0 URLRequest:self.URLRequest];
-    return [[SRGFirstPageRequest alloc] initWithURLRequest:self.URLRequest
-                                                   session:self.session
-                                                   options:self.options
-                                                    parser:self.parser
-                                                      page:firstPage
-                                                   builder:self.builder
-                                           completionBlock:self.pageCompletionBlock];
+    NSURLRequest *URLRequest = [self URLRequestForPageWithSize:pageSize number:0];
+    SRGPage *page = [[SRGPage alloc] initWithSize:pageSize number:0 URLRequest:URLRequest];
+    return [self requestWithPage:page class:SRGFirstPageRequest.class];
 }
 
 - (SRGPageRequest *)requestWithPage:(SRGPage *)page
 {
-    if (! page) {
-        page = [[SRGPage alloc] initWithSize:self.page.size number:0 URLRequest:self.URLRequest];
-    }
-    return [[SRGPageRequest alloc] initWithURLRequest:self.URLRequest
-                                              session:self.session
-                                              options:self.options
-                                               parser:self.parser
-                                                 page:page
-                                              builder:self.builder
-                                      completionBlock:self.pageCompletionBlock];
+    return [self requestWithPage:page class:SRGPageRequest.class];
 }
 
 @end

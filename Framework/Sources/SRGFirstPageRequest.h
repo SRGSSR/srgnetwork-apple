@@ -9,9 +9,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Page builder block signatures.
-typedef NSURLRequest * _Nullable (^SRGDataPageBuilder)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
-typedef NSURLRequest * _Nullable (^SRGJSONArrayPageBuilder)(NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
-typedef NSURLRequest * _Nullable (^SRGJSONDictionaryPageBuilder)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number, NSURLRequest *firstPageURLRequest);
+typedef NSURLRequest * _Nullable (^SRGDataPageBuilder)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
+typedef NSURLRequest * _Nullable (^SRGJSONArrayPageBuilder)(NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
+typedef NSURLRequest * _Nullable (^SRGJSONDictionaryPageBuilder)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
 
 // Completion block signatures.
 typedef void (^SRGDataPageCompletionBlock)(NSData * _Nullable data, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
@@ -30,8 +30,8 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
  *  @param URLRequest      The request to execute.
  *  @param session         The session for which the request is executed.
  *  @param options         Options to apply (0 if none).
- *  @param builder         A block with which the URL request for a next page can be built from response information, or
- *                         directly from the first page URL request.
+ *  @param builder         A block with which the URL request for a page can be built from response information, or directly
+ *                         from the first page URL request.
  *  @param completionBlock The completion block which will be called when the request ends.
  *
  *  @discussion Blocks will likely be called on a background thread (this depends on how the session was configured).
