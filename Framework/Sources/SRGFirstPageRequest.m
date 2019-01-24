@@ -77,9 +77,8 @@ typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page,
                            builder:(SRGObjectPageBuilder)builder
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock
 {
-    // TODO: Default size constant
     if (! page) {
-        page = [self firstPageWithSize:10];
+        page = [self firstPageWithSize:SRGPageSizeDefault];
     }
     
     SRGObjectCompletionBlock pageCompletionBlock = ^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {

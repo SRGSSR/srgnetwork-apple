@@ -22,7 +22,7 @@
 {
     if (self = [super init]) {
         self.number = MAX(number, 0);
-        self.size = MAX(size, 1);
+        self.size = size;
         self.URLRequest = URLRequest;
     }
     return self;
@@ -59,7 +59,7 @@
     return [NSString stringWithFormat:@"<%@: %p; size = %@; number = %@; URL = %@>",
             self.class,
             self,
-            @(self.size),
+            (self.size == SRGPageSizeDefault) ? @"default" : @(self.size),
             @(self.number),
             self.URLRequest.URL];
 }

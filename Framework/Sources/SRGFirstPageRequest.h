@@ -57,7 +57,7 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
 /**
  *  Return an equivalent request, but with the specified page size.
  *
- *  @param pageSize The page size to use (values < 1 will be fixed to 1).
+ *  @param pageSize The page size to use.
  */
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize;
 
