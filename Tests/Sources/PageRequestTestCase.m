@@ -126,5 +126,25 @@
     [self waitForExpectationsWithTimeout:5. handler:nil];
 }
 
+- (void)testPages
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
+    
+    // Use a small page size to be sure we get two full pages of results (and more to come)
+    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (page.number == 0 && nextPage) {
+            [[request requestWithPage:nextPage] resume];
+        }
+        else if (page.number == 1) {
+            [expectation fulfill];
+        }
+        else {
+            XCTFail(@"Only first two pages are expected");
+        }
+    }] requestWithPageSize:2];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+}
 
 @end
