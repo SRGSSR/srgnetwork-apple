@@ -48,6 +48,21 @@
     } completionBlock:completionBlock];
 }
 
+- (SRGFirstPageRequest *)hummingbirdV4SportNewsFeedWithCompletionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
+{
+    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://hummingbird.rts.ch/api/sport/v4/feed"]];
+    return [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 seed:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue],
+                                      [NSURLQueryItem queryItemWithName:@"offset" value:@(number * size).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } completionBlock:completionBlock];
+}
+
 #pragma mark Tests
 
 - (void)testConstruction
@@ -155,8 +170,27 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    // Use a small page size to be sure we get two full pages of results (and more to come)
     __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (page.number == 0 && nextPage) {
+            [[request requestWithPage:nextPage] resume];
+        }
+        else if (page.number == 1) {
+            [expectation fulfill];
+        }
+        else {
+            XCTFail(@"Only first two pages are expected");
+        }
+    }] requestWithPageSize:2];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+}
+
+- (void)testHummingbirdV4Pagination
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
+    
+    __block SRGFirstPageRequest *request = [[self hummingbirdV4SportNewsFeedWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
