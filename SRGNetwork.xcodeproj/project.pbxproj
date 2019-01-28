@@ -10,6 +10,7 @@
 		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
+		6F40353D21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */; };
 		6F676B0121F856E70066DDE8 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F676B0221F856E70066DDE8 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
 		6F676B0521F857580066DDE8 /* SRGPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0321F857580066DDE8 /* SRGPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,6 +92,7 @@
 		6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkParsers.h; sourceTree = "<group>"; };
 		6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkParsers.m; sourceTree = "<group>"; };
 		6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponse_NetworkTestCase.m; sourceTree = "<group>"; };
+		6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivityManagementTestCase.m; sourceTree = "<group>"; };
 		6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGPageRequest.h; sourceTree = "<group>"; };
 		6F676B0021F856E60066DDE8 /* SRGPageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGPageRequest.m; sourceTree = "<group>"; };
 		6F676B0321F857580066DDE8 /* SRGPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGPage.h; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				6FE9DBAA21A2CEAD00BE1DD6 /* Helpers */,
+				6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */,
 				6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */,
 				6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */,
 				6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */,
@@ -453,6 +456,7 @@
 			files = (
 				6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */,
 				6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */,
+				6F40353D21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m in Sources */,
 				6F8030E221F9AE2E003185E9 /* PageRequestTestCase.m in Sources */,
 				6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */,
 				6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */,
