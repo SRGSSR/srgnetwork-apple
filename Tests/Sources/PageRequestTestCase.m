@@ -8,8 +8,7 @@
 
 #import <libextobjc/libextobjc.h>
 
-// TODO: Test for each type of pagination implementation
-// TODO: Test data, JSON array, JSON dict
+// For more test APIs, have a look at https://github.com/toddmotto/public-apis
 
 @interface PageRequestTestCase : NetworkBaseTestCase
 
@@ -59,6 +58,21 @@
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue],
                                       [NSURLQueryItem queryItemWithName:@"offset" value:@(number * size).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } completionBlock:completionBlock];
+}
+
+- (SRGFirstPageRequest *)anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
+{
+    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.anapioficeandfire.com/api/characters"]];
+    return [SRGFirstPageRequest JSONArrayRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 seed:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue],
+                                      [NSURLQueryItem queryItemWithName:@"page" value:@(number + 1).stringValue] ];
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
 }
@@ -191,6 +205,28 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
     __block SRGFirstPageRequest *request = [[self hummingbirdV4SportNewsFeedWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (page.number == 0 && nextPage) {
+            [[request requestWithPage:nextPage] resume];
+        }
+        else if (page.number == 1) {
+            [expectation fulfill];
+        }
+        else {
+            XCTFail(@"Only first two pages are expected");
+        }
+    }] requestWithPageSize:2];
+    [request resume];
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+}
+
+- (void)testAnAPIOfIceAndFirePagination
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
+    
+    __block SRGFirstPageRequest *request = [[self anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertEqual(JSONArray.count, 2);
+        
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
