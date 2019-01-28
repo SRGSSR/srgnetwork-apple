@@ -15,7 +15,8 @@
 @property (nonatomic) NSURLRequest *firstPageURLRequest;
 @property (nonatomic) SRGPage *page;
 
-@property (nonatomic, copy) SRGObjectPageBuilder builder;
+@property (nonatomic, copy) SRGObjectPageSeed seed;
+@property (nonatomic, copy) SRGObjectPaginator paginator;
 @property (nonatomic, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
 
 @end
@@ -29,7 +30,8 @@
                            options:(SRGRequestOptions)options
                             parser:(SRGResponseParser)parser
                               page:(SRGPage *)page
-                           builder:(SRGObjectPageBuilder)builder
+                              seed:(SRGObjectPageSeed)seed
+                         paginator:(SRGObjectPaginator)paginator
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock
 {
     if (! page) {
@@ -42,7 +44,7 @@
             return;
         }
         
-        NSURLRequest *nextURLRequest = builder(object, response, page.size, page.number + 1);
+        NSURLRequest *nextURLRequest = paginator(URLRequest, object, response, page.size, page.number + 1);
         SRGPage *nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
         completionBlock(object, page, nextPage, response, nil);
     };
@@ -50,7 +52,8 @@
     if (self = [super initWithURLRequest:page.URLRequest session:session options:options parser:parser completionBlock:pageCompletionBlock]) {
         self.firstPageURLRequest = URLRequest;
         self.page = page;
-        self.builder = builder;
+        self.seed = seed;
+        self.paginator = paginator;
         self.pageCompletionBlock = completionBlock;
     }
     return self;
@@ -58,13 +61,13 @@
 
 #pragma mark Request generation
 
-- (NSURLRequest *)URLRequestForPageWithSize:(NSUInteger)size number:(NSUInteger)number
+- (NSURLRequest *)URLRequestForFirstPageWithSize:(NSUInteger)size
 {
-    if (size == SRGPageDefaultSize && number == 0) {
+    if (size == SRGPageDefaultSize) {
         return self.firstPageURLRequest;
     }
     else {
-        return self.builder(nil, nil, size, number) ?: self.firstPageURLRequest;
+        return self.seed(self.firstPageURLRequest, size);
     }
 }
 
@@ -75,7 +78,8 @@
                                          options:self.options
                                           parser:self.parser
                                             page:page ?: self.page
-                                         builder:self.builder
+                                            seed:self.seed
+                                       paginator:self.paginator
                                  completionBlock:self.pageCompletionBlock];
     NSAssert([request isKindOfClass:SRGPageRequest.class], @"A page request subclass must be returned");
     return request;

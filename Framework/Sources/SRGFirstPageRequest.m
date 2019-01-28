@@ -19,7 +19,8 @@
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
                                            options:(SRGRequestOptions)options
-                                           builder:(SRGDataPageBuilder)builder
+                                              seed:(SRGDataPageSeed)seed
+                                         paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest
@@ -27,39 +28,42 @@
                                           options:options
                                            parser:nil
                                              page:nil
-                                          builder:builder
+                                             seed:seed
+                                        paginator:paginator
                                   completionBlock:completionBlock];
 }
 
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
                                                 options:(SRGRequestOptions)options
-                                                builder:(SRGJSONArrayPageBuilder)builder
+                                                   seed:(SRGDataPageSeed)seed
+                                              paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONArrayParser(data, pError);
-    } page:nil builder:^NSURLRequest * _Nullable(id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
-        return builder(response, size, number);
+    } page:nil seed:seed paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        return paginator(URLRequest, response, size, number);
     } completionBlock:completionBlock];
 }
 
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
                                                      options:(SRGRequestOptions)options
-                                                     builder:(SRGJSONDictionaryPageBuilder)builder
+                                                        seed:(SRGJSONDictionaryPageSeed)seed
+                                                   paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
-    } page:nil builder:builder completionBlock:completionBlock];
+    } page:nil seed:seed paginator:paginator completionBlock:completionBlock];
 }
 
 #pragma mark Page management
 
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize
 {
-    NSURLRequest *URLRequest = [self URLRequestForPageWithSize:pageSize number:0];
+    NSURLRequest *URLRequest = [self URLRequestForFirstPageWithSize:pageSize];
     SRGPage *page = [[SRGPage alloc] initWithSize:pageSize number:0 URLRequest:URLRequest];
     return [self requestWithPage:page class:SRGFirstPageRequest.class];
 }
