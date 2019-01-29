@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *SRGNetworkMarketingVersion(void);
 #import "SRGFirstPageRequest.h"
 #import "SRGNetworkError.h"
 #import "SRGNetworkActivityManagement.h"
+#import "SRGNetworkParsers.h"
 #import "SRGNetworkTypes.h"
 #import "SRGPage.h"
 #import "SRGPageRequest.h"

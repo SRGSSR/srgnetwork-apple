@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; };
+		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
 		6F40353D21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */; };
