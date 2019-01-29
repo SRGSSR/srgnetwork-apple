@@ -22,6 +22,7 @@
                                           session:session
                                           options:options
                                            parser:nil
+                                        extractor:nil
                                   completionBlock:completionBlock];
 }
 
@@ -35,6 +36,7 @@
                                           session:session
                                           options:options
                                            parser:parser
+                                        extractor:nil
                                   completionBlock:completionBlock];
 }
 
@@ -45,7 +47,7 @@
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONArrayParser(data, pError);
-    } completionBlock:completionBlock];
+    } extractor:nil completionBlock:completionBlock];
 }
 
 + (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
@@ -55,7 +57,7 @@
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
-    } completionBlock:completionBlock];
+    } extractor:nil completionBlock:completionBlock];
 }
 
 @end

@@ -38,18 +38,15 @@
         page = [[SRGPage alloc] initWithSize:SRGPageDefaultSize number:0 URLRequest:URLRequest];
     }
     
-    SRGObjectCompletionBlock pageCompletionBlock = ^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            completionBlock(nil, page, nil, response, error);
-            return;
-        }
-        
-        NSURLRequest *nextURLRequest = paginator(URLRequest, object, response, page.size, page.number + 1);
-        SRGPage *nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
-        completionBlock(object, page, nextPage, response, nil);
-    };
+    __block SRGPage *nextPage = nil;
     
-    if (self = [super initWithURLRequest:page.URLRequest session:session options:options parser:parser completionBlock:pageCompletionBlock]) {
+    if (self = [super initWithURLRequest:page.URLRequest session:session options:options parser:parser extractor:^(id  _Nullable object, NSURLResponse * _Nullable response) {
+        NSAssert(! NSThread.isMainThread, @"Must always be executed in the background");
+        NSURLRequest *nextURLRequest = paginator(URLRequest, object, response, page.size, page.number + 1);
+        nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
+    } completionBlock:^(id  _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        completionBlock(object, page, nextPage, response, error);
+    }]) {
         self.firstPageURLRequest = URLRequest;
         self.page = page;
         self.sizer = sizer;

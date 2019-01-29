@@ -18,6 +18,7 @@
 @property (nonatomic) NSURLSession *session;
 @property (nonatomic) SRGRequestOptions options;
 @property (nonatomic, copy) SRGResponseParser parser;
+@property (nonatomic, copy) SRGObjectExtractor extractor;
 @property (nonatomic, copy) SRGObjectCompletionBlock completionBlock;
 
 @property (nonatomic) NSURLSessionTask *sessionTask;
@@ -34,6 +35,7 @@
                            session:(NSURLSession *)session
                            options:(SRGRequestOptions)options
                             parser:(SRGResponseParser)parser
+                         extractor:(SRGObjectExtractor)extractor
                    completionBlock:(SRGObjectCompletionBlock)completionBlock
 {
     if (self = [super init]) {
@@ -41,6 +43,7 @@
         self.session = session;
         self.options = options;
         self.parser = parser;
+        self.extractor = extractor;
         self.completionBlock = completionBlock;
     }
     return self;
@@ -52,7 +55,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] options:0 parser:nil completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] options:0 parser:nil extractor:nil completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
 }
@@ -90,6 +93,10 @@
     
     // No weakify / strongify dance here, so that the request retains itself while it is running
     void (^completionBlock)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable) = ^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            self.extractor ? self.extractor(data, response) : nil;
+        }
+        
         if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
             self.completionBlock(data, response, error);
         }
