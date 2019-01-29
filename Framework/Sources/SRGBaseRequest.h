@@ -9,11 +9,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Abstract base class for requests, providing core start and stop capabilities.
+ *  Abstract base class for requests.
  *
  *  This class is not meant to be instantiated as is. Use a concrete `SRGRequest` for a standard request, or
- *  `SRGFirstPageRequest` for a request with pagination support. Concrete requests take a completion block as
- *  parameter, called when they finish, either successfully or because of an error.
+ *  `SRGFirstPageRequest` for a request with pagination support.
+ *
+ *  Note that all concrete requests take a completion block as parameter, called when they finish, either successfully
+ *  or because of an error.
  */
 @interface SRGBaseRequest : NSObject
 

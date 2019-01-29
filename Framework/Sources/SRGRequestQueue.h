@@ -18,11 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  it is running. The state of the queue automatically adjusts when you add requests to an existing queue. You can
  *  add all requests right from the start, or even add requests to a queue when needed. This makes it possible to
  *  support most common request needs, for example:
- *    - You can create a queue and add a batch of requests to it (parallel requests).
- *    - You can add a request to a queue, wait until you get an answer, and use this answer to perform another request
- *      (probably using some data you received), added to the same queue (cascading requests).
- *    - You can also pass a queue around so that subsystems of your applications can add their own requests to it
- *      as needed.
+ *    - Parallel requests: You can create a queue and add a batch of requests to it.
+ *    - Cascading requests: You can add a request to a queue, wait until you get an answer, and use this answer to
+ *      perform another request (probably using some data you received), added to the same queue.
+ *    - Decentralized requests: You can also pass a queue around so that subsystems of your applications can add
+ *      their own requests to it as needed.
  *
  *  As a general rule, you should use a request queue to group requests for which you want a common behavior when
  *  at least one of them is running, or none of them is. For example, if you need to perform ten different requests

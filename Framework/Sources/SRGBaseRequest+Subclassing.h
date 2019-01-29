@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Methods to be used when implementing a `SRGBaseRequest` subclass.
+ *  Methods accessible to `SRGBaseRequest` subclasses.
  */
 @interface SRGBaseRequest (Subclassing)
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param session         The session for which the request is executed.
  *  @param options         Options to apply (0 if none).
  *  @param parser          An optional parser. If no error is returned (by reference), the extracted object will be
- *                         returend to the completion block, otherwise an error will be returned instead.
+ *                         returned to the completion block, otherwise an error will be returned instead.
  *  @param completionBlock The completion block which will be called when the request ends.
  *
  *  @discussion The block will likely be called on a background thread (this depends on how the session was configured).

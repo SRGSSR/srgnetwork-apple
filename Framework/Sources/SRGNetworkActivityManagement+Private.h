@@ -8,9 +8,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ *  Private category for implementation purposes.
+ */
 @interface SRGNetworkActivityManagement (Private)
 
+/**
+ *  Increase the number of running request. When > 0, network activity is reported.
+ */
 + (void)increaseNumberOfRunningRequests;
+
+/**
+ *  Decrease the number of running request. When = 0, network activity is not reported.
+ */
 + (void)decreaseNumberOfRunningRequests;
 
 @end

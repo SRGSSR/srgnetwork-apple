@@ -10,7 +10,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Request for the first page of a list of results.
+ *  Request for the first page of a list of results. Once an `SRGFirstPageRequest` has been properly created, you can
+ *  change the desired size for a page of results (`-requestWithPageSize:`).
+ *
+ *  You never instantiate page objects yourself, though, you merely receive them in the completion block of a request
+ *  supporting pagination. Subsequent pages can then be retrieved by calling `-requestWithPage:` and executing the
+ *  returned request.
+ *
+ *  Requests are not started by default. Once you have an `SRGFirstPageRequest` or `SRGPageRequest` instance, call
+ *  the `-resume` method to start the request. A started request keeps itself alive while it is running. You can
+ *  therefore execute a request "locally" in your code, without keeping a reference to it (but this makes it impossible
+ *  to cancel the request manually afterwards). If you want to be able to cancel a request, keep a reference to it.
+ *
+ *  To manage several related requests, use an `SRGRequestQueue`.
  */
 @interface SRGFirstPageRequest : SRGPageRequest
 
@@ -87,9 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize;
 
 /**
- *  Return an equivalent request, but for the specified page. You never instantiate pages yourself, you receive them
- *  in the completion block of a request supporting pagination. Subsequent pages can then be retrieved by calling this
- *   method and executing the returned request.
+ *  Return an equivalent request, but for the specified page.
  *
  *  @param page The page to request. If `nil`, the first page is requested (for the same page size as the receiver).
  *

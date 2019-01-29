@@ -38,13 +38,13 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
     SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
 };
 
-// Parsing block signature.
-typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
+// Parser signature.
+typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError * __autoreleasing *pError);
 
-// Sizer block signature.
+// Sizer signature.
 typedef NSURLRequest * (^SRGPageSizer)(NSURLRequest *URLRequest, NSUInteger size);
 
-// Paginator block signatures.
+// Paginator signatures.
 typedef NSURLRequest * _Nullable (^SRGDataPaginator)(NSURLRequest *URLRequest, NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
 typedef NSURLRequest * _Nullable (^SRGJSONArrayPaginator)(NSURLRequest *URLRequest, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
 typedef NSURLRequest * _Nullable (^SRGJSONDictionaryPaginator)(NSURLRequest *URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);

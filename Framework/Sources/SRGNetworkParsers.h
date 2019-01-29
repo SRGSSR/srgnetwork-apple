@@ -8,7 +8,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-OBJC_EXPORT NSArray * _Nullable SRGNetworkJSONArrayParser(NSData * _Nullable data, NSError **pError);
-OBJC_EXPORT NSDictionary * _Nullable SRGNetworkJSONDictionaryParser(NSData * _Nullable data, NSError **pError);
+/**
+ *  Parsing functions.
+ */
+OBJC_EXPORT NSArray * _Nullable SRGNetworkJSONArrayParser(NSData * _Nullable data, NSError * __autoreleasing *pError);
+OBJC_EXPORT NSDictionary * _Nullable SRGNetworkJSONDictionaryParser(NSData * _Nullable data, NSError * __autoreleasing *pError);
 
 NS_ASSUME_NONNULL_END
