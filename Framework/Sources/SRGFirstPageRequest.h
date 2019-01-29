@@ -4,24 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "SRGNetworkTypes.h"
 #import "SRGPageRequest.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Seed block signatures
-typedef NSURLRequest * (^SRGDataPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * (^SRGJSONArrayPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * (^SRGJSONDictionaryPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-
-// Paginagor block signatures.
-typedef NSURLRequest * _Nullable (^SRGDataPaginator)(NSURLRequest *URLRequest, NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
-typedef NSURLRequest * _Nullable (^SRGJSONArrayPaginator)(NSURLRequest *URLRequest, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
-typedef NSURLRequest * _Nullable (^SRGJSONDictionaryPaginator)(NSURLRequest *URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
-
-// Completion block signatures.
-typedef void (^SRGDataPageCompletionBlock)(NSData * _Nullable data, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
-typedef void (^SRGJSONArrayPageCompletionBlock)(NSArray * _Nullable JSONArray, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
-typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JSONDictionary, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 /**
  *  Request for the first page of a list of results.
@@ -29,18 +15,12 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
 @interface SRGFirstPageRequest : SRGPageRequest
 
 /**
- *  Convenience initializers for requests started with the provided session and options, calling the specified block
- *  on completion. Note that JSON requests will fail with an error if the data cannot be parsed in the expected format.
+ *  Data request started with the provided session and options, calling the specified block on completion. Pagination
+ *  requires a seed (defines how the original request is tuned to alter its page size to another value) as well as a
+ *  paginator (defines how subsequent pages of results are loaded).
  *
- *  @param URLRequest      The request to execute.
- *  @param session         The session for which the request is executed.
- *  @param options         Options to apply (0 if none).
- *  @param seed            A block which creates the first URL to start pagination with.
- *  @param paginator       A block with which the URL request for subsequent pages can be guessed. Various information
- *                         is available to extract or build the request from.
- *  @param completionBlock The completion block which will be called when the request ends.
- *
- *  @discussion Blocks will likely be called on a background thread (this depends on how the session was configured).
+ *  @discussion The completion block will likely be called on a background thread (this depends on how the session was
+ *              configured).
  */
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
@@ -49,6 +29,16 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
                                          paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock;
 
+/**
+ *  Request started with the provided session and options, calling the specified block on completion, and returning
+ *  the response as a JSON array. Pagination requires a seed (defines how the original request is tuned to alter its
+ *  page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
+ *
+ *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
+ *              array. The completion block will likely be called on a background thread (this depends on how the
+ *              session was configured).
+ */
+
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
                                                 options:(SRGRequestOptions)options
@@ -56,12 +46,38 @@ typedef void (^SRGJSONDictionaryPageCompletionBlock)(NSDictionary * _Nullable JS
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock;
 
+/**
+ *  Request started with the provided session and options, calling the specified block on completion, and returning
+ *  the response as a JSON dictionary. Pagination requires a seed (defines how the original request is tuned to alter
+ *  its page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
+ *
+ *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
+ *              dictionary. The completion block will likely be called on a background thread (this depends on how
+ *              the session was configured).
+ */
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
                                                      options:(SRGRequestOptions)options
                                                         seed:(SRGJSONDictionaryPageSeed)seed
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock;
+
+/**
+ *  Object request started with the provided session and options, turning the response into an object through a mandatory
+ *  parsing block, and calling the specified block on completion. Pagination requires a seed (defines how the original
+ *  request is tuned to alter its page size to another value) as well as a paginator (defines how subsequent pages of
+ *  results are loaded).
+ *
+ *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
+ *              likely be called on a background thread (this depends on how the session was configured).
+ */
++ (SRGFirstPageRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                             session:(NSURLSession *)session
+                                             options:(SRGRequestOptions)options
+                                              parser:(SRGResponseParser)parser
+                                                seed:(SRGObjectPageSeed)seed
+                                           paginator:(SRGObjectPaginator)paginator
+                                     completionBlock:(SRGObjectPageCompletionBlock)completionBlock;
 
 /**
  *  Return an equivalent request, but with the specified page size.

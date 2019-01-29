@@ -5,13 +5,9 @@
 //
 
 #import "SRGBaseRequest.h"
+#import "SRGNetworkTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Completion block signatures.
-typedef void (^SRGDataCompletionBlock)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error);
-typedef void (^SRGJSONArrayCompletionBlock)(NSArray * _Nullable JSONArray, NSURLResponse * _Nullable response, NSError * _Nullable error);
-typedef void (^SRGJSONDictionaryCompletionBlock)(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 /**
  *  `SRGRequest` objects provide a way to manage the data retrieval process associated with a data provider 
@@ -28,30 +24,54 @@ typedef void (^SRGJSONDictionaryCompletionBlock)(NSDictionary * _Nullable JSONDi
 @interface SRGRequest : SRGBaseRequest
 
 /**
- *  Convenience initializers for requests started with the provided session and options, calling the specified block
- *  on completion. Note that JSON requests will fail with an error if the data cannot be parsed in the expected format.
+ *  Data request started with the provided session and options, calling the specified block on completion.
  *
- *  @param URLRequest      The request to execute.
- *  @param session         The session for which the request is executed.
- *  @param options         Options to apply (0 if none).
- *  @param completionBlock The completion block which will be called when the request ends.
- *
- *  @discussion The block will likely be called on a background thread (this depends on how the session was configured).
+ *  @discussion The completion block will likely be called on a background thread (this depends on how the session was
+ *              configured).
  */
 + (SRGRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                   session:(NSURLSession *)session
                                   options:(SRGRequestOptions)options
                           completionBlock:(SRGDataCompletionBlock)completionBlock;
 
+/**
+ *  Request started with the provided session and options, calling the specified block on completion, and returning
+ *  the response as a JSON array.
+ *
+ *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
+ *              array. The completion block will likely be called on a background thread (this depends on how the
+ *              session was configured).
+ */
++ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                       session:(NSURLSession *)session
+                                       options:(SRGRequestOptions)options
+                               completionBlock:(SRGJSONArrayCompletionBlock)completionBlock;
+
+/**
+ *  Request started with the provided session and options, calling the specified block on completion, and returning
+ *  the response as a JSON dictionary.
+ *
+ *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
+ *              dictionary. The completion block will likely be called on a background thread (this depends on how
+ *              the session was configured).
+ */
 + (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                             session:(NSURLSession *)session
                                             options:(SRGRequestOptions)options
                                     completionBlock:(SRGJSONDictionaryCompletionBlock)completionBlock;
 
-+ (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
-                                       session:(NSURLSession *)session
-                                       options:(SRGRequestOptions)options
-                               completionBlock:(SRGJSONArrayCompletionBlock)completionBlock;
+/**
+ *  Object request started with the provided session and options, turning the response into an object through a mandatory
+ *  parsing block, and calling the specified block on completion.
+ *
+ *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
+ *              likely be called on a background thread (this depends on how the session was configured).
+ */
++ (SRGRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                    session:(NSURLSession *)session
+                                    options:(SRGRequestOptions)options
+                                     parser:(SRGResponseParser)parser
+                            completionBlock:(SRGObjectCompletionBlock)completionBlock;
 
 @end
 

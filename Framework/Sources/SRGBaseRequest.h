@@ -4,37 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+#import "SRGNetworkTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- *  Rquest options.
- */
-typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
-    /**
-     *  By default, cancelled requests will not call the associated completion block. If this flag is set, though,
-     *  cancelled requests will call the completion block with an associated error.
-     */
-    SRGRequestOptionCancellationErrorsEnabled = (1UL << 0),
-    /**
-     *  By default, and unlike `NSURLSession` tasks, requests return an `NSError` when an HTTP error status code has
-     *  been received. If this flag is set, though, this mechanism is disabled, and the behavior is similar to the
-     *  one of `NSURLSession` tasks (the status code can be retrieved from the response).
-     */
-    SRGRequestOptionHTTPErrorsDisabled = (1UL << 1),
-    /**
-     *  Some errors might be related to a public WiFi being used, which is why friendly error messages are returned
-     *  by default when this might be the case. The error domain and code are left unaltered. This behavior can be
-     *  disabled, in which case the original (non-friendly) error message is kept.
-     */
-    SRGNetworkOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
-    /**
-     *  By default, request completion blocks are called on a background thread. Enable this flag to have them called
-     *  on the main thread.
-     */
-    SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
-};
 
 /**
  *  Abstract base class for requests, providing core start and stop capabilities.

@@ -25,6 +25,19 @@
                                   completionBlock:completionBlock];
 }
 
++ (SRGRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                    session:(NSURLSession *)session
+                                    options:(SRGRequestOptions)options
+                                     parser:(SRGResponseParser)parser
+                            completionBlock:(SRGObjectCompletionBlock)completionBlock
+{
+    return [[self.class alloc] initWithURLRequest:URLRequest
+                                          session:session
+                                          options:options
+                                           parser:parser
+                                  completionBlock:completionBlock];
+}
+
 + (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                        session:(NSURLSession *)session
                                        options:(SRGRequestOptions)options

@@ -15,13 +15,12 @@
 @interface SRGBaseRequest ()
 
 @property (nonatomic) NSURLRequest *URLRequest;
-@property (nonatomic, copy) SRGObjectCompletionBlock completionBlock;
-
 @property (nonatomic) NSURLSession *session;
-@property (nonatomic) NSURLSessionTask *sessionTask;
-
 @property (nonatomic) SRGRequestOptions options;
 @property (nonatomic, copy) SRGResponseParser parser;
+@property (nonatomic, copy) SRGObjectCompletionBlock completionBlock;
+
+@property (nonatomic) NSURLSessionTask *sessionTask;
 
 @property (nonatomic, getter=isRunning) BOOL running;
 
@@ -151,7 +150,11 @@
         NSError *parsingError = nil;
         id object = self.parser ? self.parser(data, &parsingError) : data;
         if (parsingError) {
-            completionBlock(nil, response, parsingError);
+            NSError *error = [NSError errorWithDomain:SRGNetworkErrorDomain
+                                                 code:SRGNetworkErrorInvalidData
+                                             userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect."),
+                                                         NSUnderlyingErrorKey : parsingError }];
+            completionBlock(nil, response, error);
             return;
         }
         

@@ -15,12 +15,21 @@ static id SRGNetworkJSONParser(NSData *data, Class expectedClass, NSError **pErr
         return nil;
     }
     
-    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
-    if (! JSONObject || ! [JSONObject isKindOfClass:expectedClass]) {
+    NSError *parsingError = nil;
+    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parsingError];
+    if (parsingError) {
         if (pError) {
+            *pError = parsingError;
+        }
+        return nil;
+    }
+    
+    if (! [JSONObject isKindOfClass:expectedClass]) {
+        if (pError) {
+            NSString *description = [NSString stringWithFormat:SRGNetworkNonLocalizedString(@"Incorrect JSON type. Expected %@ but found %@"), NSStringFromClass(expectedClass), NSStringFromClass([JSONObject class])];
             *pError = [NSError errorWithDomain:SRGNetworkErrorDomain
                                           code:SRGNetworkErrorInvalidData
-                                      userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect.") }];
+                                      userInfo:@{ NSLocalizedDescriptionKey : description }];
         }
         return nil;
     }

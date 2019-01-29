@@ -8,6 +8,11 @@
 
 #import "SRGRequest.h"
 
+NSString *SRGNetworkNonLocalizedString(NSString *string)
+{
+    return string;
+}
+
 @implementation NSBundle (SRGNetwork)
 
 #pragma mark Class methods

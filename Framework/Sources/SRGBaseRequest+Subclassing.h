@@ -5,12 +5,9 @@
 //
 
 #import "SRGBaseRequest.h"
+#import "SRGNetworkTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Block signatures.
-typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
-typedef void (^SRGObjectCompletionBlock)(id _Nullable object, NSURLResponse * _Nullable response, NSError * _Nullable error);
 
 /**
  *  Methods to be used when implementing a `SRGBaseRequest` subclass.

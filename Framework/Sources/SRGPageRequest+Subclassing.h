@@ -10,11 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Block signatures.
-typedef NSURLRequest * (^SRGObjectPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * _Nullable (^SRGObjectPaginator)(NSURLRequest *URLRequest, id _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
-typedef void (^SRGObjectPageCompletionBlock)(id _Nullable object, SRGPage *page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error);
-
 /**
  *  Methods to be used when implementing a `SRGPageRequest` subclass.
  */

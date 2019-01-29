@@ -59,6 +59,24 @@
     } page:nil seed:seed paginator:paginator completionBlock:completionBlock];
 }
 
++ (SRGFirstPageRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
+                                             session:(NSURLSession *)session
+                                             options:(SRGRequestOptions)options
+                                              parser:(SRGResponseParser)parser
+                                                seed:(SRGObjectPageSeed)seed
+                                           paginator:(SRGObjectPaginator)paginator
+                                     completionBlock:(SRGObjectPageCompletionBlock)completionBlock
+{
+    return [[self.class alloc] initWithURLRequest:URLRequest
+                                          session:session
+                                          options:options
+                                           parser:parser
+                                             page:nil
+                                             seed:seed
+                                        paginator:paginator
+                                  completionBlock:completionBlock];
+}
+
 #pragma mark Page management
 
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize
