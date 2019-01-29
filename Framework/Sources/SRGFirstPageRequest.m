@@ -18,14 +18,12 @@
 
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
-                                           options:(SRGRequestOptions)options
                                              sizer:(SRGPageSizer)sizer
                                          paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest
                                           session:session
-                                          options:options
                                            parser:nil
                                              page:nil
                                             sizer:sizer
@@ -35,12 +33,11 @@
 
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
-                                                options:(SRGRequestOptions)options
                                                   sizer:(SRGPageSizer)sizer
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONArrayParser(data, pError);
     } page:nil sizer:sizer paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         return paginator(URLRequest, response, size, number);
@@ -49,19 +46,17 @@
 
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
-                                                     options:(SRGRequestOptions)options
                                                        sizer:(SRGPageSizer)sizer
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
     } page:nil sizer:sizer paginator:paginator completionBlock:completionBlock];
 }
 
 + (SRGFirstPageRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
                                              session:(NSURLSession *)session
-                                             options:(SRGRequestOptions)options
                                               parser:(SRGResponseParser)parser
                                                sizer:(SRGPageSizer)sizer
                                            paginator:(SRGObjectPaginator)paginator
@@ -69,7 +64,6 @@
 {
     return [[self.class alloc] initWithURLRequest:URLRequest
                                           session:session
-                                          options:options
                                            parser:parser
                                              page:nil
                                             sizer:sizer

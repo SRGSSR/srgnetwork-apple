@@ -15,12 +15,10 @@
 
 + (SRGRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                   session:(NSURLSession *)session
-                                  options:(SRGRequestOptions)options
                           completionBlock:(SRGDataCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest
                                           session:session
-                                          options:options
                                            parser:nil
                                         extractor:nil
                                   completionBlock:completionBlock];
@@ -28,13 +26,11 @@
 
 + (SRGRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
                                     session:(NSURLSession *)session
-                                    options:(SRGRequestOptions)options
                                      parser:(SRGResponseParser)parser
                             completionBlock:(SRGObjectCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest
                                           session:session
-                                          options:options
                                            parser:parser
                                         extractor:nil
                                   completionBlock:completionBlock];
@@ -42,20 +38,18 @@
 
 + (SRGRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                        session:(NSURLSession *)session
-                                       options:(SRGRequestOptions)options
                                completionBlock:(SRGJSONArrayCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONArrayParser(data, pError);
     } extractor:nil completionBlock:completionBlock];
 }
 
 + (SRGRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                             session:(NSURLSession *)session
-                                            options:(SRGRequestOptions)options
                                     completionBlock:(SRGJSONDictionaryCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
     } extractor:nil completionBlock:completionBlock];
 }

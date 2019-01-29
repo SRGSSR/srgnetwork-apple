@@ -14,10 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  This class is not meant to be instantiated as is. Use a concrete `SRGRequest` for a standard request, or
  *  `SRGFirstPageRequest` for a request with pagination support.
  *
+ *  Requests support various options (none applied by default), controlling how they behave. To apply options,
+ *  call `-requestWithOptions:` to apply options to the receiver.
+ *
  *  Note that all concrete requests take a completion block as parameter, called when they finish, either successfully
  *  or because of an error.
  */
 @interface SRGBaseRequest : NSObject
+
+/**
+ *  Return a clone of the receiver, with the specified options. Previously applied options are replaced.
+ */
+- (__kindof SRGBaseRequest *)requestWithOptions:(SRGRequestOptions)options;
 
 /**
  *  Start performing the request.

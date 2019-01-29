@@ -32,21 +32,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SRGFirstPageRequest : SRGPageRequest
 
 /**
- *  Data request started with the provided session and options, calling the specified block on completion.
+ *  Data request started with the provided session, calling the specified block on completion.
  *
  *  @discussion The completion block will likely be called on a background thread (this depends on how the session was
  *              configured).
  */
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
-                                           options:(SRGRequestOptions)options
                                              sizer:(SRGPageSizer)sizer
                                          paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock;
 
 /**
- *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON array.
+ *  Request started with the provided session, calling the specified block on completion, and returning the response as
+ *  a JSON array.
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
  *              array. The completion block will likely be called on a background thread (this depends on how the
@@ -54,14 +53,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
-                                                options:(SRGRequestOptions)options
                                                   sizer:(SRGPageSizer)sizer
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock;
 
 /**
- *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON dictionary.
+ *  Request started with the provided session, calling the specified block on completion, and returning the response as
+ *  a JSON dictionary.
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
  *              dictionary. The completion block will likely be called on a background thread (this depends on how
@@ -69,21 +67,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
-                                                     options:(SRGRequestOptions)options
                                                        sizer:(SRGPageSizer)sizer
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock;
 
 /**
- *  Object request started with the provided session and options, turning the response into an object through a mandatory
- *  parsing block (if response data is retrieved), and calling the specified block on completion.
+ *  Object request started with the provided session, turning the response into an object through a mandatory parsing
+ *  block (if response data is retrieved), and calling the specified block on completion.
  *
  *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
  *              likely be called on a background thread (this depends on how the session was configured).
  */
 + (SRGFirstPageRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
                                              session:(NSURLSession *)session
-                                             options:(SRGRequestOptions)options
                                               parser:(SRGResponseParser)parser
                                                sizer:(SRGPageSizer)sizer
                                            paginator:(SRGObjectPaginator)paginator

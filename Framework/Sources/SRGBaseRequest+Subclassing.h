@@ -22,7 +22,6 @@ typedef void (^SRGObjectExtractor)(id _Nullable object, NSURLResponse * _Nullabl
  *
  *  @param URLRequest      The request to execute.
  *  @param session         The session for which the request is executed.
- *  @param options         Options to apply (0 if none).
  *  @param parser          An optional parser. If no error is returned (by reference), the extracted object will be
  *                         returned to the completion block, otherwise an error will be returned instead. The parser
  *                         is only called if data has been retrieved.
@@ -36,7 +35,6 @@ typedef void (^SRGObjectExtractor)(id _Nullable object, NSURLResponse * _Nullabl
  */
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
-                           options:(SRGRequestOptions)options
                             parser:(nullable SRGResponseParser)parser
                          extractor:(nullable SRGObjectExtractor)extractor
                    completionBlock:(SRGObjectCompletionBlock)completionBlock;

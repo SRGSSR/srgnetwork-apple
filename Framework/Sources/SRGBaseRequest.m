@@ -33,7 +33,6 @@
 
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
-                           options:(SRGRequestOptions)options
                             parser:(SRGResponseParser)parser
                          extractor:(SRGObjectExtractor)extractor
                    completionBlock:(SRGObjectCompletionBlock)completionBlock
@@ -41,7 +40,6 @@
     if (self = [super init]) {
         self.URLRequest = URLRequest;
         self.session = session;
-        self.options = options;
         self.parser = parser;
         self.extractor = extractor;
         self.completionBlock = completionBlock;
@@ -55,7 +53,7 @@
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
-    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] options:0 parser:nil extractor:nil completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    return [self initWithURLRequest:[NSURLRequest new] session:[NSURLSession new] parser:nil extractor:nil completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing
     }];
 }
@@ -81,6 +79,19 @@
             [SRGNetworkActivityManagement decreaseNumberOfRunningRequests];
         }
     }
+}
+
+#pragma mark Overrides
+
+- (SRGBaseRequest *)requestWithOptions:(SRGRequestOptions)options
+{
+    SRGBaseRequest *request = [[self.class alloc] initWithURLRequest:self.URLRequest
+                                                             session:self.session
+                                                              parser:self.parser
+                                                           extractor:self.extractor
+                                                     completionBlock:self.completionBlock];
+    request.options = options;
+    return request;
 }
 
 #pragma mark Session task management

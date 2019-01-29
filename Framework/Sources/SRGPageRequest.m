@@ -27,7 +27,6 @@
 
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
-                           options:(SRGRequestOptions)options
                             parser:(SRGResponseParser)parser
                               page:(SRGPage *)page
                              sizer:(SRGPageSizer)sizer
@@ -40,7 +39,7 @@
     
     __block SRGPage *nextPage = nil;
     
-    if (self = [super initWithURLRequest:page.URLRequest session:session options:options parser:parser extractor:^(id  _Nullable object, NSURLResponse * _Nullable response) {
+    if (self = [super initWithURLRequest:page.URLRequest session:session parser:parser extractor:^(id  _Nullable object, NSURLResponse * _Nullable response) {
         NSAssert(! NSThread.isMainThread, @"Must always be executed in the background");
         NSURLRequest *nextURLRequest = paginator(URLRequest, object, response, page.size, page.number + 1);
         nextPage = nextURLRequest ? [[SRGPage alloc] initWithSize:page.size number:page.number + 1 URLRequest:nextURLRequest] : nil;
@@ -72,7 +71,6 @@
 {
     id request = [[cls alloc] initWithURLRequest:self.firstPageURLRequest
                                          session:self.session
-                                         options:self.options
                                           parser:self.parser
                                             page:page ?: self.page
                                            sizer:self.sizer

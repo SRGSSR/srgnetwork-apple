@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param URLRequest      The request to execute.
  *  @param session         The session for which the request is executed.
- *  @param options         Options to apply (0 if none).
  *  @param parser          An optional parser. If no error is returned (by reference), the extracted object will be
  *                         returned to the completion block, otherwise an error will be returned instead.
  *  @param page            The page to associate the request with.
@@ -34,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
-                           options:(SRGRequestOptions)options
                             parser:(nullable SRGResponseParser)parser
                               page:(nullable SRGPage *)page
                              sizer:(SRGPageSizer)sizer

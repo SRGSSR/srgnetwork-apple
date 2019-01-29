@@ -9,7 +9,7 @@ At its core, SRG Network is all about requests. The simplest kind of request is 
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-SRGRequest *request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+SRGRequest *request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
     if (error) {
         // Deal with the error
         return;
@@ -20,7 +20,17 @@ SRGRequest *request = [SRGRequest dataRequestWithURLRequest:URLRequest session:N
 [request resume];
 ```
 
-When a request ends, the corresponding completion block is called, with the returned data or error information. The completion block of a cancelled request will not be called by default. This behavior can be changed by setting the `options` mask appropriately.
+When a request ends, the corresponding completion block is called, with the returned data or error information. The completion block of a cancelled request is not called by default. This behavior can be changed by changing request options, as follows:
+
+```objective-c
+NSURLRequest *URLRequest = ...;
+SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    // The completion block is now called if the request is cancelled
+}] requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
+[request resume];
+```
+
+Other options can be added with the `|` bitwise OR operator.
 
 Other request variants exist which can automatically parse the reponse data as a JSON dictionary or array, or as an object using an arbitrary parser.
 
@@ -42,7 +52,7 @@ Set the request property when a refresh is performed:
 - (void)refresh
 {
     NSURLRequest *URLRequest = ...;
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // ...
     }];
     [self.request resume];
@@ -70,7 +80,7 @@ If `self` retains the request and is referenced from its completion block, you w
 - (void)refresh
 {
     __weak __typeof(self) weakSelf = self;
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [weakSelf doStuff];
     }];
     [self.request resume];
@@ -85,7 +95,7 @@ For Objective-C codebases, you can use the bundled `libextobjc` framework which 
 - (void)refresh
 {
     @weakify(self)
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         @strongify(self)
         [self doStuff];
     }];
@@ -107,7 +117,7 @@ Here is an example of a service for which pagination is specified with a `pageSi
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
     URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
     return [NSURLRequest requestWithURL:URLComponents.URL];
@@ -127,7 +137,7 @@ Once an `SRGFirstPageRequest` has been successfully executed, the paginator (if 
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
     // See above
 } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
     // See above
@@ -224,7 +234,7 @@ If a request does not depend on the result of another request, you can instantia
     }];
     
     NSURLRequest *URLRequest1 = ...;
-    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [requestQueue reportError:error];
         
         // ...
@@ -232,7 +242,7 @@ If a request does not depend on the result of another request, you can instantia
     [requestQueue addRequest:request1 resume:YES];
     
     NSURLRequest *URLRequest2 = ...;
-    SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [requestQueue reportError:error];
         
         // ...
@@ -255,7 +265,7 @@ Though `__weak` request queue references are not required, you must still weakif
     NSURLRequest *URLRequest = ...;
 
     __weak __typeof(self) weakSelf = self;
-    self.requestQueue = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    self.requestQueue = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         [weakSelf doStuff];
     }];
     
@@ -290,7 +300,7 @@ If a request depends on the result of another request, you can similarly use a r
     }];
 
     NSURLRequest *URLRequest1 = ...;
-    SRGRequest *request1 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession options:0 completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request1 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             [requestQueue reportError:error];
             return;
@@ -300,7 +310,7 @@ If a request depends on the result of another request, you can similarly use a r
         // ...
         
         NSURLRequest *URLRequest2 = ...;
-        SRGRequest *request2 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession options:0 completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        SRGRequest *request2 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
              if (error) {
                 [requestQueue reportError:error];
                 return;
@@ -344,7 +354,7 @@ When a full refresh is needed, create the first request and a queue which will r
         }
     }];
 
-    self.firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+    self.firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
         // ...
     } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         // ...
