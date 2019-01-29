@@ -30,8 +30,6 @@ typedef void (^SRGObjectExtractor)(id _Nullable object, NSURLResponse * _Nullabl
  *                         main thread (no matter which options have been set).
  *  @param completionBlock The completion block which will be called when the request ends. This block might be called
  *                         on the main thread depending on the request options.
- *
- *  @discussion The block will likely be called on a background thread (this depends on how the session was configured).
  */
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session

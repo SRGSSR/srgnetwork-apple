@@ -28,8 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param sizer           A block through which the original request can be tuned for other page sizes.
  *  @param paginator       A block to build or extract the URL request needed to load another page of content.
  *  @param completionBlock The completion block which will be called when the request ends.
- *
- *  @discussion The block will likely be called on a background thread (this depends on how the session was configured).
  */
 - (instancetype)initWithURLRequest:(NSURLRequest *)URLRequest
                            session:(NSURLSession *)session
