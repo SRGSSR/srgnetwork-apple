@@ -41,11 +41,8 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 // Parsing block signature.
 typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError **pError);
 
-// Seed block signatures
-typedef NSURLRequest * (^SRGDataPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * (^SRGJSONArrayPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * (^SRGJSONDictionaryPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
-typedef NSURLRequest * (^SRGObjectPageSeed)(NSURLRequest *URLRequest, NSUInteger size);
+// Sizer block signature.
+typedef NSURLRequest * (^SRGPageSizer)(NSURLRequest *URLRequest, NSUInteger size);
 
 // Paginator block signatures.
 typedef NSURLRequest * _Nullable (^SRGDataPaginator)(NSURLRequest *URLRequest, NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);

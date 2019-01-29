@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
                            options:(SRGRequestOptions)options
                             parser:(nullable SRGResponseParser)parser
                               page:(nullable SRGPage *)page
-                              seed:(SRGObjectPageSeed)seed
+                             sizer:(SRGPageSizer)sizer
                          paginator:(SRGObjectPaginator)paginator
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock;
 

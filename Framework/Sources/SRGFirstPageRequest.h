@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Data request started with the provided session and options, calling the specified block on completion. Pagination
- *  requires a seed (defines how the original request is tuned to alter its page size to another value) as well as a
+ *  requires a sizer (defines how the original request is tuned to change its page size to another value) as well as a
  *  paginator (defines how subsequent pages of results are loaded).
  *
  *  @discussion The completion block will likely be called on a background thread (this depends on how the session was
@@ -25,13 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
                                            options:(SRGRequestOptions)options
-                                              seed:(SRGDataPageSeed)seed
+                                             sizer:(SRGPageSizer)sizer
                                          paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock;
 
 /**
  *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON array. Pagination requires a seed (defines how the original request is tuned to alter its
+ *  the response as a JSON array. Pagination requires a sizer (defines how the original request is tuned to change its
  *  page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
@@ -42,13 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
                                                 options:(SRGRequestOptions)options
-                                                   seed:(SRGDataPageSeed)seed
+                                                  sizer:(SRGPageSizer)sizer
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock;
 
 /**
  *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON dictionary. Pagination requires a seed (defines how the original request is tuned to alter
+ *  the response as a JSON dictionary. Pagination requires a sizer (defines how the original request is tuned to change
  *  its page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
@@ -58,14 +58,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
                                                      options:(SRGRequestOptions)options
-                                                        seed:(SRGJSONDictionaryPageSeed)seed
+                                                       sizer:(SRGPageSizer)sizer
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock;
 
 /**
  *  Object request started with the provided session and options, turning the response into an object through a mandatory
- *  parsing block, and calling the specified block on completion. Pagination requires a seed (defines how the original
- *  request is tuned to alter its page size to another value) as well as a paginator (defines how subsequent pages of
+ *  parsing block, and calling the specified block on completion. Pagination requires a sizer (defines how the original
+ *  request is tuned to change its page size to another value) as well as a paginator (defines how subsequent pages of
  *  results are loaded).
  *
  *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
                                              session:(NSURLSession *)session
                                              options:(SRGRequestOptions)options
                                               parser:(SRGResponseParser)parser
-                                                seed:(SRGObjectPageSeed)seed
+                                               sizer:(SRGPageSizer)sizer
                                            paginator:(SRGObjectPaginator)paginator
                                      completionBlock:(SRGObjectPageCompletionBlock)completionBlock;
 
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Return an equivalent request, but for the specified page. You never instantiate pages yourself, you receive them
  *  in the completion block of a request supporting pagination. Subsequent pages can then be retrieved by calling this
-*   method and executing the returned request.
+ *   method and executing the returned request.
  *
  *  @param page The page to request. If `nil`, the first page is requested (for the same page size as the receiver).
  *

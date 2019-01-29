@@ -15,7 +15,7 @@
 @property (nonatomic) NSURLRequest *firstPageURLRequest;
 @property (nonatomic) SRGPage *page;
 
-@property (nonatomic, copy) SRGObjectPageSeed seed;
+@property (nonatomic, copy) SRGPageSizer sizer;
 @property (nonatomic, copy) SRGObjectPaginator paginator;
 @property (nonatomic, copy) SRGObjectPageCompletionBlock pageCompletionBlock;
 
@@ -30,7 +30,7 @@
                            options:(SRGRequestOptions)options
                             parser:(SRGResponseParser)parser
                               page:(SRGPage *)page
-                              seed:(SRGObjectPageSeed)seed
+                             sizer:(SRGPageSizer)sizer
                          paginator:(SRGObjectPaginator)paginator
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock
 {
@@ -52,7 +52,7 @@
     if (self = [super initWithURLRequest:page.URLRequest session:session options:options parser:parser completionBlock:pageCompletionBlock]) {
         self.firstPageURLRequest = URLRequest;
         self.page = page;
-        self.seed = seed;
+        self.sizer = sizer;
         self.paginator = paginator;
         self.pageCompletionBlock = completionBlock;
     }
@@ -67,7 +67,7 @@
         return self.firstPageURLRequest;
     }
     else {
-        return self.seed(self.firstPageURLRequest, size);
+        return self.sizer(self.firstPageURLRequest, size);
     }
 }
 
@@ -78,7 +78,7 @@
                                          options:self.options
                                           parser:self.parser
                                             page:page ?: self.page
-                                            seed:self.seed
+                                           sizer:self.sizer
                                        paginator:self.paginator
                                  completionBlock:self.pageCompletionBlock];
     NSAssert([request isKindOfClass:SRGPageRequest.class], @"A page request subclass must be returned");

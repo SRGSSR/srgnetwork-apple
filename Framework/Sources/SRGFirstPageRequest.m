@@ -19,7 +19,7 @@
 + (SRGFirstPageRequest *)dataRequestWithURLRequest:(NSURLRequest *)URLRequest
                                            session:(NSURLSession *)session
                                            options:(SRGRequestOptions)options
-                                              seed:(SRGDataPageSeed)seed
+                                             sizer:(SRGPageSizer)sizer
                                          paginator:(SRGDataPaginator)paginator
                                    completionBlock:(SRGDataPageCompletionBlock)completionBlock
 {
@@ -28,7 +28,7 @@
                                           options:options
                                            parser:nil
                                              page:nil
-                                             seed:seed
+                                            sizer:sizer
                                         paginator:paginator
                                   completionBlock:completionBlock];
 }
@@ -36,13 +36,13 @@
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
                                                 options:(SRGRequestOptions)options
-                                                   seed:(SRGDataPageSeed)seed
+                                                  sizer:(SRGPageSizer)sizer
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONArrayParser(data, pError);
-    } page:nil seed:seed paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+    } page:nil sizer:sizer paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         return paginator(URLRequest, response, size, number);
     } completionBlock:completionBlock];
 }
@@ -50,20 +50,20 @@
 + (SRGFirstPageRequest *)JSONDictionaryRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                      session:(NSURLSession *)session
                                                      options:(SRGRequestOptions)options
-                                                        seed:(SRGJSONDictionaryPageSeed)seed
+                                                       sizer:(SRGPageSizer)sizer
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
     return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
-    } page:nil seed:seed paginator:paginator completionBlock:completionBlock];
+    } page:nil sizer:sizer paginator:paginator completionBlock:completionBlock];
 }
 
 + (SRGFirstPageRequest *)objectRequestWithURLRequest:(NSURLRequest *)URLRequest
                                              session:(NSURLSession *)session
                                              options:(SRGRequestOptions)options
                                               parser:(SRGResponseParser)parser
-                                                seed:(SRGObjectPageSeed)seed
+                                               sizer:(SRGPageSizer)sizer
                                            paginator:(SRGObjectPaginator)paginator
                                      completionBlock:(SRGObjectPageCompletionBlock)completionBlock
 {
@@ -72,7 +72,7 @@
                                           options:options
                                            parser:parser
                                              page:nil
-                                             seed:seed
+                                            sizer:sizer
                                         paginator:paginator
                                   completionBlock:completionBlock];
 }
