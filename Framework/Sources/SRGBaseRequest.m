@@ -147,18 +147,23 @@
             }
         }
         
-        NSError *parsingError = nil;
-        id object = self.parser ? self.parser(data, &parsingError) : data;
-        if (parsingError) {
-            NSError *error = [NSError errorWithDomain:SRGNetworkErrorDomain
-                                                 code:SRGNetworkErrorInvalidData
-                                             userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect."),
-                                                         NSUnderlyingErrorKey : parsingError }];
-            completionBlock(nil, response, error);
-            return;
+        if (data) {
+            NSError *parsingError = nil;
+            id object = self.parser ? self.parser(data, &parsingError) : data;
+            if (parsingError) {
+                NSError *error = [NSError errorWithDomain:SRGNetworkErrorDomain
+                                                     code:SRGNetworkErrorInvalidData
+                                                 userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect."),
+                                                             NSUnderlyingErrorKey : parsingError }];
+                completionBlock(nil, response, error);
+                return;
+            }
+            
+            completionBlock(object, response, nil);
         }
-        
-        completionBlock(object, response, nil);
+        else {
+            completionBlock(nil, response, nil);
+        }
     }];
     
     self.running = YES;

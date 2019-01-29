@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Request for the first page of a list of results. Once an `SRGFirstPageRequest` has been properly created, you can
  *  change the desired size for a page of results (`-requestWithPageSize:`).
  *
+ *  When initializing a request with pagination, two blocks are required (which might not be called on the main thread,
+ *  depending on how the session was configured):
+ *    - A sizer, which defines how the original request is tuned to change its page size to another value.
+ *    - A paginator, which defines how subsequent pages of results are loaded.
+ *
  *  You never instantiate page objects yourself, though, you merely receive them in the completion block of a request
  *  supporting pagination. Subsequent pages can then be retrieved by calling `-requestWithPage:` and executing the
  *  returned request.
@@ -27,9 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SRGFirstPageRequest : SRGPageRequest
 
 /**
- *  Data request started with the provided session and options, calling the specified block on completion. Pagination
- *  requires a sizer (defines how the original request is tuned to change its page size to another value) as well as a
- *  paginator (defines how subsequent pages of results are loaded).
+ *  Data request started with the provided session and options, calling the specified block on completion.
  *
  *  @discussion The completion block will likely be called on a background thread (this depends on how the session was
  *              configured).
@@ -43,14 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON array. Pagination requires a sizer (defines how the original request is tuned to change its
- *  page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
+ *  the response as a JSON array.
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
  *              array. The completion block will likely be called on a background thread (this depends on how the
  *              session was configured).
  */
-
 + (SRGFirstPageRequest *)JSONArrayRequestWithURLRequest:(NSURLRequest *)URLRequest
                                                 session:(NSURLSession *)session
                                                 options:(SRGRequestOptions)options
@@ -60,8 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Request started with the provided session and options, calling the specified block on completion, and returning
- *  the response as a JSON dictionary. Pagination requires a sizer (defines how the original request is tuned to change
- *  its page size to another value) as well as a paginator (defines how subsequent pages of results are loaded).
+ *  the response as a JSON dictionary.
  *
  *  @discussion An error is returned to the completion block if the response could not be transformed into a JSON
  *              dictionary. The completion block will likely be called on a background thread (this depends on how
@@ -76,9 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Object request started with the provided session and options, turning the response into an object through a mandatory
- *  parsing block, and calling the specified block on completion. Pagination requires a sizer (defines how the original
- *  request is tuned to change its page size to another value) as well as a paginator (defines how subsequent pages of
- *  results are loaded).
+ *  parsing block (if response data is retrieved), and calling the specified block on completion.
  *
  *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
  *              likely be called on a background thread (this depends on how the session was configured).

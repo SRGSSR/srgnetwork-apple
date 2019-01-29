@@ -43,7 +43,7 @@
                                        options:(SRGRequestOptions)options
                                completionBlock:(SRGJSONArrayCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONArrayParser(data, pError);
     } completionBlock:completionBlock];
 }
@@ -53,7 +53,7 @@
                                             options:(SRGRequestOptions)options
                                     completionBlock:(SRGJSONDictionaryCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError * _Nullable __autoreleasing * _Nullable pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError * _Nullable __autoreleasing * _Nullable pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
     } completionBlock:completionBlock];
 }

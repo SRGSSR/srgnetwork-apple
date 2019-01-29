@@ -39,7 +39,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
 };
 
 // Parser signature.
-typedef id _Nullable (^SRGResponseParser)(NSData * _Nullable data, NSError * __autoreleasing *pError);
+typedef id _Nullable (^SRGResponseParser)(NSData *data, NSError * __autoreleasing *pError);
 
 // Sizer signature.
 typedef NSURLRequest * (^SRGPageSizer)(NSURLRequest *URLRequest, NSUInteger size);

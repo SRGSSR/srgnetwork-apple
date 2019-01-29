@@ -40,7 +40,7 @@
                                               paginator:(SRGJSONArrayPaginator)paginator
                                         completionBlock:(SRGJSONArrayPageCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONArrayParser(data, pError);
     } page:nil sizer:sizer paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, id  _Nullable object, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         return paginator(URLRequest, response, size, number);
@@ -54,7 +54,7 @@
                                                    paginator:(SRGJSONDictionaryPaginator)paginator
                                              completionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
-    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData * _Nullable data, NSError *__autoreleasing *pError) {
+    return [[self.class alloc] initWithURLRequest:URLRequest session:session options:options parser:^id _Nullable(NSData *data, NSError *__autoreleasing *pError) {
         return SRGNetworkJSONDictionaryParser(data, pError);
     } page:nil sizer:sizer paginator:paginator completionBlock:completionBlock];
 }

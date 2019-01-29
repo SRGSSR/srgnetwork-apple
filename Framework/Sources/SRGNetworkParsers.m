@@ -10,11 +10,7 @@
 #import "SRGNetworkError.h"
 
 static id SRGNetworkJSONParser(NSData *data, Class expectedClass, NSError **pError)
-{
-    if (! data) {
-        return nil;
-    }
-    
+{   
     NSError *parsingError = nil;
     id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parsingError];
     if (parsingError) {

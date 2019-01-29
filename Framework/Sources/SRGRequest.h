@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Object request started with the provided session and options, turning the response into an object through a mandatory
- *  parsing block, and calling the specified block on completion.
+ *  parsing block (if response data is retrieved), and calling the specified block on completion.
  *
  *  @discussion An error is returned to the completion block if parsing fails. The parsing and completion blocks will
  *              likely be called on a background thread (this depends on how the session was configured).
