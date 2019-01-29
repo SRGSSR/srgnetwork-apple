@@ -70,6 +70,8 @@
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        // Remark: The next page URL could also be extracted by casting the response to an `NSHTTPURLResponse` and having
+        //         a look at the `Link` header.
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue],
                                       [NSURLQueryItem queryItemWithName:@"page" value:@(number + 1).stringValue] ];
