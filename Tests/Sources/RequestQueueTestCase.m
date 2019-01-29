@@ -297,8 +297,11 @@
             SRGPageRequest *request2 = [request1 requestWithPage:nextPage];
             [requestQueue addRequest:request2 resume:YES];
         }
-        else {
+        else if (page.number == 1) {
             [expectation fulfill];
+        }
+        else {
+            XCTFail(@"Only first two pages are expected");
         }
     }];
     [requestQueue addRequest:request1 resume:YES];
