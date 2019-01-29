@@ -208,7 +208,7 @@
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        XCTAssertFalse([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         [expectation fulfill];
     }];
     [request resume];
@@ -216,15 +216,15 @@
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
 
-- (void)testMainThreadCompletionEnabled
+- (void)testBackgroundThreadCompletionEnabled
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
     SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertFalse(NSThread.isMainThread);
         [expectation fulfill];
-    }] requestWithOptions:SRGNetworkRequestMainThreadCompletionEnabled];
+    }] requestWithOptions:SRGNetworkRequestBackgroundThreadCompletionEnabled];
     [request resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
@@ -296,7 +296,6 @@
     }];
     
     [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         XCTAssertEqualObjects(change[NSKeyValueChangeNewKey], @YES);
         return YES;
     }];
@@ -355,7 +354,6 @@
     
     // Wait until the request is not running anymore
     [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@NO];
     }];
     
@@ -366,7 +364,6 @@
     
     // Restart it
     [self keyValueObservingExpectationForObject:request keyPath:@"running" handler:^BOOL(id  _Nonnull observedObject, NSDictionary * _Nonnull change) {
-        XCTAssertTrue([NSThread isMainThread]);
         return [change[NSKeyValueChangeNewKey] isEqual:@YES];
     }];
     

@@ -19,6 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Note that all concrete requests take a completion block as parameter, called when they finish, either successfully
  *  or because of an error.
+ *
+ *  ## Thread-safety
+ *
+ *  Network requests can be started from any thread. By default, their completion block will be called on the main
+ *  thread, though. This can be changed by calling `-requestWithOptions:` on an existing request, with the
+ *  `SRGNetworkRequestBackgroundThreadCompletionEnabled` option.
+ *
+ *  This choice has been made to avoid common programming errors. Since all request work is done on background threads,
+ *  the completion block is most of the time namely used to trigger UI updates, which have to occur on the main thread.
  */
 @interface SRGBaseRequest : NSObject
 

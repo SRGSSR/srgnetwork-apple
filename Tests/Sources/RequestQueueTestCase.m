@@ -31,7 +31,7 @@
     XCTestExpectation *requestCompletionExpectation = [self expectationWithDescription:@"Request completed"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
         if (! finished) {
@@ -123,7 +123,7 @@
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
         if (! finished) {
@@ -184,7 +184,7 @@
     __block SRGRequestQueue *requestQueue = nil;
     dispatch_sync(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-            XCTAssertTrue([NSThread isMainThread]);
+            XCTAssertTrue(NSThread.isMainThread);
             XCTAssertNil(error);
             
             if (! finished) {
@@ -242,7 +242,7 @@
     XCTestExpectation *requestsFinishedExpectation = [self expectationWithDescription:@"Requests finished"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
         if (! finished) {
@@ -317,7 +317,7 @@
     XCTestExpectation *requestCompletionExpectation = [self expectationWithDescription:@"Request completed"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         
         if (! finished) {
             XCTAssertTrue(requestQueue.running);
@@ -352,7 +352,7 @@
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         
         if (! finished) {
             XCTAssertTrue(requestQueue.running);
@@ -401,7 +401,7 @@
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
         if (! finished) {
@@ -450,7 +450,7 @@
     XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
     
     __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-        XCTAssertTrue([NSThread isMainThread]);
+        XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
         if (! finished) {

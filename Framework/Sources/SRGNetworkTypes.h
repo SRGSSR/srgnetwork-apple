@@ -32,10 +32,12 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
      */
     SRGNetworkOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
     /**
-     *  By default, request completion blocks are called on a background thread. Enable this flag to have them called
-     *  on the main thread.
+     *  By default, request completion blocks are called on the main thread. The reason is that parsing and other
+     *  time-consuming operations will always occur on background threads, the completion block will thus in most
+     *  cases be dedicated to UI updates. If you want to have the completion block called on a background thread,
+     *  simply enable the following option.
      */
-    SRGNetworkRequestMainThreadCompletionEnabled = (1UL << 2),
+    SRGNetworkRequestBackgroundThreadCompletionEnabled = (1UL << 2),
 };
 
 // Parser signature.

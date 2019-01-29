@@ -108,13 +108,13 @@
             self.extractor ? self.extractor(data, response) : nil;
         }
         
-        if ((self.options & SRGNetworkRequestMainThreadCompletionEnabled) == 0) {
-            self.completionBlock(data, response, error);
-        }
-        else {
+        if ((self.options & SRGNetworkRequestBackgroundThreadCompletionEnabled) == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 self.completionBlock(data, response, error);
             });
+        }
+        else {
+            self.completionBlock(data, response, error);
         }
         
         self.running = NO;
