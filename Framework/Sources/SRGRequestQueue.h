@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "SRGRequest.h"
+#import "SRGBaseRequest.h"
 
 #import <Foundation/Foundation.h>
 
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Adding the same request to two different queues is not supported and leads to undefined behavior.
  */
-- (void)addRequest:(SRGRequest *)request resume:(BOOL)resume;
+- (void)addRequest:(SRGBaseRequest *)request resume:(BOOL)resume;
 
 /**
  *  Call `-resume` on all requests within the queue.

@@ -276,6 +276,36 @@
     XCTAssertFalse(requestQueue.running);
 }
 
+- (void)testPaginatedRequests
+{
+    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:nil];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests finished"];
+    
+    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.anapioficeandfire.com/api/characters"]];
+    __block SRGFirstPageRequest *request1 = [SRGFirstPageRequest JSONArrayRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession options:0 sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue],
+                                      [NSURLQueryItem queryItemWithName:@"page" value:@(number + 1).stringValue] ];
+        return [NSURLRequest requestWithURL:URLComponents.URL];
+    } completionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (page.number == 0) {
+            SRGPageRequest *request2 = [request1 requestWithPage:nextPage];
+            [requestQueue addRequest:request2 resume:YES];
+        }
+        else {
+            [expectation fulfill];
+        }
+    }];
+    [requestQueue addRequest:request1 resume:YES];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
 - (void)testError
 {
     XCTestExpectation *queueStartedExpectation = [self expectationWithDescription:@"Queue started"];

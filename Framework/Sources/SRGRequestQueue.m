@@ -13,11 +13,11 @@
 #import <libextobjc/libextobjc.h>
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 
-static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshipTable = nil;
+static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relationshipTable = nil;
 
 @interface SRGRequestQueue ()
 
-@property (nonatomic, readonly) NSSet<SRGRequest *> *requests;
+@property (nonatomic, readonly) NSSet<SRGBaseRequest *> *requests;
 @property (nonatomic, copy) void (^stateChangeBlock)(BOOL running, NSError *error);
 @property (nonatomic) NSMutableArray<NSError *> *errors;
 @property (nonatomic, getter=isRunning) BOOL running;
@@ -59,7 +59,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 
 - (void)dealloc
 {
-    for (SRGRequest *request in self.requests) {
+    for (SRGBaseRequest *request in self.requests) {
         [request cancel];
     }
     
@@ -68,16 +68,16 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 
 #pragma mark Getters and setters
 
-- (NSArray<SRGRequest *> *)requests
+- (NSArray<SRGBaseRequest *> *)requests
 {
     return [[s_relationshipTable objectForKey:self] copy];
 }
 
 #pragma mark Request management
 
-- (void)addRequest:(SRGRequest *)request resume:(BOOL)resume
+- (void)addRequest:(SRGBaseRequest *)request resume:(BOOL)resume
 {
-    NSHashTable<SRGRequest *> *requests = [s_relationshipTable objectForKey:self];
+    NSHashTable<SRGBaseRequest *> *requests = [s_relationshipTable objectForKey:self];
     if ([requests containsObject:request]) {
         return;
     }
@@ -99,14 +99,14 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 
 - (void)resume
 {
-    for (SRGRequest *request in self.requests) {
+    for (SRGBaseRequest *request in self.requests) {
         [request resume];
     }
 }
 
 - (void)cancel
 {
-    for (SRGRequest *request in self.requests) {
+    for (SRGBaseRequest *request in self.requests) {
         [request cancel];
     }
 }
@@ -130,7 +130,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGRequest *> *> *s_relationshi
 - (void)checkStateChange
 {
     // Running iff at least one request is running
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(SRGRequest.new, running)];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(SRGBaseRequest.new, running)];
     BOOL running = ([self.requests.allObjects filteredArrayUsingPredicate:predicate].count != 0);
     if (running != self.running) {
         self.running = running;
