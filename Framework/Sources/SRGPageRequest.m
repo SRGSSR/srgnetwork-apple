@@ -34,7 +34,7 @@
                    completionBlock:(SRGObjectPageCompletionBlock)completionBlock
 {
     if (! page) {
-        page = [[SRGPage alloc] initWithSize:SRGPageDefaultSize number:0 URLRequest:URLRequest];
+        page = [[SRGPage alloc] initWithSize:SRGPageUnspecifiedSize number:0 URLRequest:URLRequest];
     }
     
     __block SRGPage *nextPage = nil;
@@ -59,7 +59,7 @@
 
 - (NSURLRequest *)URLRequestForFirstPageWithSize:(NSUInteger)size
 {
-    if (size == SRGPageDefaultSize) {
+    if (size == SRGPageUnspecifiedSize) {
         return self.firstPageURLRequest;
     }
     else {

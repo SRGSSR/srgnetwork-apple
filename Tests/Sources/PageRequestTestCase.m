@@ -83,13 +83,13 @@
 
 - (void)testConstruction
 {
-    // Default page size
+    // Unspecified page size
     SRGFirstPageRequest *request1 = [self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing, the request isn't run
     }];
     XCTAssertFalse(request1.running);
     XCTAssertEqual(request1.page.number, 0);
-    XCTAssertEqual(request1.page.size, SRGPageDefaultSize);
+    XCTAssertEqual(request1.page.size, SRGPageUnspecifiedSize);
     
     // Specific page size
     SRGFirstPageRequest *request2 = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -105,7 +105,7 @@
     }] requestWithPage:nil];
     XCTAssertFalse(request3.running);
     XCTAssertEqual(request3.page.number, 0);
-    XCTAssertEqual(request3.page.size, SRGPageDefaultSize);
+    XCTAssertEqual(request3.page.size, SRGPageUnspecifiedSize);
     
     // Incorrect page size
     SRGFirstPageRequest *request4 = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -131,13 +131,13 @@
     XCTAssertEqual(request6.page.number, 0);
     XCTAssertEqual(request6.page.size, 36);
     
-    // Override with default page
+    // Override with unspecified page size
     SRGFirstPageRequest *request7 = [[[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Nothing, the request isn't run
-    }] requestWithPageSize:36] requestWithPageSize:SRGPageDefaultSize];
+    }] requestWithPageSize:36] requestWithPageSize:SRGPageUnspecifiedSize];
     XCTAssertFalse(request7.running);
     XCTAssertEqual(request7.page.number, 0);
-    XCTAssertEqual(request7.page.size, SRGPageDefaultSize);
+    XCTAssertEqual(request7.page.size, SRGPageUnspecifiedSize);
 }
 
 - (void)testPageInformation
