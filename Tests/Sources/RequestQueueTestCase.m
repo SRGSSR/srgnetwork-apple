@@ -587,4 +587,69 @@
     [self waitForExpectationsWithTimeout:5. handler:nil];
 }
 
+- (void)testAutomaticCancellationDisabled
+{
+    XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
+    XCTestExpectation *dataRequestFinishedExpectation = [self expectationWithDescription:@"Data request finished"];
+    
+    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        if (finished) {
+            XCTAssertNotNil(error);
+            [queueFinishedExpectation fulfill];
+        }
+    }];
+    
+    NSURL *URL1 = [NSURL URLWithString:@"https://httpbin.org/status/404"];
+    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL1] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNotNil(error);
+        [requestQueue reportError:error];
+    }];
+    [requestQueue addRequest:request1 resume:NO];
+    
+    // Use a large size so that this request takes longer than the 404 above
+    NSURL *URL2 = [NSURL URLWithString:@"https://httpbin.org/bytes/500000"];
+    SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL2] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNotNil(data);
+        XCTAssertNil(error);
+        [dataRequestFinishedExpectation fulfill];
+    }];
+    [requestQueue addRequest:request2 resume:NO];
+    
+    // Start all requests at the same time
+    [requestQueue resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
+- (void)testAutomaticCancellationEnabled
+{
+    XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
+    
+    __block SRGRequestQueue *requestQueue = [[[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        if (finished) {
+            XCTAssertNotNil(error);
+            [queueFinishedExpectation fulfill];
+        }
+    }] requestQueueWithOptions:SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled];
+    
+    NSURL *URL1 = [NSURL URLWithString:@"https://httpbin.org/status/404"];
+    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL1] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNotNil(error);
+        [requestQueue reportError:error];
+    }];
+    [requestQueue addRequest:request1 resume:NO];
+    
+    // Use a large size so that this request takes longer than the 404 above
+    NSURL *URL2 = [NSURL URLWithString:@"https://httpbin.org/bytes/500000"];
+    SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL2] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTFail(@"Must not be called, cancelled");
+    }];
+    [requestQueue addRequest:request2 resume:NO];
+    
+    // Start all requests at the same time
+    [requestQueue resume];
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+}
+
 @end

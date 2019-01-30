@@ -17,6 +17,8 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
 
 @interface SRGRequestQueue ()
 
+@property (nonatomic) SRGRequestQueueOptions options;
+
 @property (nonatomic, readonly) NSSet<SRGBaseRequest *> *requests;
 @property (nonatomic, copy) void (^stateChangeBlock)(BOOL running, NSError *error);
 @property (nonatomic) NSMutableArray<NSError *> *errors;
@@ -73,6 +75,15 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
     return [[s_relationshipTable objectForKey:self] copy];
 }
 
+#pragma mark Options
+
+- (SRGRequestQueue *)requestQueueWithOptions:(SRGRequestQueueOptions)options
+{
+    SRGRequestQueue *requestQueue = [[self.class alloc] initWithStateChangeBlock:self.stateChangeBlock];
+    requestQueue.options = options;
+    return requestQueue;
+}
+
 #pragma mark Request management
 
 - (void)addRequest:(SRGBaseRequest *)request resume:(BOOL)resume
@@ -123,6 +134,10 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
     }
     
     [self.errors addObject:error];
+    
+    if ((self.options & SRGRequestOptionCancellationErrorsEnabled) != 0) {
+        [self cancel];
+    }
 }
 
 #pragma mark State management

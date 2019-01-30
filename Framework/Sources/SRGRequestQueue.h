@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  to fill a screen of content, you can group them with a single queue, and adjust your UI depending on the status
  *  of the queue (e.g. displaying a loading indicator when the queue is running).
  *
+ *  Request queues support options (none applied by default), controlling how they behave. To apply options,
+ *  call `-requestQueueWithOptions:` to apply options to the receiver.
+ *
  *  ## State change
  *
  *  A request queue is instantiated with an optional state change block, which is called when the running status
@@ -89,6 +92,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithStateChangeBlock:(nullable void (^)(BOOL finished, NSError * _Nullable error))stateChangeBlock;
 
 /**
+ *  Return a clone of the receiver, with the specified options. Previously applied options are replaced.
+ */
+- (SRGRequestQueue *)requestQueueWithOptions:(SRGRequestQueueOptions)options;
+
+/**
  *  Add a request to the queue. The queue status will immediately be updated according to the status of the request
  *  added to it.
  *
@@ -113,6 +121,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Report an error to the queue. Nothing happens if the error is `nil` (this eliminates the need to check whether an
  *  error is `nil` before reporting it). Errors are collected during running sessions, and cleaned up when the queue
  *  has returned to the non-running state.
+ *
+ *  @discussion If the `SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled` option has been set, reporting a
+ *              non-`nil` error cancels all remaining queue requests.
  */
 - (void)reportError:(nullable NSError *)error;
 

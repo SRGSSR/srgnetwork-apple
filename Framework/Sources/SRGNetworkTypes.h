@@ -40,6 +40,18 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
     SRGNetworkRequestBackgroundThreadCompletionEnabled = (1UL << 2),
 };
 
+/**
+ *  Request queue options.
+ */
+typedef NS_OPTIONS(NSUInteger, SRGRequestQueueOptions) {
+    /**
+     *  By default, requests associated with a queue will continue, even if one of them fails. When this flag is
+     *  enabled, though, the queue will automatically cancel all its remaining requests when a non-`nil` error is
+     *  reported to it.
+     */
+    SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled = (1UL << 0)
+};
+
 // Parser signature.
 typedef id _Nullable (^SRGResponseParser)(NSData *data, NSError * __autoreleasing *pError);
 
