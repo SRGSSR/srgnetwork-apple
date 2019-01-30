@@ -106,9 +106,14 @@
         XCTFail(@"Completion block must not be called");
     }];
     [request resume];
+    XCTAssertTrue(request.running);
+    
     [request cancel];
+    XCTAssertFalse(request.running);
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
+    
+    XCTAssertFalse(request.running);
 }
 
 - (void)testCancellationErrorsEnabled
