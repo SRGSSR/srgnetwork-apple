@@ -129,7 +129,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
     }
     
     if (! self.running) {
-        SRGNetworkLogWarning(@"Request Queue", @"The error %@ was reported to a non-running queue and will therefore be lost.", error);
+        SRGNetworkLogInfo(@"Request Queue", @"The error %@ was reported to a non-running queue and will therefore be lost.", error);
         return;
     }
     
