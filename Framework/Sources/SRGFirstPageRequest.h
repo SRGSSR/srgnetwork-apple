@@ -14,8 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  change the desired size for a page of results (`-requestWithPageSize:`).
  *
  *  When initializing a request with pagination, two blocks are required:
- *    - A sizer, which defines how the original request is tuned to change its page size to another value.
- *    - A paginator, which defines how subsequent pages of results are loaded.
+ *    - A sizer, which defines how the original request is tuned to change its page size to another value. This block
+ *      is only called for page sizes different from `SRGPageUnspecifiedSize`.
+ *    - A paginator, which defines how subsequent pages of results are loaded, and which is called each time a request
+ *      with pagination support ends.
  *
  *  You never instantiate page objects yourself, though, you merely receive them in the completion block of a request
  *  supporting pagination. Subsequent pages can then be retrieved by calling `-requestWithPage:` and executing the
