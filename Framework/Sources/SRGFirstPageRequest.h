@@ -69,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  Object request started with the provided session, turning the response into an object through a mandatory parsing
  *  block (if response data is retrieved), and calling the specified block on completion.
  *
+ *  If helpful, some standard basic parsers are available from <SRGNetwork/SRGNetworkParsers.h>.
+ *
  *  @discussion An error is returned to the completion block if parsing fails. The parsing block will be called on a
  *              background thread (except if the session is configured with the main operation queue, which is best
  *              avoided).
