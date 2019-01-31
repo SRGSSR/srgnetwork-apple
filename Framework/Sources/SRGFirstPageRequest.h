@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Return an equivalent request, but with the specified page size.
  *
- *  @param pageSize The page size to use.
+ *  @param pageSize The page size to use. Options applied to the original request are preserved.
  */
 - (SRGFirstPageRequest *)requestWithPageSize:(NSUInteger)pageSize;
 
@@ -98,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param page The page to request. If `nil`, the first page is requested (for the same page size as the receiver).
  *
  *  @discussion The `-requestWithPage:` method must be called on a related request, otherwise the behavior is undefined.
+ *              Options applied to the original request are preserved.
  */
 - (SRGPageRequest *)requestWithPage:(nullable SRGPage *)page;
 

@@ -325,4 +325,42 @@
     [self waitForExpectationsWithTimeout:30. handler:nil];
 }
 
+- (void)testOptionInheritanceWhenApplyingPageSize
+{
+    SRGFirstPageRequest *request1 = [self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Nothing, will not be run
+    }];
+    XCTAssertEqual(request1.options, 0);
+    
+    SRGFirstPageRequest *request2 = [request1 requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
+    XCTAssertEqual(request2.options, SRGRequestOptionCancellationErrorsEnabled);
+    
+    SRGFirstPageRequest *request3 = [request2 requestWithPageSize:20];
+    XCTAssertEqual(request3.options, SRGRequestOptionCancellationErrorsEnabled);
+}
+
+- (void)testOptionInheritanceBetweenPages
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
+    
+    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (page.number == 0 && nextPage) {
+            SRGPageRequest *nextRequest = [request requestWithPage:nextPage];
+            XCTAssertEqual(nextRequest.options, SRGRequestOptionCancellationErrorsEnabled);
+            [nextRequest resume];
+        }
+        else if (page.number == 1) {
+            [expectation fulfill];
+        }
+        else {
+            XCTFail(@"Only first two pages are expected");
+        }
+    }] requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
+    [request resume];
+    
+    XCTAssertEqual(request.options, SRGRequestOptionCancellationErrorsEnabled);
+    
+    [self waitForExpectationsWithTimeout:30. handler:nil];
+}
+
 @end

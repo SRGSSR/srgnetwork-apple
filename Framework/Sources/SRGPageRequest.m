@@ -69,15 +69,15 @@
 
 - (__kindof SRGPageRequest *)requestWithPage:(SRGPage *)page class:(Class)cls
 {
-    id request = [[cls alloc] initWithURLRequest:self.firstPageURLRequest
-                                         session:self.session
-                                          parser:self.parser
-                                            page:page ?: self.page
-                                           sizer:self.sizer
-                                       paginator:self.paginator
-                                 completionBlock:self.pageCompletionBlock];
+    SRGPageRequest *request = [[cls alloc] initWithURLRequest:self.firstPageURLRequest
+                                                      session:self.session
+                                                       parser:self.parser
+                                                         page:page ?: self.page
+                                                        sizer:self.sizer
+                                                    paginator:self.paginator
+                                              completionBlock:self.pageCompletionBlock];
     NSAssert([request isKindOfClass:SRGPageRequest.class], @"A page request subclass must be returned");
-    return request;
+    return [request requestWithOptions:self.options];
 }
 
 #pragma mark NSCopying protocol
