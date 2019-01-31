@@ -257,7 +257,7 @@ Each individual request completion block might receive an error. To propagate er
 
 #### Remark
 
-Though `__weak` request queue references are not required, you must still weakify `self` if referenced in the state change block of a queue it retains, otherwise you will create a retain cycle:
+As said before, and unlike requests, queues need to be retained by some parent context to stay alive. If for example a queue is retained by `self`, like in our example above, you must weakify `self` for use in the state change block, otherwise you will create a retain cycle:
 
 ```objective-c
 - (void)refresh
