@@ -80,4 +80,17 @@
     return request;
 }
 
+#pragma mark NSCopying protocol
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[self.class alloc] initWithURLRequest:self.firstPageURLRequest
+                                          session:self.session
+                                           parser:self.parser
+                                             page:self.page
+                                            sizer:self.sizer
+                                        paginator:self.paginator
+                                  completionBlock:self.pageCompletionBlock];
+}
+
 @end

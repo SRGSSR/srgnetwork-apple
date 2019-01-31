@@ -85,11 +85,7 @@
 
 - (SRGBaseRequest *)requestWithOptions:(SRGRequestOptions)options
 {
-    SRGBaseRequest *request = [[self.class alloc] initWithURLRequest:self.URLRequest
-                                                             session:self.session
-                                                              parser:self.parser
-                                                           extractor:self.extractor
-                                                     completionBlock:self.completionBlock];
+    SRGBaseRequest *request = [self copy];
     request.options = options;
     return request;
 }
@@ -192,6 +188,17 @@
 {
     self.running = NO;
     [self.sessionTask cancel];
+}
+
+#pragma mark NSCopying protocol
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[self.class alloc] initWithURLRequest:self.URLRequest
+                                          session:self.session
+                                           parser:self.parser
+                                        extractor:self.extractor
+                                  completionBlock:self.completionBlock];
 }
 
 #pragma mark Description

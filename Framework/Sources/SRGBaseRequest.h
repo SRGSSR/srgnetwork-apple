@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  This choice has been made to avoid common programming errors. Since all request work is done on background threads,
  *  the completion block is most of the time namely used to trigger UI updates, which have to occur on the main thread.
  */
-@interface SRGBaseRequest : NSObject
+@interface SRGBaseRequest : NSObject <NSCopying>
 
 /**
  *  Return a clone of the receiver, with the specified options. Previously applied options are replaced.

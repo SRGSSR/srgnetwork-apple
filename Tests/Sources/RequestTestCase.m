@@ -23,13 +23,12 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(data);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -40,13 +39,12 @@
     
     dispatch_sync(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
         NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-        SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             XCTAssertNotNil(data);
             XCTAssertNotNil(response);
             XCTAssertNil(error);
             [expectation fulfill];
-        }];
-        [request resume];
+        }] resume];
     });
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
@@ -57,13 +55,12 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/json"];
-    SRGRequest *request = [SRGRequest JSONDictionaryRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest JSONDictionaryRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(JSONDictionary);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -73,7 +70,7 @@
     [self expectationForElapsedTimeInterval:3. withHandler:nil];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    __unused SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTFail(@"Completion block must not be called");
     }];
     
@@ -85,14 +82,13 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest JSONDictionaryRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest JSONDictionaryRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(JSONDictionary);
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(error.domain, SRGNetworkErrorDomain);
         XCTAssertEqual(error.code, SRGNetworkErrorInvalidData);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -139,7 +135,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/status/404"];
-    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNotNil(response);
         XCTAssertEqualObjects(error.domain, SRGNetworkErrorDomain);
@@ -147,8 +143,7 @@
         XCTAssertEqualObjects(error.userInfo[SRGNetworkHTTPStatusCodeKey], @404);
         XCTAssertEqualObjects(error.userInfo[SRGNetworkFailingURLKey], URL);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -158,13 +153,12 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/status/404"];
-    SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
         [expectation fulfill];
-    }] requestWithOptions:SRGRequestOptionHTTPErrorsDisabled];
-    [request resume];
+    }] requestWithOptions:SRGRequestOptionHTTPErrorsDisabled] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -174,7 +168,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://untrusted-root.badssl.com"];
-    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNil(response);
         XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
@@ -182,8 +176,7 @@
         XCTAssertTrue([error.localizedDescription containsString:@"WiFi"]);
         XCTAssertNotNil(error.userInfo[NSURLErrorFailingURLStringErrorKey]);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -193,7 +186,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://untrusted-root.badssl.com"];
-    SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssertNil(response);
         XCTAssertEqualObjects(error.domain, NSURLErrorDomain);
@@ -201,8 +194,7 @@
         XCTAssertFalse([error.localizedDescription containsString:@"WiFi"]);
         XCTAssertNotNil(error.userInfo[NSURLErrorFailingURLStringErrorKey]);
         [expectation fulfill];
-    }] requestWithOptions:SRGNetworkOptionFriendlyWiFiMessagesDisabled];
-    [request resume];
+    }] requestWithOptions:SRGNetworkOptionFriendlyWiFiMessagesDisabled] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -212,11 +204,10 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         [expectation fulfill];
-    }];
-    [request resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -226,11 +217,10 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertFalse(NSThread.isMainThread);
         [expectation fulfill];
-    }] requestWithOptions:SRGNetworkRequestBackgroundThreadCompletionEnabled];
-    [request resume];
+    }] requestWithOptions:SRGNetworkRequestBackgroundThreadCompletionEnabled] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -382,21 +372,35 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(data);
         XCTAssertNil(error);
         
-        SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             XCTAssertNotNil(data);
             XCTAssertNil(error);
             
             [expectation fulfill];
-        }];
-        [request2 resume];
-    }];
-    [request1 resume];
+        }] resume];
+    }] resume];
     
     [self waitForExpectationsWithTimeout:30. handler:nil];
 }
+
+- (void)testCopy
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
+    
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNotNil(data);
+        XCTAssertNotNil(response);
+        XCTAssertNil(error);
+        [expectation fulfill];
+    }] copy] resume];
+    
+    [self waitForExpectationsWithTimeout:10. handler:nil];
+}
+
 
 @end
