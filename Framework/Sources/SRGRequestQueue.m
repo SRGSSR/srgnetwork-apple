@@ -14,13 +14,13 @@
 #import <MAKVONotificationCenter/MAKVONotificationCenter.h>
 
 static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relationshipTable = nil;
-static NSMapTable<SRGRequestQueue *, id> *s_stateChangeBlockTable = nil;
 
 @interface SRGRequestQueue ()
 
 @property (nonatomic) SRGRequestQueueOptions options;
 
 @property (nonatomic, readonly) NSSet<SRGBaseRequest *> *requests;
+@property (nonatomic, copy) void (^stateChangeBlock)(BOOL running, NSError *error);
 @property (nonatomic) NSMutableArray<NSError *> *errors;
 @property (nonatomic, getter=isRunning) BOOL running;
 
@@ -40,8 +40,6 @@ static NSMapTable<SRGRequestQueue *, id> *s_stateChangeBlockTable = nil;
     
     s_relationshipTable = [NSMapTable mapTableWithKeyOptions:NSHashTableWeakMemory
                                                 valueOptions:NSHashTableStrongMemory];
-    s_stateChangeBlockTable = [NSMapTable mapTableWithKeyOptions:NSHashTableWeakMemory
-                                                    valueOptions:NSHashTableStrongMemory];
 }
 
 #pragma mark Object lifecycle
@@ -50,11 +48,7 @@ static NSMapTable<SRGRequestQueue *, id> *s_stateChangeBlockTable = nil;
 {
     if (self = [super init]) {
         self.errors = [NSMutableArray array];
-        
-        if (stateChangeBlock) {
-            [s_stateChangeBlockTable setObject:stateChangeBlock forKey:self];
-        }
-        
+        self.stateChangeBlock = stateChangeBlock;
         [s_relationshipTable setObject:[NSHashTable hashTableWithOptions:NSHashTableWeakMemory] forKey:self];
     }
     return self;
@@ -79,11 +73,6 @@ static NSMapTable<SRGRequestQueue *, id> *s_stateChangeBlockTable = nil;
 - (NSArray<SRGBaseRequest *> *)requests
 {
     return [[s_relationshipTable objectForKey:self] copy];
-}
-
-- (void (^)(BOOL, NSError *))stateChangeBlock
-{
-    return [s_stateChangeBlockTable objectForKey:self];
 }
 
 #pragma mark Options
