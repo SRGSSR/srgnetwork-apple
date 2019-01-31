@@ -27,8 +27,14 @@
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue],
-                                      [NSURLQueryItem queryItemWithName:@"pageNumber" value:@(number + 1).stringValue] ];
+        
+        NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray array];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageNumber" value:@(number + 1).stringValue]];
+        if (size != SRGPageUnspecifiedSize) {
+            [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
+        }
+        URLComponents.queryItems = [queryItems copy];
+        
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
 }
@@ -56,8 +62,14 @@
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue],
-                                      [NSURLQueryItem queryItemWithName:@"offset" value:@(number * size).stringValue] ];
+        
+        NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray array];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"offset" value:@(number * size).stringValue]];
+        if (size != SRGPageUnspecifiedSize) {
+            [queryItems addObject:[NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue]];
+        }
+        URLComponents.queryItems = [queryItems copy];
+        
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
 }
@@ -73,8 +85,14 @@
         // Remark: The next page URL could also be extracted by casting the response to an `NSHTTPURLResponse` and having
         //         a look at the `Link` header.
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue],
-                                      [NSURLQueryItem queryItemWithName:@"page" value:@(number + 1).stringValue] ];
+        
+        NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray array];
+        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"page" value:@(number + 1).stringValue]];
+        if (size != SRGPageUnspecifiedSize) {
+            [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
+        }
+        URLComponents.queryItems = [queryItems copy];
+        
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
 }

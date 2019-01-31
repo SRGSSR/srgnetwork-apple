@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  *    - A sizer, which defines how the original request is tuned to change its page size to another value. This block
  *      is only called for page sizes different from `SRGPageUnspecifiedSize`.
  *    - A paginator, which defines how subsequent pages of results are loaded, and which is called each time a request
- *      with pagination support ends.
+ *      with pagination support ends. When implementing this block, you might need to check whether a page size has
+ *      been specified or not (`SRGPageUnspecifiedSize`).
  *
  *  You never instantiate page objects yourself, though, you merely receive them in the completion block of a request
  *  supporting pagination. Subsequent pages can then be retrieved by calling `-requestWithPage:` and executing the
