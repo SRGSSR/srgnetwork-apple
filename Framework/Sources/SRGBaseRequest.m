@@ -167,7 +167,7 @@
             if (parsingError) {
                 NSError *error = [NSError errorWithDomain:SRGNetworkErrorDomain
                                                      code:SRGNetworkErrorInvalidData
-                                                 userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid.", @"Error message returned when a server response data is incorrect."),
+                                                 userInfo:@{ NSLocalizedDescriptionKey : SRGNetworkLocalizedString(@"The data is invalid", @"Error message returned when a server response data is incorrect."),
                                                              NSUnderlyingErrorKey : parsingError }];
                 completionBlock(nil, response, error);
                 return;

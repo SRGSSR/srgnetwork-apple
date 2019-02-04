@@ -1,2 +1,8 @@
+/* The main error message if multiple errors have been encountered. Finally, the developer could should which one to display, and not show this message. */
+"Several errors have been encountered" = "Intgins sbagls èn vegnids chattads";
+
 /* Error message returned when a server response data is incorrect. */
-"The data is invalid." = "Las datas n'èn betg valaivlas.";
+"The data is invalid" = "Las datas n'èn betg valaivlas";
+
+/* The error message when request a media or a media list on a public network with no Internet access (e.g. SBB) */
+"You are likely connected to a public WiFi network with no Internet access" = "Probablamain essas Vus colliads cun ina rait wifi publica però senza avair access a l'internet";
