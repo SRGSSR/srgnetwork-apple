@@ -22,8 +22,7 @@ typedef NS_ENUM(NSInteger, SRGNetworkErrorCode) {
      */
     SRGNetworkErrorInvalidData,
     /**
-     *  Several errors have been encountered. Use the `SRGDataProviderErrorsKey` user info key to retrieve the
-     *  error list.
+     *  Several errors have been encountered. Use the `SRGNetworkErrorsKey` user info key to retrieve the error list.
      */
     SRGNetworkErrorMultiple
 };
@@ -40,7 +39,7 @@ OBJC_EXPORT NSString * const SRGNetworkHTTPStatusCodeKey;           // Key to ac
 OBJC_EXTERN NSString * const SRGNetworkFailingURLKey;               // Key to access the failing URL.
 
 /**
- *  Information available for `SRGDataProviderErrorsKey`.
+ *  Information available for `SRGNetworkErrorsKey`.
  */
 OBJC_EXPORT NSString * const SRGNetworkErrorsKey;                   // Error list as as an `NSArray<NSError *>`.
 
