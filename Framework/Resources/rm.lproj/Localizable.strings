@@ -4,5 +4,8 @@
 /* Error message returned when a server response data is incorrect. */
 "The data is invalid" = "Las datas n'èn betg valaivlas";
 
+/* Generic error description when the actual error is not identified */
+"Unknown error" = "Unknown error";
+
 /* The error message when request a media or a media list on a public network with no Internet access (e.g. SBB) */
 "You are likely connected to a public WiFi network with no Internet access" = "Probablamain essas Vus colliads cun ina rait wifi publica però senza avair access a l'internet";
