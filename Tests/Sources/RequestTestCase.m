@@ -259,6 +259,29 @@
     XCTAssertNil(request2);
 }
 
+- (void)testCancelledRequestDeallocation
+{
+    NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
+    
+    __block SRGRequest *request;
+    @autoreleasepool {
+        request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            // Release the local strong reference
+            request = nil;
+            [expectation fulfill];
+        }] requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
+        [request resume];
+        [request cancel];
+    }
+    XCTAssertNotNil(request);
+    
+    [self waitForExpectationsWithTimeout:5. handler:nil];
+    
+    XCTAssertNil(request);
+}
+
 - (void)testStatus
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
