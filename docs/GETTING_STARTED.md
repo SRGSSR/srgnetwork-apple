@@ -52,10 +52,11 @@ Set the request property when a refresh is performed:
 - (void)refresh
 {
     NSURLRequest *URLRequest = ...;
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    SRGRequest *request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // ...
     }];
-    [self.request resume];
+    [request resume];
+    self.request = request;
 }
 ```
 
