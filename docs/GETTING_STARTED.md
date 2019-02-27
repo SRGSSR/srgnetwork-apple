@@ -38,11 +38,11 @@ Other request variants exist which can automatically parse the reponse data as a
 
 A request retains itself when running and can therefore be executed as described above, but in general you should store a reference to any request you perform so that you can cancel it when appropriate.
 
-Consider for example a request made at the view controller level. One way to ensure that the request does not run unnecessarily if the user navigates back before the request finishes is to store a reference to the request, cancelling it when the view controller is removed:
+Consider for example a request made at the view controller level. One way to ensure that the request does not run unnecessarily if the user navigates back before the request finishes is to store a reference to the request (a weak one suffices since the request retains itself), cancelling it when the view controller is removed:
 
 ```objective-c
 @interface MyViewController ()
-@property (nonatomic) SRGRequest *request;
+@property (nonatomic, weak) SRGRequest *request;
 @end
 ```
 
