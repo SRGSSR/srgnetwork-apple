@@ -137,7 +137,7 @@ Once an `SRGFirstPageRequest` has been successfully executed, the paginator (if 
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+__block SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
     // See above
 } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
     // See above
@@ -146,7 +146,7 @@ SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWi
     
     // Request the next page of content, if any
     if (nextPage) {
-        SRGPageRequest *nextRequest = [request requestWithPage:nextPage];
+        SRGPageRequest *nextRequest = [firstRequest requestWithPage:nextPage];
         [nextRequest resume];
     }
 }];
@@ -235,19 +235,19 @@ If a request does not depend on the result of another request, you can instantia
     
     NSURLRequest *URLRequest1 = ...;
     SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [requestQueue reportError:error];
+        [self.requestQueue reportError:error];
         
         // ...
     }];
-    [requestQueue addRequest:request1 resume:YES];
+    [self.requestQueue addRequest:request1 resume:YES];
     
     NSURLRequest *URLRequest2 = ...;
     SRGRequest *request2 = [SRGRequest dataRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [requestQueue reportError:error];
+        [self.requestQueue reportError:error];
         
         // ...
     }];
-    [requestQueue addRequest:request2 resume:YES];
+    [self.requestQueue addRequest:request2 resume:YES];
 }
 ```
 
@@ -302,7 +302,7 @@ If a request depends on the result of another request, you can similarly use a r
     NSURLRequest *URLRequest1 = ...;
     SRGRequest *request1 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest1 session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
-            [requestQueue reportError:error];
+            [self.requestQueue reportError:error];
             return;
         }
         
@@ -312,7 +312,7 @@ If a request depends on the result of another request, you can similarly use a r
         NSURLRequest *URLRequest2 = ...;
         SRGRequest *request2 = [SRGRequest JSONDictionaryRequestWithURLRequest:URLRequest2 session:NSURLSession.sharedSession completionBlock:^(NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSError * _Nullable error) {
              if (error) {
-                [requestQueue reportError:error];
+                [self.requestQueue reportError:error];
                 return;
              }
         
@@ -377,8 +377,8 @@ When you need to load the next page of content (if any is available), simply gen
 - (void)loadNextPage
 {
     if (self.nextPage) {
-        SRGPageRequest *nextRequest = [self.firstPageRequest requestWithPage:self.nextPage];
-        [self.requestQueue addRequest: nextRequest resume:YES];
+        SRGPageRequest *nextRequest = [self.firstRequest requestWithPage:self.nextPage];
+        [self.requestQueue addRequest:nextRequest resume:YES];
     }
 }
 ```
