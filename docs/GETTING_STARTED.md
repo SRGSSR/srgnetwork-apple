@@ -73,37 +73,6 @@ and use this reference to cancel it when the view controller disappears:
 }
 ```
 
-#### Remark
-
-If `self` retains the request and is referenced from its completion block, you will create a retain cycle since the block captures its context, which `self` is implicitly part of. To eliminate those issues, be sure to create a weak reference to `self` where needed, e.g.
-
-```objective-c
-- (void)refresh
-{
-    __weak __typeof(self) weakSelf = self;
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        [weakSelf doStuff];
-    }];
-    [self.request resume];
-}
-```
-
-For Objective-C codebases, you can use the bundled `libextobjc` framework which provides expressive convenience macros for this purpose:
-
-```objective-c
-#import <libextobjc/libextobjc.h>
-
-- (void)refresh
-{
-    @weakify(self)
-    self.request = [SRGRequest dataRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        @strongify(self)
-        [self doStuff];
-    }];
-    [self.request resume];
-}
-```
-
 ## Pagination
 
 Pagination is a way to retrieve results in pages of constrained size, e.g. 20 items at most per page. Requesting pages starts with `SRGFirstPageRequest`, which you instantiate like usual requests, but with two blocks:
@@ -216,7 +185,7 @@ Once you have a queue, you can add requests to it at any time. In general, reque
 
 #### Remark
 
-Requests added to a queue do not need to be additionally retained elsewhere. They are automatically retained _with_ the queue and cancelled when the queue is cancelled. Not that requests are not internally retained _by_ the queue, which means no retain cycle will occur if you reference a queue from within a request completion block (which is the pattern enforced by error reporting, see below). No `__weak` reference to the queue is therefore required.
+Requests added to a queue do not need to be additionally retained elsewhere. They are automatically retained _with_ the queue and cancelled when the queue is cancelled. Not that requests are not internally retained _by_ the queue, which means no retain cycle will occur if you reference a queue from within a request completion block (which is the pattern enforced by error reporting, see below). No `__weak` reference to the queue is therefore required in such cases.
 
 ### Parallel requests
 
@@ -274,7 +243,7 @@ As said before, and unlike requests, queues need to be retained by some parent c
 }
 ```
 
-or, with the `libextobjc` framework:
+or, with the `libextobjc` framework bundled as `SRGNetwork` dependency:
 
 ```objective-c
 - (void)refresh
@@ -334,7 +303,7 @@ A single request queue can be used to implement on-demand page loading, thanks t
 ```
 @interface MyViewController ()
 @property (nonatomic) SRGRequestQueue *requestQueue;
-@property (nonatomic) SRGFirstPageRequest *firstRequest;
+@property (nonatomic, weak) SRGFirstPageRequest *firstRequest;
 @property (nonatomic) SRGPage *nextPage;
 @end
 ```
@@ -355,7 +324,7 @@ When a full refresh is needed, create the first request and a queue which will r
         }
     }];
 
-    self.firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+    SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
         // ...
     } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
         // ...
@@ -369,7 +338,9 @@ When a full refresh is needed, create the first request and a queue which will r
         
         self.nextPage = nextPage;
     }];
-    [self.requestQueue addRequest:self.firstRequest resume:YES];
+    [self.requestQueue addRequest:firstRequest resume:YES];
+    self.firstRequest = firstRequest;
+}
 ```
 
 When you need to load the next page of content (if any is available), simply generate the next page request and add it to the queue:
