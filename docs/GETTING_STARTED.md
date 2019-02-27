@@ -20,7 +20,7 @@ SRGRequest *request = [SRGRequest dataRequestWithURLRequest:URLRequest session:N
 [request resume];
 ```
 
-When a request ends, the corresponding completion block is called, with the returned data or error information. The completion block of a cancelled request is not called by default. This behavior can be changed by changing request options, as follows:
+When a request ends, the corresponding completion block is called (on the main thread by default), with the returned data or error information. The completion block of a cancelled request is not called by default. This behavior can be changed by changing request options, as follows:
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
@@ -30,7 +30,7 @@ SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:URLRequest session:
 [request resume];
 ```
 
-Other options can be added with the `|` bitwise OR operator.
+Other options can be added with the `|` bitwise OR operator. For example, you can use `SRGNetworkRequestBackgroundThreadCompletionEnabled`to have the completion block called on a background thread.
 
 Other request variants exist which can automatically parse the reponse data as a JSON dictionary or array, or as an object using an arbitrary parser.
 
