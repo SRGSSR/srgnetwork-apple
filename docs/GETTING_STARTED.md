@@ -119,6 +119,10 @@ __block SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryR
         SRGPageRequest *nextRequest = [firstRequest requestWithPage:nextPage];
         [nextRequest resume];
     }
+    else {
+        // Release the reference for proper deallocation
+        firstRequest = nil;
+    }
 }];
 [firstRequest resume];
 ```
@@ -127,6 +131,7 @@ This implementation is meant for illustration purposes mostly since it has two m
 
 * Requests are performed one after another, which can be catastrophic if a lot of pages are available. Usually, you should wait until the current result set has been browsed before loading the next page (e.g. via a dedicated table view footer).
 * There is no way to cancel the requests once started.
+* Since page requests are generated from the first, assigned to a `__block` variable, the `__block` variable must be set to `nil` when not used anymore, so that the request can properly get deallocated.
 
 To solve those issues and properly implement pagination support in your application, you should use a request queue.
 

@@ -294,6 +294,7 @@
         // Fulfill expectation after block execution to capture the `running` update occurring after it
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [expectation fulfill];
+            request = nil;
         });
     }];
     XCTAssertFalse(request.running);

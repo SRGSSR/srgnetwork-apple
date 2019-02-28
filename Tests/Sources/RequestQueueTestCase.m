@@ -44,6 +44,7 @@
             
             requestQueueFinished = YES;
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -137,6 +138,7 @@
             
             requestQueueFinished = YES;
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -198,6 +200,7 @@
                 
                 requestQueueFinished = YES;
                 [queueFinishedExpectation fulfill];
+                requestQueue = nil;
             }
         }];
     });
@@ -252,6 +255,7 @@
         else {
             XCTAssertFalse(requestQueue.running);
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -299,6 +303,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request1 = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -330,6 +335,7 @@
             XCTAssertEqual(error.code, SRGNetworkErrorHTTP);
             
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -366,6 +372,7 @@
             XCTAssertEqual([error.userInfo[SRGNetworkErrorsKey] count], 2);
             
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -411,6 +418,7 @@
         else {
             XCTAssertFalse(requestQueue.running);
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -460,6 +468,7 @@
         else {
             XCTAssertFalse(requestQueue.running);
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -596,6 +605,7 @@
         if (finished) {
             XCTAssertNotNil(error);
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }];
     
@@ -630,6 +640,7 @@
         if (finished) {
             XCTAssertNotNil(error);
             [queueFinishedExpectation fulfill];
+            requestQueue = nil;
         }
     }] requestQueueWithOptions:SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled];
     
@@ -659,7 +670,7 @@
     XCTestExpectation *notFoundRequestFinishedExpectation = [self expectationWithDescription:@"404 request finished"];
     XCTestExpectation *dataRequestFinishedExpectation = [self expectationWithDescription:@"Data request finished"];
     
-    __block SRGRequestQueue *requestQueue = [[[SRGRequestQueue alloc] initWithStateChangeBlock:nil] requestQueueWithOptions:SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled];
+    SRGRequestQueue *requestQueue = [[[SRGRequestQueue alloc] initWithStateChangeBlock:nil] requestQueueWithOptions:SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled];
     
     NSURL *URL1 = [NSURL URLWithString:@"https://httpbin.org/status/404"];
     SRGRequest *request1 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL1] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {

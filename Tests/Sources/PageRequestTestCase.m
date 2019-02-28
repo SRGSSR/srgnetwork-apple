@@ -170,6 +170,7 @@
         XCTAssertEqual(request.page.size, 5);
         
         [expectation fulfill];
+        request = nil;
     }] requestWithPageSize:5];
     
     XCTAssertEqual(request.page.number, 0);
@@ -190,6 +191,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -210,6 +212,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -230,6 +233,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -252,6 +256,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -295,6 +300,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -315,6 +321,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
@@ -351,6 +358,7 @@
         }
         else if (page.number == 1) {
             [expectation fulfill];
+            request = nil;
         }
         else {
             XCTFail(@"Only first two pages are expected");
