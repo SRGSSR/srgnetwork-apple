@@ -104,7 +104,7 @@
             self.extractor ? self.extractor(data, response) : nil;
         }
         
-        if ((self.options & SRGNetworkRequestBackgroundThreadCompletionEnabled) == 0) {
+        if ((self.options & SRGRequestOptionBackgroundCompletionEnabled) == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 self.completionBlock(data, response, error);
             });
@@ -124,7 +124,7 @@
                 }
             }
             else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
-                if ((self.options & SRGNetworkOptionFriendlyWiFiMessagesDisabled) == 0) {
+                if ((self.options & SRGRequestOptionFriendlyWiFiMessagesDisabled) == 0) {
                     NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
                     userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
                     

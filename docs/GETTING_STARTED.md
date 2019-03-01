@@ -30,7 +30,7 @@ SRGRequest *request = [[SRGRequest dataRequestWithURLRequest:URLRequest session:
 [request resume];
 ```
 
-Other options can be added with the `|` bitwise OR operator. For example, you can use `SRGNetworkRequestBackgroundThreadCompletionEnabled`to have the completion block called on a background thread.
+Other options can be added with the `|` bitwise OR operator. For example, you can use `SRGRequestOptionBackgroundCompletionEnabled`to have the completion block called on a background thread.
 
 Other request variants exist which can automatically parse the reponse data as a JSON dictionary or array, or as an object using an arbitrary parser.
 

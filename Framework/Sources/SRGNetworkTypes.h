@@ -30,14 +30,14 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
      *  by default when this might be the case. The error domain and code are left unaltered. This behavior can be
      *  disabled, in which case the original (non-friendly) error message is kept.
      */
-    SRGNetworkOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
+    SRGRequestOptionFriendlyWiFiMessagesDisabled = (1UL << 2),
     /**
      *  By default, request completion blocks are called on the main thread. The reason is that parsing and other
      *  time-consuming operations will always occur on background threads, the completion block will thus in most
      *  cases be dedicated to UI updates. If you want to have the completion block called on a background thread,
      *  simply enable the following option.
      */
-    SRGNetworkRequestBackgroundThreadCompletionEnabled = (1UL << 2),
+    SRGRequestOptionBackgroundCompletionEnabled = (1UL << 2),
 };
 
 /**

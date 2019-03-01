@@ -194,7 +194,7 @@
         XCTAssertFalse([error.localizedDescription containsString:@"WiFi"]);
         XCTAssertNotNil(error.userInfo[NSURLErrorFailingURLStringErrorKey]);
         [expectation fulfill];
-    }] requestWithOptions:SRGNetworkOptionFriendlyWiFiMessagesDisabled] resume];
+    }] requestWithOptions:SRGRequestOptionFriendlyWiFiMessagesDisabled] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }
@@ -220,7 +220,7 @@
     [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertFalse(NSThread.isMainThread);
         [expectation fulfill];
-    }] requestWithOptions:SRGNetworkRequestBackgroundThreadCompletionEnabled] resume];
+    }] requestWithOptions:SRGRequestOptionBackgroundCompletionEnabled] resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }

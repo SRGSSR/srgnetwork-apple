@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  Network requests can be started from any thread. By default, their completion block will be called on the main
  *  thread, though. This can be changed by calling `-requestWithOptions:` on an existing request, with the
- *  `SRGNetworkRequestBackgroundThreadCompletionEnabled` option.
+ *  `SRGRequestOptionBackgroundCompletionEnabled` option.
  *
  *  This choice has been made to avoid common programming errors. Since all request work is done on background threads,
  *  the completion block is most of the time namely used to trigger UI updates, which have to occur on the main thread.
