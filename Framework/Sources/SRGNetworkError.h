@@ -43,5 +43,4 @@ OBJC_EXTERN NSString * const SRGNetworkFailingURLKey;               // Key to ac
  */
 OBJC_EXPORT NSString * const SRGNetworkErrorsKey;                   // Error list as as an `NSArray<NSError *>`.
 
-
 NS_ASSUME_NONNULL_END
