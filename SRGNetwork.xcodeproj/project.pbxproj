@@ -201,8 +201,8 @@
 			children = (
 				6F8A94392100566F00AA6434 /* Framework */,
 				6F6A09FD2101BEB7004568BD /* Tests */,
-				6F8A942420FF21EB00AA6434 /* Products */,
 				6FE9DB96219D654D00BE1DD6 /* Frameworks */,
+				6F8A942420FF21EB00AA6434 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
