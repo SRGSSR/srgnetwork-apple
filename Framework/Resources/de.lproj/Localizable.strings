@@ -5,7 +5,7 @@
 "The data is invalid" = "Die Daten sind ungültig";
 
 /* Generic error description when the actual error is not identified */
-"Unknown error" = "Unknown error";
+"Unknown error" = "Unbekannter Fehler";
 
 /* The error message when request a media or a media list on a public network with no Internet access (e.g. SBB) */
 "You are likely connected to a public WiFi network with no Internet access" = "Sie sind möglicherweise mit einem öffentlichen WLAN ohne Internetanschluss verbunden";
