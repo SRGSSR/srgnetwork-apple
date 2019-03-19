@@ -4,9 +4,13 @@
 
 ## About
 
-A simple network library.
+Built on top of `NSURLSession`, this library provides a concise, consistent formalism to create and manage network requests.
 
-🚧 **3rd party applications should not use this library until it reaches version 1.0, as its precise scope and API have not been defined yet.** 🚧
+Unlike most network libraries, SRG Network focuses on common issues surrounding the use of network connections:
+
+* Convenient and simple management of multiple requests, whether they are performed in parallel or in cascade.
+* Simple formalism to be notified when a request or group of requests is active or inactive.
+* Proper cancellation of requests.
 
 ## Compatibility
 
@@ -30,6 +34,9 @@ For more information about Carthage and its use, refer to the [official document
 
 The library requires the following frameworks to be added to any target requiring it:
 
+* `libextobjc`: A utility framework.
+* `MAKVONotificationCenter`: A safe KVO framework.
+* `SRGLogger`: The framework used for internal logging.
 * `SRGNetwork`: The main library framework.
 
 ### Dynamic framework integration
@@ -74,6 +81,10 @@ Import the module where needed:
 ```swift
 import SRGNetwork
 ```
+
+### Working with the library
+
+To learn about how the library can be used, have a look at the [getting started guide](GETTING_STARTED.md).
 
 ## Building the project
 

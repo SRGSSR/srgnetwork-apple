@@ -16,6 +16,30 @@
 
 #pragma mark Tests
 
+- (void)testLocalizedStringForNetworkErrorCode
+{
+    NSArray *errorCodes = @[ @(NSURLErrorUnknown),
+                             @(NSURLErrorCancelled), @(NSURLErrorBadURL), @(NSURLErrorTimedOut), @(NSURLErrorUnsupportedURL),
+                             @(NSURLErrorCannotFindHost), @(NSURLErrorCannotConnectToHost), @(NSURLErrorNetworkConnectionLost),
+                             @(NSURLErrorDNSLookupFailed), @(NSURLErrorHTTPTooManyRedirects), @(NSURLErrorResourceUnavailable),
+                             @(NSURLErrorNotConnectedToInternet), @(NSURLErrorRedirectToNonExistentLocation), @(NSURLErrorBadServerResponse),
+                             @(NSURLErrorUserCancelledAuthentication), @(NSURLErrorUserAuthenticationRequired), @(NSURLErrorZeroByteResource),
+                             @(NSURLErrorCannotDecodeRawData), @(NSURLErrorCannotDecodeContentData), @(NSURLErrorCannotParseResponse),
+                             @(NSURLErrorAppTransportSecurityRequiresSecureConnection), @(NSURLErrorFileDoesNotExist),
+                             @(NSURLErrorFileIsDirectory), @(NSURLErrorNoPermissionsToReadFile), @(NSURLErrorDataLengthExceedsMaximum),
+                             @(NSURLErrorSecureConnectionFailed), @(NSURLErrorServerCertificateHasBadDate),
+                             @(NSURLErrorServerCertificateUntrusted), @(NSURLErrorServerCertificateHasUnknownRoot),
+                             @(NSURLErrorServerCertificateNotYetValid), @(NSURLErrorClientCertificateRejected),
+                             @(NSURLErrorClientCertificateRequired), @(NSURLErrorCannotLoadFromNetwork),
+                             @(-9789) ];
+    
+    for (NSNumber *errorCode in errorCodes) {
+        NSString *message = [NSHTTPURLResponse srg_localizedStringForURLErrorCode:errorCode.integerValue];
+        NSLog(@"%@: %@", errorCode, message);
+        XCTAssertNotNil(message);
+    }
+}
+
 - (void)testLocalizedStringForStatusCode
 {
     NSArray *statusCodes = @[ @100, @101, @102,
@@ -26,7 +50,7 @@
                               @103, @420, @450, @498, @499, @509, @530, @598, @599,
                               @440, @449, @451,
                               @444, @495, @496, @497, @499,
-                              @520, @521, @522, @523, @524, @525, @526, @527];
+                              @520, @521, @522, @523, @524, @525, @526, @527 ];
     
     for (NSNumber *statusCode in statusCodes) {
         NSString *message = [NSHTTPURLResponse srg_localizedStringForStatusCode:statusCode.integerValue];

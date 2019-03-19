@@ -7,12 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
+		6F40353D21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */; };
+		6F4035452200299D003EFB29 /* SRGNetworkTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F4035432200299D003EFB29 /* SRGNetworkTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F676B0121F856E70066DDE8 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F676B0221F856E70066DDE8 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
+		6F676B0521F857580066DDE8 /* SRGPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0321F857580066DDE8 /* SRGPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F676B0621F857580066DDE8 /* SRGPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0421F857580066DDE8 /* SRGPage.m */; };
+		6F676B0921F8591B0066DDE8 /* SRGFirstPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0721F8591B0066DDE8 /* SRGFirstPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F676B0A21F8591B0066DDE8 /* SRGFirstPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */; };
+		6F676B0D21F870650066DDE8 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
+		6F676B1421F890B00066DDE8 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
 		6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
-		6F6A0A012101BEB7004568BD /* NetworkRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */; };
-		6F8A94432100566F00AA6434 /* SRGNetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* RequestTestCase.m */; };
+		6F8030D321F99418003185E9 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F8030D421F99418003185E9 /* SRGBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030D221F99418003185E9 /* SRGBaseRequest.m */; };
+		6F8030D721F9948F003185E9 /* SRGBaseRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D521F9948F003185E9 /* SRGBaseRequest+Subclassing.h */; };
+		6F8030DB21F9950C003185E9 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F8030DC21F9950C003185E9 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
+		6F8030DF21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
+		6F8030E221F9AE2E003185E9 /* PageRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */; };
 		6F8A94442100566F00AA6434 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F8A94452100566F00AA6434 /* SRGNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A943D2100566F00AA6434 /* SRGNetworkRequest.m */; };
 		6F8A94462100566F00AA6434 /* NSBundle+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943F2100566F00AA6434 /* NSBundle+SRGNetwork.h */; };
 		6F8A94472100566F00AA6434 /* NSBundle+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94402100566F00AA6434 /* NSBundle+SRGNetwork.m */; };
 		6F8A94482100566F00AA6434 /* SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94412100566F00AA6434 /* SRGNetwork.m */; };
@@ -22,6 +39,22 @@
 		6F8A945121005D9400AA6434 /* SRGNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944F21005D9400AA6434 /* SRGNetworkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F926BB7210F413D00D2E3D0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FCBFEEF210B5662006BC355 /* Localizable.strings */; };
 		6F926BBA210F415100D2E3D0 /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F926BAF210F406D00D2E3D0 /* SRGNetwork.bundle */; };
+		6FE9DB88219D5F0200BE1DD6 /* SRGRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7A219D5F0100BE1DD6 /* SRGRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FE9DB8B219D5F0200BE1DD6 /* SRGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FE9DB8F219D5F0200BE1DD6 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
+		6FE9DB95219D5F0200BE1DD6 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
+		6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
+		6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
+		6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
+		6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
+		6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
+		6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
+		6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
+		6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
+		6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,15 +74,47 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6FE9DB9A219D658600BE1DD6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */,
+				6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */,
+				6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkParsers.h; sourceTree = "<group>"; };
+		6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkParsers.m; sourceTree = "<group>"; };
 		6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponse_NetworkTestCase.m; sourceTree = "<group>"; };
+		6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkActivityManagementTestCase.m; sourceTree = "<group>"; };
+		6F4035432200299D003EFB29 /* SRGNetworkTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkTypes.h; sourceTree = "<group>"; };
+		6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGPageRequest.h; sourceTree = "<group>"; };
+		6F676B0021F856E60066DDE8 /* SRGPageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGPageRequest.m; sourceTree = "<group>"; };
+		6F676B0321F857580066DDE8 /* SRGPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGPage.h; sourceTree = "<group>"; };
+		6F676B0421F857580066DDE8 /* SRGPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGPage.m; sourceTree = "<group>"; };
+		6F676B0721F8591B0066DDE8 /* SRGFirstPageRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGFirstPageRequest.h; sourceTree = "<group>"; };
+		6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGFirstPageRequest.m; sourceTree = "<group>"; };
+		6F676B0B21F870650066DDE8 /* SRGPage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGPage+Private.h"; sourceTree = "<group>"; };
+		6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGPageRequest+Subclassing.h"; sourceTree = "<group>"; };
 		6F6A09F22101BD11004568BD /* SRGNetwork-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SRGNetwork-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequestTestCase.m; sourceTree = "<group>"; };
+		6F6A09FF2101BEB7004568BD /* RequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTestCase.m; sourceTree = "<group>"; };
 		6F6A0A002101BEB7004568BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F8030D121F99418003185E9 /* SRGBaseRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGBaseRequest.h; sourceTree = "<group>"; };
+		6F8030D221F99418003185E9 /* SRGBaseRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGBaseRequest.m; sourceTree = "<group>"; };
+		6F8030D521F9948F003185E9 /* SRGBaseRequest+Subclassing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGBaseRequest+Subclassing.h"; sourceTree = "<group>"; };
+		6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkActivityManagement.h; sourceTree = "<group>"; };
+		6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkActivityManagement.m; sourceTree = "<group>"; };
+		6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGNetworkActivityManagement+Private.h"; sourceTree = "<group>"; };
+		6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageRequestTestCase.m; sourceTree = "<group>"; };
 		6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SRGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkRequest.h; sourceTree = "<group>"; };
 		6F8A943C2100566F00AA6434 /* SRGNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetwork.h; sourceTree = "<group>"; };
-		6F8A943D2100566F00AA6434 /* SRGNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkRequest.m; sourceTree = "<group>"; };
 		6F8A943F2100566F00AA6434 /* NSBundle+SRGNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+SRGNetwork.h"; sourceTree = "<group>"; };
 		6F8A94402100566F00AA6434 /* NSBundle+SRGNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+SRGNetwork.m"; sourceTree = "<group>"; };
 		6F8A94412100566F00AA6434 /* SRGNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGNetwork.m; sourceTree = "<group>"; };
@@ -64,6 +129,17 @@
 		6FCBFEF3210B56AC006BC355 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FCBFEF4210B56AC006BC355 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6FCBFEF5210B56AC006BC355 /* rm */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = rm; path = rm.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FE9DB7A219D5F0100BE1DD6 /* SRGRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGRequestQueue.h; sourceTree = "<group>"; };
+		6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGRequest.h; sourceTree = "<group>"; };
+		6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequest.m; sourceTree = "<group>"; };
+		6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequestQueue.m; sourceTree = "<group>"; };
+		6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/iOS/libextobjc.framework; sourceTree = "<group>"; };
+		6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
+		6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
+		6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkLogger.h; sourceTree = "<group>"; };
+		6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestQueueTestCase.m; sourceTree = "<group>"; };
+		6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkBaseTestCase.m; sourceTree = "<group>"; };
+		6FE9DBAC21A2CEAD00BE1DD6 /* NetworkBaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkBaseTestCase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +147,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */,
+				6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
+				6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */,
 				6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +158,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */,
+				6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
+				6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +186,12 @@
 		6F6A09FE2101BEB7004568BD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6F6A09FF2101BEB7004568BD /* NetworkRequestTestCase.m */,
+				6FE9DBAA21A2CEAD00BE1DD6 /* Helpers */,
+				6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */,
 				6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */,
+				6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */,
+				6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */,
+				6F6A09FF2101BEB7004568BD /* RequestTestCase.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -115,6 +201,7 @@
 			children = (
 				6F8A94392100566F00AA6434 /* Framework */,
 				6F6A09FD2101BEB7004568BD /* Tests */,
+				6FE9DB96219D654D00BE1DD6 /* Frameworks */,
 				6F8A942420FF21EB00AA6434 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,12 +230,32 @@
 			isa = PBXGroup;
 			children = (
 				6F8A943E2100566F00AA6434 /* Categories */,
+				6F8030D121F99418003185E9 /* SRGBaseRequest.h */,
+				6F8030D221F99418003185E9 /* SRGBaseRequest.m */,
+				6F8030D521F9948F003185E9 /* SRGBaseRequest+Subclassing.h */,
+				6F676B0721F8591B0066DDE8 /* SRGFirstPageRequest.h */,
+				6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */,
 				6F8A943C2100566F00AA6434 /* SRGNetwork.h */,
 				6F8A94412100566F00AA6434 /* SRGNetwork.m */,
+				6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */,
+				6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */,
+				6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */,
 				6F8A944F21005D9400AA6434 /* SRGNetworkError.h */,
 				6F8A944E21005D9400AA6434 /* SRGNetworkError.m */,
-				6F8A943B2100566F00AA6434 /* SRGNetworkRequest.h */,
-				6F8A943D2100566F00AA6434 /* SRGNetworkRequest.m */,
+				6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */,
+				6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */,
+				6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */,
+				6F4035432200299D003EFB29 /* SRGNetworkTypes.h */,
+				6F676B0321F857580066DDE8 /* SRGPage.h */,
+				6F676B0421F857580066DDE8 /* SRGPage.m */,
+				6F676B0B21F870650066DDE8 /* SRGPage+Private.h */,
+				6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */,
+				6F676B0021F856E60066DDE8 /* SRGPageRequest.m */,
+				6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */,
+				6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */,
+				6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */,
+				6FE9DB7A219D5F0100BE1DD6 /* SRGRequestQueue.h */,
+				6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -172,6 +279,25 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6FE9DB96219D654D00BE1DD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */,
+				6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */,
+				6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6FE9DBAA21A2CEAD00BE1DD6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */,
+				6FE9DBAC21A2CEAD00BE1DD6 /* NetworkBaseTestCase.h */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -179,11 +305,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F676B0121F856E70066DDE8 /* SRGPageRequest.h in Headers */,
 				6F8A944D2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h in Headers */,
 				6F8A945121005D9400AA6434 /* SRGNetworkError.h in Headers */,
 				6F8A94442100566F00AA6434 /* SRGNetwork.h in Headers */,
+				6F676B0D21F870650066DDE8 /* SRGPage+Private.h in Headers */,
+				6F8030D321F99418003185E9 /* SRGBaseRequest.h in Headers */,
+				6F8030DB21F9950C003185E9 /* SRGNetworkActivityManagement.h in Headers */,
+				6F8030DF21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h in Headers */,
 				6F8A94462100566F00AA6434 /* NSBundle+SRGNetwork.h in Headers */,
-				6F8A94432100566F00AA6434 /* SRGNetworkRequest.h in Headers */,
+				6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */,
+				6F676B1421F890B00066DDE8 /* SRGPageRequest+Subclassing.h in Headers */,
+				6F676B0521F857580066DDE8 /* SRGPage.h in Headers */,
+				6F676B0921F8591B0066DDE8 /* SRGFirstPageRequest.h in Headers */,
+				6F8030D721F9948F003185E9 /* SRGBaseRequest+Subclassing.h in Headers */,
+				6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */,
+				6FE9DB88219D5F0200BE1DD6 /* SRGRequestQueue.h in Headers */,
+				6F4035452200299D003EFB29 /* SRGNetworkTypes.h in Headers */,
+				6FE9DB8B219D5F0200BE1DD6 /* SRGRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +336,7 @@
 				6F6A09EE2101BD11004568BD /* Sources */,
 				6F6A09EF2101BD11004568BD /* Frameworks */,
 				6F6A09F02101BD11004568BD /* Resources */,
+				6FE9DB9A219D658600BE1DD6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -274,6 +414,7 @@
 				it,
 				de,
 				rm,
+				Base,
 			);
 			mainGroup = 6F8A941920FF21EB00AA6434;
 			productRefGroup = 6F8A942420FF21EB00AA6434 /* Products */;
@@ -319,7 +460,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */,
-				6F6A0A012101BEB7004568BD /* NetworkRequestTestCase.m in Sources */,
+				6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */,
+				6F40353D21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m in Sources */,
+				6F8030E221F9AE2E003185E9 /* PageRequestTestCase.m in Sources */,
+				6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */,
+				6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,9 +474,16 @@
 			files = (
 				6F8A94472100566F00AA6434 /* NSBundle+SRGNetwork.m in Sources */,
 				6F8A945021005D9400AA6434 /* SRGNetworkError.m in Sources */,
+				6F676B0A21F8591B0066DDE8 /* SRGFirstPageRequest.m in Sources */,
+				6F8030D421F99418003185E9 /* SRGBaseRequest.m in Sources */,
+				6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */,
 				6F8A944C2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m in Sources */,
 				6F8A94482100566F00AA6434 /* SRGNetwork.m in Sources */,
-				6F8A94452100566F00AA6434 /* SRGNetworkRequest.m in Sources */,
+				6FE9DB95219D5F0200BE1DD6 /* SRGRequestQueue.m in Sources */,
+				6F676B0621F857580066DDE8 /* SRGPage.m in Sources */,
+				6F8030DC21F9950C003185E9 /* SRGNetworkActivityManagement.m in Sources */,
+				6FE9DB8F219D5F0200BE1DD6 /* SRGRequest.m in Sources */,
+				6F676B0221F856E70066DDE8 /* SRGPageRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +529,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -393,7 +548,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -461,7 +619,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -519,7 +677,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -535,6 +693,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,6 +719,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -627,7 +793,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -644,6 +810,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -663,7 +834,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -725,7 +899,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 0.2.1;
+				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -742,6 +916,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -761,7 +940,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

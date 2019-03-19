@@ -1,2 +1,11 @@
+/* The main error message if multiple errors have been encountered. Finally, the developer could should which one to display, and not show this message. */
+"Several errors have been encountered" = "Plusieurs erreurs se sont produites";
+
 /* Error message returned when a server response data is incorrect. */
-"The data is invalid." = "Les données ne sont pas valides.";
+"The data is invalid" = "Les données ne sont pas valides";
+
+/* Generic error description when the actual error is not identified */
+"Unknown error" = "Erreur inconnue";
+
+/* The error message when request a media or a media list on a public network with no Internet access (e.g. SBB) */
+"You are likely connected to a public WiFi network with no Internet access" = "Vous êtes probablement connecté à un réseau WiFi public sans accès Internet";

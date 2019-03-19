@@ -6,7 +6,12 @@
 
 #import "NSBundle+SRGNetwork.h"
 
-#import "SRGNetworkRequest.h"
+#import "SRGRequest.h"
+
+NSString *SRGNetworkNonLocalizedString(NSString *string)
+{
+    return string;
+}
 
 @implementation NSBundle (SRGNetwork)
 
@@ -17,7 +22,7 @@
     static NSBundle *s_bundle;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        NSString *bundlePath = [[NSBundle bundleForClass:SRGNetworkRequest.class].bundlePath stringByAppendingPathComponent:@"SRGNetwork.bundle"];
+        NSString *bundlePath = [[NSBundle bundleForClass:SRGRequest.class].bundlePath stringByAppendingPathComponent:@"SRGNetwork.bundle"];
         s_bundle = [NSBundle bundleWithPath:bundlePath];
         NSAssert(s_bundle, @"Please add SRGNetwork.bundle to your project resources");
     });
