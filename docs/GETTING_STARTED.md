@@ -322,7 +322,7 @@ When a full refresh is needed, create the first request and a queue which will r
 
     self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         if (finished) {
-            // Consolidate the self.medias dictionary and display results, or deal with errors
+            // Consolidate the request results and display them, or deal with errors
         }
         else {
             // Display a spinning wheel, for example
