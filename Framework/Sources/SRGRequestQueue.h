@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *              When the state change block is called, the queue is already in the correct state. This means `running` 
  *              is `YES` within the state change block when it is called because the queue started, and `NO` if it is
- *              called if the queue finished.
+ *              called if the queue finished. The state change block is always called on the main thread.
  *
  *              If several errors have been reported, the error code is `SRGNetworkErrorMultiple`. You can obtain
  *              the error list from the associated user info. If a single error is reported, it is reported as is.
