@@ -135,7 +135,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
     
     [self.errors addObject:error];
     
-    if ((self.options & SRGRequestOptionCancellationErrorsEnabled) != 0) {
+    if ((self.options & SRGRequestQueueOptionAutomaticCancellationOnErrorEnabled) != 0) {
         [self cancel];
     }
 }

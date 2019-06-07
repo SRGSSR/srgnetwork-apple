@@ -305,7 +305,7 @@ As said above, you should not immediately chain requests for pages of contents i
 
 A single request queue can be used to implement on-demand page loading, thanks to the possibility to add a request to a queue at any time. You only need to store the next page information alongside the queue and the first page request, so that this information is available when the next page of content must be retrieved:
 
-```
+```objective-c
 @interface MyViewController ()
 @property (nonatomic) SRGRequestQueue *requestQueue;
 @property (nonatomic, weak) SRGFirstPageRequest *firstRequest;
@@ -322,7 +322,7 @@ When a full refresh is needed, create the first request and a queue which will r
 
     self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         if (finished) {
-            // Consolidate the self.medias dictionary and display results, or deal with errors
+            // Consolidate the request results and display them, or deal with errors
         }
         else {
             // Display a spinning wheel, for example

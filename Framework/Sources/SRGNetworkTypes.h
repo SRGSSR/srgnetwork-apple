@@ -56,7 +56,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestQueueOptions) {
 typedef id _Nullable (^SRGResponseParser)(NSData *data, NSError * __autoreleasing *pError);
 
 // Sizer signature.
-typedef NSURLRequest * (^SRGPageSizer)(NSURLRequest *URLRequest, NSUInteger size);
+typedef NSURLRequest * _Nonnull (^SRGPageSizer)(NSURLRequest *URLRequest, NSUInteger size);
 
 // Paginator signatures.
 typedef NSURLRequest * _Nullable (^SRGDataPaginator)(NSURLRequest *URLRequest, NSData * _Nullable data, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number);
