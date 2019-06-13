@@ -37,7 +37,7 @@ typedef NS_OPTIONS(NSUInteger, SRGRequestOptions) {
      *  cases be dedicated to UI updates. If you want to have the completion block called on a background thread,
      *  simply enable the following option.
      */
-    SRGRequestOptionBackgroundCompletionEnabled = (1UL << 2),
+    SRGRequestOptionBackgroundCompletionEnabled = (1UL << 3),
 };
 
 /**
