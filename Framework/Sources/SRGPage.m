@@ -49,7 +49,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return [[self.class allocWithZone:zone] initWithSize:self.size number:self.number URLRequest:self.URLRequest];
+    return [[self.class alloc] initWithSize:self.size number:self.number URLRequest:self.URLRequest];
 }
 
 #pragma mark Description
