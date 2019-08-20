@@ -16,7 +16,6 @@
 		0897CC29230C957F00555054 /* SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94412100566F00AA6434 /* SRGNetwork.m */; };
 		0897CC2A230C957F00555054 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
 		0897CC2B230C957F00555054 /* SRGPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0421F857580066DDE8 /* SRGPage.m */; };
-		0897CC2C230C957F00555054 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
 		0897CC2D230C957F00555054 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
 		0897CC2E230C957F00555054 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
 		0897CC34230C957F00555054 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,8 +24,6 @@
 		0897CC37230C957F00555054 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0897CC38230C957F00555054 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
 		0897CC39230C957F00555054 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC3A230C957F00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC3B230C957F00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
 		0897CC3C230C957F00555054 /* NSBundle+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943F2100566F00AA6434 /* NSBundle+SRGNetwork.h */; };
 		0897CC3D230C957F00555054 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
 		0897CC3E230C957F00555054 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
@@ -43,7 +40,6 @@
 		0897CC54230C96AF00555054 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */; };
 		0897CC59230C971100555054 /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
 		0897CC5A230C971100555054 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
-		0897CC5B230C971100555054 /* NetworkActivityManagementTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F40353C21FF59A1003EFB29 /* NetworkActivityManagementTestCase.m */; };
 		0897CC5C230C971100555054 /* PageRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */; };
 		0897CC5D230C971100555054 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
 		0897CC5E230C971100555054 /* RequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* RequestTestCase.m */; };
@@ -415,8 +411,6 @@
 				0897CC37230C957F00555054 /* SRGNetwork.h in Headers */,
 				0897CC38230C957F00555054 /* SRGPage+Private.h in Headers */,
 				0897CC39230C957F00555054 /* SRGBaseRequest.h in Headers */,
-				0897CC3A230C957F00555054 /* SRGNetworkActivityManagement.h in Headers */,
-				0897CC3B230C957F00555054 /* SRGNetworkActivityManagement+Private.h in Headers */,
 				0897CC3C230C957F00555054 /* NSBundle+SRGNetwork.h in Headers */,
 				0897CC3D230C957F00555054 /* SRGNetworkLogger.h in Headers */,
 				0897CC3E230C957F00555054 /* SRGPageRequest+Subclassing.h in Headers */,
@@ -652,7 +646,6 @@
 				0897CC29230C957F00555054 /* SRGNetwork.m in Sources */,
 				0897CC2A230C957F00555054 /* SRGRequestQueue.m in Sources */,
 				0897CC2B230C957F00555054 /* SRGPage.m in Sources */,
-				0897CC2C230C957F00555054 /* SRGNetworkActivityManagement.m in Sources */,
 				0897CC2D230C957F00555054 /* SRGRequest.m in Sources */,
 				0897CC2E230C957F00555054 /* SRGPageRequest.m in Sources */,
 			);
@@ -664,7 +657,6 @@
 			files = (
 				0897CC59230C971100555054 /* NSHTTPURLResponse_NetworkTestCase.m in Sources */,
 				0897CC5A230C971100555054 /* NetworkBaseTestCase.m in Sources */,
-				0897CC5B230C971100555054 /* NetworkActivityManagementTestCase.m in Sources */,
 				0897CC5C230C971100555054 /* PageRequestTestCase.m in Sources */,
 				0897CC5D230C971100555054 /* RequestQueueTestCase.m in Sources */,
 				0897CC5E230C971100555054 /* RequestTestCase.m in Sources */,

@@ -8,9 +8,12 @@
 
 #import "NSBundle+SRGNetwork.h"
 #import "NSHTTPURLResponse+SRGNetwork.h"
-#import "SRGNetworkActivityManagement+Private.h"
 #import "SRGBaseRequest+Subclassing.h"
 #import "SRGNetworkError.h"
+
+#if TARGET_OS_IOS
+#import "SRGNetworkActivityManagement+Private.h"
+#endif
 
 @interface SRGBaseRequest ()
 
@@ -72,12 +75,14 @@
     if (running != _running) {
         _running = running;
         
+#if TARGET_OS_IOS
         if (running) {
             [SRGNetworkActivityManagement increaseNumberOfRunningRequests];
         }
         else {
             [SRGNetworkActivityManagement decreaseNumberOfRunningRequests];
         }
+#endif
     }
 }
 
