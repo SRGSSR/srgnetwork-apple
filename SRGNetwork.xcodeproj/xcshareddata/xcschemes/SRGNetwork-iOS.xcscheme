@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F8A942220FF21EB00AA6434"
                BuildableName = "SRGNetwork.framework"
-               BlueprintName = "SRGNetwork"
+               BlueprintName = "SRGNetwork-iOS"
                ReferencedContainer = "container:SRGNetwork.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -35,8 +35,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F6A09F12101BD11004568BD"
-               BuildableName = "SRGNetwork-tests.xctest"
-               BlueprintName = "SRGNetwork-tests"
+               BuildableName = "SRGNetwork-iOS-tests.xctest"
+               BlueprintName = "SRGNetwork-iOS-tests"
                ReferencedContainer = "container:SRGNetwork.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -46,7 +46,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F8A942220FF21EB00AA6434"
             BuildableName = "SRGNetwork.framework"
-            BlueprintName = "SRGNetwork"
+            BlueprintName = "SRGNetwork-iOS"
             ReferencedContainer = "container:SRGNetwork.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -68,7 +68,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F8A942220FF21EB00AA6434"
             BuildableName = "SRGNetwork.framework"
-            BlueprintName = "SRGNetwork"
+            BlueprintName = "SRGNetwork-iOS"
             ReferencedContainer = "container:SRGNetwork.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -86,7 +86,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F8A942220FF21EB00AA6434"
             BuildableName = "SRGNetwork.framework"
-            BlueprintName = "SRGNetwork"
+            BlueprintName = "SRGNetwork-iOS"
             ReferencedContainer = "container:SRGNetwork.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
