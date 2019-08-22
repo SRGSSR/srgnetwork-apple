@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0897CC7F230C9D5E00555054"
-               BuildableName = "SRGNetwork-watchOS.framework"
+               BuildableName = "SRGNetwork.framework"
                BlueprintName = "SRGNetwork-watchOS"
                ReferencedContainer = "container:SRGNetwork.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0897CC7F230C9D5E00555054"
-            BuildableName = "SRGNetwork-watchOS.framework"
+            BuildableName = "SRGNetwork.framework"
             BlueprintName = "SRGNetwork-watchOS"
             ReferencedContainer = "container:SRGNetwork.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0897CC7F230C9D5E00555054"
-            BuildableName = "SRGNetwork-watchOS.framework"
+            BuildableName = "SRGNetwork.framework"
             BlueprintName = "SRGNetwork-watchOS"
             ReferencedContainer = "container:SRGNetwork.xcodeproj">
          </BuildableReference>

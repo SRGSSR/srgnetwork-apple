@@ -81,6 +81,10 @@
 		0897CCB2230CA40F00555054 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCAF230CA40F00555054 /* SRGLogger.framework */; };
 		0897CCB3230CA40F00555054 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCB0230CA40F00555054 /* MAKVONotificationCenter.framework */; };
 		0897CCB4230CA40F00555054 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCB1230CA40F00555054 /* libextobjc.framework */; };
+		0897CDF0230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0897CDF1230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
+		0897CDF2230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0897CDF3230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
 		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
@@ -469,6 +473,7 @@
 				0897CC39230C957F00555054 /* SRGBaseRequest.h in Headers */,
 				0897CC3C230C957F00555054 /* NSBundle+SRGNetwork.h in Headers */,
 				0897CC3D230C957F00555054 /* SRGNetworkLogger.h in Headers */,
+				0897CDF1230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */,
 				0897CC3E230C957F00555054 /* SRGPageRequest+Subclassing.h in Headers */,
 				0897CC3F230C957F00555054 /* SRGPage.h in Headers */,
 				0897CC40230C957F00555054 /* SRGFirstPageRequest.h in Headers */,
@@ -477,6 +482,7 @@
 				0897CC43230C957F00555054 /* SRGRequestQueue.h in Headers */,
 				0897CC44230C957F00555054 /* SRGNetworkTypes.h in Headers */,
 				0897CC45230C957F00555054 /* SRGRequest.h in Headers */,
+				0897CDF0230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +498,7 @@
 				0897CC99230C9D5E00555054 /* SRGBaseRequest.h in Headers */,
 				0897CC9C230C9D5E00555054 /* NSBundle+SRGNetwork.h in Headers */,
 				0897CC9D230C9D5E00555054 /* SRGNetworkLogger.h in Headers */,
+				0897CDF3230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */,
 				0897CC9E230C9D5E00555054 /* SRGPageRequest+Subclassing.h in Headers */,
 				0897CC9F230C9D5E00555054 /* SRGPage.h in Headers */,
 				0897CCA0230C9D5E00555054 /* SRGFirstPageRequest.h in Headers */,
@@ -500,6 +507,7 @@
 				0897CCA3230C9D5E00555054 /* SRGRequestQueue.h in Headers */,
 				0897CCA4230C9D5E00555054 /* SRGNetworkTypes.h in Headers */,
 				0897CCA5230C9D5E00555054 /* SRGRequest.h in Headers */,
+				0897CDF2230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

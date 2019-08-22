@@ -9,11 +9,8 @@
 #import "NSBundle+SRGNetwork.h"
 #import "NSHTTPURLResponse+SRGNetwork.h"
 #import "SRGBaseRequest+Subclassing.h"
-#import "SRGNetworkError.h"
-
-#if TARGET_OS_IOS
 #import "SRGNetworkActivityManagement+Private.h"
-#endif
+#import "SRGNetworkError.h"
 
 @interface SRGBaseRequest ()
 
