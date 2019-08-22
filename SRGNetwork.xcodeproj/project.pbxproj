@@ -85,6 +85,8 @@
 		0897CDF1230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
 		0897CDF2230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0897CDF3230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
+		0897CE12230EFDB400555054 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
+		0897CE13230EFDB500555054 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
 		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
@@ -761,6 +763,7 @@
 				0897CC29230C957F00555054 /* SRGNetwork.m in Sources */,
 				0897CC2A230C957F00555054 /* SRGRequestQueue.m in Sources */,
 				0897CC2B230C957F00555054 /* SRGPage.m in Sources */,
+				0897CE12230EFDB400555054 /* SRGNetworkActivityManagement.m in Sources */,
 				0897CC2D230C957F00555054 /* SRGRequest.m in Sources */,
 				0897CC2E230C957F00555054 /* SRGPageRequest.m in Sources */,
 			);
@@ -791,6 +794,7 @@
 				0897CC89230C9D5E00555054 /* SRGNetwork.m in Sources */,
 				0897CC8A230C9D5E00555054 /* SRGRequestQueue.m in Sources */,
 				0897CC8B230C9D5E00555054 /* SRGPage.m in Sources */,
+				0897CE13230EFDB500555054 /* SRGNetworkActivityManagement.m in Sources */,
 				0897CC8D230C9D5E00555054 /* SRGRequest.m in Sources */,
 				0897CC8E230C9D5E00555054 /* SRGPageRequest.m in Sources */,
 			);

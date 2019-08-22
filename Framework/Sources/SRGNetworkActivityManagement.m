@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#if TARGET_OS_IOS
+
 static NSInteger s_numberOfRunningRequests = 0;
 static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
@@ -69,3 +71,5 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 }
 
 @end
+
+#endif
