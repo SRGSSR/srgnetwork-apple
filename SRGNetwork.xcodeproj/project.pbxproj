@@ -7,86 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0897CC23230C957F00555054 /* NSBundle+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94402100566F00AA6434 /* NSBundle+SRGNetwork.m */; };
-		0897CC24230C957F00555054 /* SRGNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944E21005D9400AA6434 /* SRGNetworkError.m */; };
-		0897CC25230C957F00555054 /* SRGFirstPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */; };
-		0897CC26230C957F00555054 /* SRGBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030D221F99418003185E9 /* SRGBaseRequest.m */; };
-		0897CC27230C957F00555054 /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
-		0897CC28230C957F00555054 /* NSHTTPURLResponse+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944A2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m */; };
-		0897CC29230C957F00555054 /* SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94412100566F00AA6434 /* SRGNetwork.m */; };
-		0897CC2A230C957F00555054 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
-		0897CC2B230C957F00555054 /* SRGPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0421F857580066DDE8 /* SRGPage.m */; };
-		0897CC2D230C957F00555054 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
-		0897CC2E230C957F00555054 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
-		0897CC34230C957F00555054 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC35230C957F00555054 /* NSHTTPURLResponse+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944B2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC36230C957F00555054 /* SRGNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944F21005D9400AA6434 /* SRGNetworkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC37230C957F00555054 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC38230C957F00555054 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
-		0897CC39230C957F00555054 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC3C230C957F00555054 /* NSBundle+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943F2100566F00AA6434 /* NSBundle+SRGNetwork.h */; };
-		0897CC3D230C957F00555054 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
-		0897CC3E230C957F00555054 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
-		0897CC3F230C957F00555054 /* SRGPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0321F857580066DDE8 /* SRGPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC40230C957F00555054 /* SRGFirstPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0721F8591B0066DDE8 /* SRGFirstPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC41230C957F00555054 /* SRGBaseRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D521F9948F003185E9 /* SRGBaseRequest+Subclassing.h */; };
-		0897CC42230C957F00555054 /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC43230C957F00555054 /* SRGRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7A219D5F0100BE1DD6 /* SRGRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC44230C957F00555054 /* SRGNetworkTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F4035432200299D003EFB29 /* SRGNetworkTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC45230C957F00555054 /* SRGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC47230C957F00555054 /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F926BAF210F406D00D2E3D0 /* SRGNetwork.bundle */; };
-		0897CC52230C96AF00555054 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC4F230C96AE00555054 /* libextobjc.framework */; };
-		0897CC53230C96AF00555054 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC50230C96AE00555054 /* SRGLogger.framework */; };
-		0897CC54230C96AF00555054 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */; };
-		0897CC59230C971100555054 /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
-		0897CC5A230C971100555054 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
-		0897CC5C230C971100555054 /* PageRequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030E121F9AE2E003185E9 /* PageRequestTestCase.m */; };
-		0897CC5D230C971100555054 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
-		0897CC5E230C971100555054 /* RequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* RequestTestCase.m */; };
-		0897CC72230C9ADC00555054 /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC4D230C957F00555054 /* SRGNetwork.framework */; };
-		0897CC73230C9AE800555054 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC4F230C96AE00555054 /* libextobjc.framework */; };
-		0897CC74230C9AE800555054 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */; };
-		0897CC75230C9AE800555054 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CC50230C96AE00555054 /* SRGLogger.framework */; };
-		0897CC7C230C9B8500555054 /* libextobjc.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0897CC4F230C96AE00555054 /* libextobjc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0897CC7D230C9B8A00555054 /* MAKVONotificationCenter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0897CC7E230C9B9100555054 /* SRGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0897CC50230C96AE00555054 /* SRGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0897CC83230C9D5E00555054 /* NSBundle+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94402100566F00AA6434 /* NSBundle+SRGNetwork.m */; };
-		0897CC84230C9D5E00555054 /* SRGNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944E21005D9400AA6434 /* SRGNetworkError.m */; };
-		0897CC85230C9D5E00555054 /* SRGFirstPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */; };
-		0897CC86230C9D5E00555054 /* SRGBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030D221F99418003185E9 /* SRGBaseRequest.m */; };
-		0897CC87230C9D5E00555054 /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
-		0897CC88230C9D5E00555054 /* NSHTTPURLResponse+SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A944A2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.m */; };
-		0897CC89230C9D5E00555054 /* SRGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A94412100566F00AA6434 /* SRGNetwork.m */; };
-		0897CC8A230C9D5E00555054 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
-		0897CC8B230C9D5E00555054 /* SRGPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0421F857580066DDE8 /* SRGPage.m */; };
-		0897CC8D230C9D5E00555054 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
-		0897CC8E230C9D5E00555054 /* SRGPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0021F856E60066DDE8 /* SRGPageRequest.m */; };
-		0897CC94230C9D5E00555054 /* SRGPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676AFF21F856E60066DDE8 /* SRGPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC95230C9D5E00555054 /* NSHTTPURLResponse+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944B2100589E00AA6434 /* NSHTTPURLResponse+SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC96230C9D5E00555054 /* SRGNetworkError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A944F21005D9400AA6434 /* SRGNetworkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC97230C9D5E00555054 /* SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943C2100566F00AA6434 /* SRGNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC98230C9D5E00555054 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
-		0897CC99230C9D5E00555054 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CC9C230C9D5E00555054 /* NSBundle+SRGNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8A943F2100566F00AA6434 /* NSBundle+SRGNetwork.h */; };
-		0897CC9D230C9D5E00555054 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
-		0897CC9E230C9D5E00555054 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
-		0897CC9F230C9D5E00555054 /* SRGPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0321F857580066DDE8 /* SRGPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA0230C9D5E00555054 /* SRGFirstPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0721F8591B0066DDE8 /* SRGFirstPageRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA1230C9D5E00555054 /* SRGBaseRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D521F9948F003185E9 /* SRGBaseRequest+Subclassing.h */; };
-		0897CCA2230C9D5E00555054 /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA3230C9D5E00555054 /* SRGRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7A219D5F0100BE1DD6 /* SRGRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA4230C9D5E00555054 /* SRGNetworkTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F4035432200299D003EFB29 /* SRGNetworkTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA5230C9D5E00555054 /* SRGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CCA7230C9D5E00555054 /* SRGNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F926BAF210F406D00D2E3D0 /* SRGNetwork.bundle */; };
-		0897CCB2230CA40F00555054 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCAF230CA40F00555054 /* SRGLogger.framework */; };
-		0897CCB3230CA40F00555054 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCB0230CA40F00555054 /* MAKVONotificationCenter.framework */; };
-		0897CCB4230CA40F00555054 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897CCB1230CA40F00555054 /* libextobjc.framework */; };
-		0897CDF0230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CDF1230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
-		0897CDF2230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D921F9950C003185E9 /* SRGNetworkActivityManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0897CDF3230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030DD21F9A1FB003185E9 /* SRGNetworkActivityManagement+Private.h */; };
-		0897CE12230EFDB400555054 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
-		0897CE13230EFDB500555054 /* SRGNetworkActivityManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030DA21F9950C003185E9 /* SRGNetworkActivityManagement.m */; };
+		0834599D2311FAE800A6C5BA /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0834598F2311F68900A6C5BA /* libextobjc.framework */; };
+		0834599E2311FAE800A6C5BA /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */; };
+		0834599F2311FAE800A6C5BA /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459912311F68900A6C5BA /* SRGLogger.framework */; };
+		083459A02311FCDF00A6C5BA /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
 		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
@@ -100,7 +24,6 @@
 		6F676B0A21F8591B0066DDE8 /* SRGFirstPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */; };
 		6F676B0D21F870650066DDE8 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
 		6F676B1421F890B00066DDE8 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
-		6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
 		6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* RequestTestCase.m */; };
 		6F8030D321F99418003185E9 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8030D421F99418003185E9 /* SRGBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030D221F99418003185E9 /* SRGBaseRequest.m */; };
@@ -123,42 +46,12 @@
 		6FE9DB8B219D5F0200BE1DD6 /* SRGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6FE9DB8F219D5F0200BE1DD6 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
 		6FE9DB95219D5F0200BE1DD6 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
-		6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
-		6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
-		6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
-		6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
-		6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
-		6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
-		6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
 		6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
 		6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0897CC21230C957F00555054 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F8A941A20FF21EB00AA6434 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F926BAE210F406D00D2E3D0;
-			remoteInfo = "SRGNetwork-resources";
-		};
-		0897CC70230C9A7600555054 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F8A941A20FF21EB00AA6434 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0897CC1F230C957F00555054;
-			remoteInfo = "SRGNetwork-tvOS";
-		};
-		0897CC81230C9D5E00555054 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F8A941A20FF21EB00AA6434 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F926BAE210F406D00D2E3D0;
-			remoteInfo = "SRGNetwork-resources";
-		};
 		6F6A09F82101BD11004568BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6F8A941A20FF21EB00AA6434 /* Project object */;
@@ -176,42 +69,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0897CC65230C971100555054 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				0897CC7C230C9B8500555054 /* libextobjc.framework in CopyFiles */,
-				0897CC7D230C9B8A00555054 /* MAKVONotificationCenter.framework in CopyFiles */,
-				0897CC7E230C9B9100555054 /* SRGLogger.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6FE9DB9A219D658600BE1DD6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */,
-				6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */,
-				6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0897CC4D230C957F00555054 /* SRGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SRGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0897CC4F230C96AE00555054 /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/tvOS/libextobjc.framework; sourceTree = "<group>"; };
-		0897CC50230C96AE00555054 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/tvOS/SRGLogger.framework; sourceTree = "<group>"; };
-		0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/tvOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
-		0897CC6E230C971100555054 /* SRGNetwork-tvOS-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SRGNetwork-tvOS-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0897CCAD230C9D5E00555054 /* SRGNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SRGNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0897CCAF230CA40F00555054 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/watchOS/SRGLogger.framework; sourceTree = "<group>"; };
-		0897CCB0230CA40F00555054 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/watchOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
-		0897CCB1230CA40F00555054 /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/watchOS/libextobjc.framework; sourceTree = "<group>"; };
+		0834598A2311EC8700A6C5BA /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		0834598B2311EC9A00A6C5BA /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
+		0834598F2311F68900A6C5BA /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/iOS/libextobjc.framework; sourceTree = "<group>"; };
+		083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
+		083459912311F68900A6C5BA /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
 		6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkParsers.h; sourceTree = "<group>"; };
 		6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkParsers.m; sourceTree = "<group>"; };
 		6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponse_NetworkTestCase.m; sourceTree = "<group>"; };
@@ -225,7 +99,7 @@
 		6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGFirstPageRequest.m; sourceTree = "<group>"; };
 		6F676B0B21F870650066DDE8 /* SRGPage+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGPage+Private.h"; sourceTree = "<group>"; };
 		6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGPageRequest+Subclassing.h"; sourceTree = "<group>"; };
-		6F6A09F22101BD11004568BD /* SRGNetwork-iOS-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SRGNetwork-iOS-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6A09F22101BD11004568BD /* SRGNetwork.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SRGNetwork.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F6A09FF2101BEB7004568BD /* RequestTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestTestCase.m; sourceTree = "<group>"; };
 		6F6A0A002101BEB7004568BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F8030D121F99418003185E9 /* SRGBaseRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGBaseRequest.h; sourceTree = "<group>"; };
@@ -255,9 +129,6 @@
 		6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGRequest.h; sourceTree = "<group>"; };
 		6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequest.m; sourceTree = "<group>"; };
 		6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequestQueue.m; sourceTree = "<group>"; };
-		6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/iOS/libextobjc.framework; sourceTree = "<group>"; };
-		6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
-		6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
 		6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkLogger.h; sourceTree = "<group>"; };
 		6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestQueueTestCase.m; sourceTree = "<group>"; };
 		6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkBaseTestCase.m; sourceTree = "<group>"; };
@@ -265,45 +136,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0897CC2F230C957F00555054 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC52230C96AF00555054 /* libextobjc.framework in Frameworks */,
-				0897CC53230C96AF00555054 /* SRGLogger.framework in Frameworks */,
-				0897CC54230C96AF00555054 /* MAKVONotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC5F230C971100555054 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC73230C9AE800555054 /* libextobjc.framework in Frameworks */,
-				0897CC74230C9AE800555054 /* MAKVONotificationCenter.framework in Frameworks */,
-				0897CC75230C9AE800555054 /* SRGLogger.framework in Frameworks */,
-				0897CC72230C9ADC00555054 /* SRGNetwork.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC8F230C9D5E00555054 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CCB2230CA40F00555054 /* SRGLogger.framework in Frameworks */,
-				0897CCB3230CA40F00555054 /* MAKVONotificationCenter.framework in Frameworks */,
-				0897CCB4230CA40F00555054 /* libextobjc.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6F6A09EF2101BD11004568BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */,
-				6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
-				6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */,
-				6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */,
+				083459A02311FCDF00A6C5BA /* SRGNetwork.framework in Frameworks */,
+				0834599D2311FAE800A6C5BA /* libextobjc.framework in Frameworks */,
+				0834599E2311FAE800A6C5BA /* MAKVONotificationCenter.framework in Frameworks */,
+				0834599F2311FAE800A6C5BA /* SRGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,9 +151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */,
-				6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
-				6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +169,7 @@
 			children = (
 				6F6A09FE2101BEB7004568BD /* Sources */,
 				6F6A0A002101BEB7004568BD /* Info.plist */,
+				0834598B2311EC9A00A6C5BA /* Tests.xcconfig */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -363,11 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */,
-				6F6A09F22101BD11004568BD /* SRGNetwork-iOS-tests.xctest */,
+				6F6A09F22101BD11004568BD /* SRGNetwork.xctest */,
 				6F926BAF210F406D00D2E3D0 /* SRGNetwork.bundle */,
-				0897CC4D230C957F00555054 /* SRGNetwork.framework */,
-				0897CC6E230C971100555054 /* SRGNetwork-tvOS-tests.xctest */,
-				0897CCAD230C9D5E00555054 /* SRGNetwork.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -378,6 +213,7 @@
 				6F8A943A2100566F00AA6434 /* Sources */,
 				6FCBFEEE210B564B006BC355 /* Resources */,
 				6F8A94422100566F00AA6434 /* Info.plist */,
+				0834598A2311EC8700A6C5BA /* Framework.xcconfig */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -438,15 +274,9 @@
 		6FE9DB96219D654D00BE1DD6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0897CCB1230CA40F00555054 /* libextobjc.framework */,
-				0897CCB0230CA40F00555054 /* MAKVONotificationCenter.framework */,
-				0897CCAF230CA40F00555054 /* SRGLogger.framework */,
-				0897CC4F230C96AE00555054 /* libextobjc.framework */,
-				0897CC51230C96AF00555054 /* MAKVONotificationCenter.framework */,
-				0897CC50230C96AE00555054 /* SRGLogger.framework */,
-				6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */,
-				6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */,
-				6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */,
+				0834598F2311F68900A6C5BA /* libextobjc.framework */,
+				083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */,
+				083459912311F68900A6C5BA /* SRGLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -463,56 +293,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0897CC33230C957F00555054 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC34230C957F00555054 /* SRGPageRequest.h in Headers */,
-				0897CC35230C957F00555054 /* NSHTTPURLResponse+SRGNetwork.h in Headers */,
-				0897CC36230C957F00555054 /* SRGNetworkError.h in Headers */,
-				0897CC37230C957F00555054 /* SRGNetwork.h in Headers */,
-				0897CC38230C957F00555054 /* SRGPage+Private.h in Headers */,
-				0897CC39230C957F00555054 /* SRGBaseRequest.h in Headers */,
-				0897CC3C230C957F00555054 /* NSBundle+SRGNetwork.h in Headers */,
-				0897CC3D230C957F00555054 /* SRGNetworkLogger.h in Headers */,
-				0897CDF1230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */,
-				0897CC3E230C957F00555054 /* SRGPageRequest+Subclassing.h in Headers */,
-				0897CC3F230C957F00555054 /* SRGPage.h in Headers */,
-				0897CC40230C957F00555054 /* SRGFirstPageRequest.h in Headers */,
-				0897CC41230C957F00555054 /* SRGBaseRequest+Subclassing.h in Headers */,
-				0897CC42230C957F00555054 /* SRGNetworkParsers.h in Headers */,
-				0897CC43230C957F00555054 /* SRGRequestQueue.h in Headers */,
-				0897CC44230C957F00555054 /* SRGNetworkTypes.h in Headers */,
-				0897CC45230C957F00555054 /* SRGRequest.h in Headers */,
-				0897CDF0230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC93230C9D5E00555054 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC94230C9D5E00555054 /* SRGPageRequest.h in Headers */,
-				0897CC95230C9D5E00555054 /* NSHTTPURLResponse+SRGNetwork.h in Headers */,
-				0897CC96230C9D5E00555054 /* SRGNetworkError.h in Headers */,
-				0897CC97230C9D5E00555054 /* SRGNetwork.h in Headers */,
-				0897CC98230C9D5E00555054 /* SRGPage+Private.h in Headers */,
-				0897CC99230C9D5E00555054 /* SRGBaseRequest.h in Headers */,
-				0897CC9C230C9D5E00555054 /* NSBundle+SRGNetwork.h in Headers */,
-				0897CC9D230C9D5E00555054 /* SRGNetworkLogger.h in Headers */,
-				0897CDF3230EC14E00555054 /* SRGNetworkActivityManagement+Private.h in Headers */,
-				0897CC9E230C9D5E00555054 /* SRGPageRequest+Subclassing.h in Headers */,
-				0897CC9F230C9D5E00555054 /* SRGPage.h in Headers */,
-				0897CCA0230C9D5E00555054 /* SRGFirstPageRequest.h in Headers */,
-				0897CCA1230C9D5E00555054 /* SRGBaseRequest+Subclassing.h in Headers */,
-				0897CCA2230C9D5E00555054 /* SRGNetworkParsers.h in Headers */,
-				0897CCA3230C9D5E00555054 /* SRGRequestQueue.h in Headers */,
-				0897CCA4230C9D5E00555054 /* SRGNetworkTypes.h in Headers */,
-				0897CCA5230C9D5E00555054 /* SRGRequest.h in Headers */,
-				0897CDF2230EC14E00555054 /* SRGNetworkActivityManagement.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6F8A942020FF21EB00AA6434 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -541,66 +321,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0897CC1F230C957F00555054 /* SRGNetwork-tvOS */ = {
+		6F6A09F12101BD11004568BD /* SRGNetwork-tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0897CC48230C957F00555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-tvOS" */;
-			buildPhases = (
-				0897CC22230C957F00555054 /* Sources */,
-				0897CC2F230C957F00555054 /* Frameworks */,
-				0897CC33230C957F00555054 /* Headers */,
-				0897CC46230C957F00555054 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0897CC20230C957F00555054 /* PBXTargetDependency */,
-			);
-			name = "SRGNetwork-tvOS";
-			productName = SRGNetwork;
-			productReference = 0897CC4D230C957F00555054 /* SRGNetwork.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		0897CC55230C971100555054 /* SRGNetwork-tvOS-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0897CC69230C971100555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-tvOS-tests" */;
-			buildPhases = (
-				0897CC58230C971100555054 /* Sources */,
-				0897CC5F230C971100555054 /* Frameworks */,
-				0897CC64230C971100555054 /* Resources */,
-				0897CC65230C971100555054 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0897CC71230C9A7600555054 /* PBXTargetDependency */,
-			);
-			name = "SRGNetwork-tvOS-tests";
-			productName = "SRGNetwork-tests";
-			productReference = 0897CC6E230C971100555054 /* SRGNetwork-tvOS-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		0897CC7F230C9D5E00555054 /* SRGNetwork-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0897CCA8230C9D5E00555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-watchOS" */;
-			buildPhases = (
-				0897CC82230C9D5E00555054 /* Sources */,
-				0897CC8F230C9D5E00555054 /* Frameworks */,
-				0897CC93230C9D5E00555054 /* Headers */,
-				0897CCA6230C9D5E00555054 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0897CC80230C9D5E00555054 /* PBXTargetDependency */,
-			);
-			name = "SRGNetwork-watchOS";
-			productName = SRGNetwork;
-			productReference = 0897CCAD230C9D5E00555054 /* SRGNetwork.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6F6A09F12101BD11004568BD /* SRGNetwork-iOS-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-iOS-tests" */;
+			buildConfigurationList = 6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-tests" */;
 			buildPhases = (
 				6F6A09EE2101BD11004568BD /* Sources */,
 				6F6A09EF2101BD11004568BD /* Frameworks */,
@@ -612,14 +335,14 @@
 			dependencies = (
 				6F6A09F92101BD11004568BD /* PBXTargetDependency */,
 			);
-			name = "SRGNetwork-iOS-tests";
+			name = "SRGNetwork-tests";
 			productName = "SRGNetwork-tests";
-			productReference = 6F6A09F22101BD11004568BD /* SRGNetwork-iOS-tests.xctest */;
+			productReference = 6F6A09F22101BD11004568BD /* SRGNetwork.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6F8A942220FF21EB00AA6434 /* SRGNetwork-iOS */ = {
+		6F8A942220FF21EB00AA6434 /* SRGNetwork */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6F8A942B20FF21EB00AA6434 /* Build configuration list for PBXNativeTarget "SRGNetwork-iOS" */;
+			buildConfigurationList = 6F8A942B20FF21EB00AA6434 /* Build configuration list for PBXNativeTarget "SRGNetwork" */;
 			buildPhases = (
 				6F8A941E20FF21EB00AA6434 /* Sources */,
 				6F8A941F20FF21EB00AA6434 /* Frameworks */,
@@ -631,7 +354,7 @@
 			dependencies = (
 				6F926BB9210F414C00D2E3D0 /* PBXTargetDependency */,
 			);
-			name = "SRGNetwork-iOS";
+			name = SRGNetwork;
 			productName = SRGNetwork;
 			productReference = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */;
 			productType = "com.apple.product-type.framework";
@@ -690,40 +413,14 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6F8A942220FF21EB00AA6434 /* SRGNetwork-iOS */,
+				6F8A942220FF21EB00AA6434 /* SRGNetwork */,
 				6F926BAE210F406D00D2E3D0 /* SRGNetwork-resources */,
-				6F6A09F12101BD11004568BD /* SRGNetwork-iOS-tests */,
-				0897CC1F230C957F00555054 /* SRGNetwork-tvOS */,
-				0897CC55230C971100555054 /* SRGNetwork-tvOS-tests */,
-				0897CC7F230C9D5E00555054 /* SRGNetwork-watchOS */,
+				6F6A09F12101BD11004568BD /* SRGNetwork-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0897CC46230C957F00555054 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC47230C957F00555054 /* SRGNetwork.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC64230C971100555054 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CCA6230C9D5E00555054 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CCA7230C9D5E00555054 /* SRGNetwork.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6F6A09F02101BD11004568BD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -750,56 +447,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0897CC22230C957F00555054 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC23230C957F00555054 /* NSBundle+SRGNetwork.m in Sources */,
-				0897CC24230C957F00555054 /* SRGNetworkError.m in Sources */,
-				0897CC25230C957F00555054 /* SRGFirstPageRequest.m in Sources */,
-				0897CC26230C957F00555054 /* SRGBaseRequest.m in Sources */,
-				0897CC27230C957F00555054 /* SRGNetworkParsers.m in Sources */,
-				0897CC28230C957F00555054 /* NSHTTPURLResponse+SRGNetwork.m in Sources */,
-				0897CC29230C957F00555054 /* SRGNetwork.m in Sources */,
-				0897CC2A230C957F00555054 /* SRGRequestQueue.m in Sources */,
-				0897CC2B230C957F00555054 /* SRGPage.m in Sources */,
-				0897CE12230EFDB400555054 /* SRGNetworkActivityManagement.m in Sources */,
-				0897CC2D230C957F00555054 /* SRGRequest.m in Sources */,
-				0897CC2E230C957F00555054 /* SRGPageRequest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC58230C971100555054 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC59230C971100555054 /* NSHTTPURLResponse_NetworkTestCase.m in Sources */,
-				0897CC5A230C971100555054 /* NetworkBaseTestCase.m in Sources */,
-				0897CC5C230C971100555054 /* PageRequestTestCase.m in Sources */,
-				0897CC5D230C971100555054 /* RequestQueueTestCase.m in Sources */,
-				0897CC5E230C971100555054 /* RequestTestCase.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0897CC82230C9D5E00555054 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0897CC83230C9D5E00555054 /* NSBundle+SRGNetwork.m in Sources */,
-				0897CC84230C9D5E00555054 /* SRGNetworkError.m in Sources */,
-				0897CC85230C9D5E00555054 /* SRGFirstPageRequest.m in Sources */,
-				0897CC86230C9D5E00555054 /* SRGBaseRequest.m in Sources */,
-				0897CC87230C9D5E00555054 /* SRGNetworkParsers.m in Sources */,
-				0897CC88230C9D5E00555054 /* NSHTTPURLResponse+SRGNetwork.m in Sources */,
-				0897CC89230C9D5E00555054 /* SRGNetwork.m in Sources */,
-				0897CC8A230C9D5E00555054 /* SRGRequestQueue.m in Sources */,
-				0897CC8B230C9D5E00555054 /* SRGPage.m in Sources */,
-				0897CE13230EFDB500555054 /* SRGNetworkActivityManagement.m in Sources */,
-				0897CC8D230C9D5E00555054 /* SRGRequest.m in Sources */,
-				0897CC8E230C9D5E00555054 /* SRGPageRequest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6F6A09EE2101BD11004568BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,24 +489,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0897CC20230C957F00555054 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6F926BAE210F406D00D2E3D0 /* SRGNetwork-resources */;
-			targetProxy = 0897CC21230C957F00555054 /* PBXContainerItemProxy */;
-		};
-		0897CC71230C9A7600555054 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0897CC1F230C957F00555054 /* SRGNetwork-tvOS */;
-			targetProxy = 0897CC70230C9A7600555054 /* PBXContainerItemProxy */;
-		};
-		0897CC80230C9D5E00555054 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6F926BAE210F406D00D2E3D0 /* SRGNetwork-resources */;
-			targetProxy = 0897CC81230C9D5E00555054 /* PBXContainerItemProxy */;
-		};
 		6F6A09F92101BD11004568BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6F8A942220FF21EB00AA6434 /* SRGNetwork-iOS */;
+			target = 6F8A942220FF21EB00AA6434 /* SRGNetwork */;
 			targetProxy = 6F6A09F82101BD11004568BD /* PBXContainerItemProxy */;
 		};
 		6F926BB9210F414C00D2E3D0 /* PBXTargetDependency */ = {
@@ -885,332 +517,14 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0897CC49230C957F00555054 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		0897CC4A230C957F00555054 /* Debug-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = "Debug-static";
-		};
-		0897CC4B230C957F00555054 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		0897CC4C230C957F00555054 /* Release-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = "Release-static";
-		};
-		0897CC6A230C971100555054 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Debug;
-		};
-		0897CC6B230C971100555054 /* Debug-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = "Debug-static";
-		};
-		0897CC6C230C971100555054 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Release;
-		};
-		0897CC6D230C971100555054 /* Release-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = "Release-static";
-		};
-		0897CCA9230C9D5E00555054 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		0897CCAA230C9D5E00555054 /* Debug-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = "Debug-static";
-		};
-		0897CCAB230C9D5E00555054 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		0897CCAC230C9D5E00555054 /* Release-static */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_CODE_COVERAGE = NO;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS/Static",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = "Release-static";
-		};
 		6F6A09FB2101BD11004568BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
@@ -1218,18 +532,19 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		6F6A09FC2101BD11004568BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
@@ -1237,9 +552,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1298,14 +612,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 			};
 			name = Debug;
 		};
@@ -1358,19 +669,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
 		6F8A942C20FF21EB00AA6434 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1379,7 +688,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1388,8 +697,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1397,6 +704,7 @@
 		};
 		6F8A942D20FF21EB00AA6434 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1405,7 +713,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1414,8 +722,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1476,19 +782,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 			};
 			name = "Debug-static";
 		};
 		6F926BA6210F402E00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
@@ -1498,8 +802,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}/Static",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1509,8 +813,6 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1518,10 +820,12 @@
 		};
 		6F926BA7210F402E00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
@@ -1529,9 +833,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-static";
 		};
@@ -1584,19 +887,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = "Release-static";
 		};
 		6F926BA9210F403300D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
@@ -1606,8 +907,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}/Static",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1617,8 +918,6 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1626,10 +925,12 @@
 		};
 		6F926BAA210F403300D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/${CARTHAGE_SUBPATH}",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
@@ -1637,21 +938,19 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-static";
 		};
 		6F926BB3210F406D00D2E3D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -1659,13 +958,12 @@
 		};
 		6F926BB4210F406D00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -1673,13 +971,12 @@
 		};
 		6F926BB5210F406D00D2E3D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -1687,13 +984,12 @@
 		};
 		6F926BB6210F406D00D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
-				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -1702,40 +998,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0897CC48230C957F00555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0897CC49230C957F00555054 /* Debug */,
-				0897CC4A230C957F00555054 /* Debug-static */,
-				0897CC4B230C957F00555054 /* Release */,
-				0897CC4C230C957F00555054 /* Release-static */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0897CC69230C971100555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-tvOS-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0897CC6A230C971100555054 /* Debug */,
-				0897CC6B230C971100555054 /* Debug-static */,
-				0897CC6C230C971100555054 /* Release */,
-				0897CC6D230C971100555054 /* Release-static */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0897CCA8230C9D5E00555054 /* Build configuration list for PBXNativeTarget "SRGNetwork-watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0897CCA9230C9D5E00555054 /* Debug */,
-				0897CCAA230C9D5E00555054 /* Debug-static */,
-				0897CCAB230C9D5E00555054 /* Release */,
-				0897CCAC230C9D5E00555054 /* Release-static */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-iOS-tests" */ = {
+		6F6A09FA2101BD11004568BD /* Build configuration list for PBXNativeTarget "SRGNetwork-tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6F6A09FB2101BD11004568BD /* Debug */,
@@ -1757,7 +1020,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6F8A942B20FF21EB00AA6434 /* Build configuration list for PBXNativeTarget "SRGNetwork-iOS" */ = {
+		6F8A942B20FF21EB00AA6434 /* Build configuration list for PBXNativeTarget "SRGNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6F8A942C20FF21EB00AA6434 /* Debug */,

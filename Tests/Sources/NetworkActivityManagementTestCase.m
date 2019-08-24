@@ -6,6 +6,8 @@
 
 #import "NetworkBaseTestCase.h"
 
+#if TARGET_OS_IOS
+
 // For tests, you can use:
 //   - https://httpbin.org for HTTP-related tests.
 //   - https://badssl.com for SSL-related tests.
@@ -160,3 +162,5 @@ static BOOL NetworkActivtiyStatesAreConsistent(NSArray<NSNumber *> *states1, NSA
 }
 
 @end
+
+#endif
