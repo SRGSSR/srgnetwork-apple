@@ -68,18 +68,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		6FE9DB9A219D658600BE1DD6 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		0834598A2311EC8700A6C5BA /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
 		0834598B2311EC9A00A6C5BA /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
@@ -328,7 +316,6 @@
 				6F6A09EE2101BD11004568BD /* Sources */,
 				6F6A09EF2101BD11004568BD /* Frameworks */,
 				6F6A09F02101BD11004568BD /* Resources */,
-				6FE9DB9A219D658600BE1DD6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
