@@ -35,7 +35,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F6A09F12101BD11004568BD"
-               BuildableName = "SRGNetwork.xctest"
+               BuildableName = "SRGNetwork-tests.xctest"
                BlueprintName = "SRGNetwork-tests"
                ReferencedContainer = "container:SRGNetwork.xcodeproj">
             </BuildableReference>
