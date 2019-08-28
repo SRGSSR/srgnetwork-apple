@@ -820,6 +820,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -927,6 +928,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
