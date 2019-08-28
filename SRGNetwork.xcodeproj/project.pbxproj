@@ -46,6 +46,9 @@
 		6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
 		6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
 		6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
+		6FEDF72A231644DF00BEE8E1 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0834598F2311F68900A6C5BA /* libextobjc.framework */; };
+		6FEDF72B231644F300BEE8E1 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */; };
+		6FEDF72C231644FE00BEE8E1 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459912311F68900A6C5BA /* SRGLogger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +136,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FEDF72C231644FE00BEE8E1 /* SRGLogger.framework in Frameworks */,
+				6FEDF72B231644F300BEE8E1 /* MAKVONotificationCenter.framework in Frameworks */,
+				6FEDF72A231644DF00BEE8E1 /* libextobjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
