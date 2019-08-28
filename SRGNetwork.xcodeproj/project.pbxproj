@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083459A02311FCDF00A6C5BA /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
 		6F261DB421F8E4F2009C9F3A /* SRGNetworkParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F261DB521F8E4F2009C9F3A /* SRGNetworkParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */; };
 		6F26A7602153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */; };
@@ -20,7 +21,6 @@
 		6F676B0A21F8591B0066DDE8 /* SRGFirstPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F676B0821F8591B0066DDE8 /* SRGFirstPageRequest.m */; };
 		6F676B0D21F870650066DDE8 /* SRGPage+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B0B21F870650066DDE8 /* SRGPage+Private.h */; };
 		6F676B1421F890B00066DDE8 /* SRGPageRequest+Subclassing.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F676B1321F890B00066DDE8 /* SRGPageRequest+Subclassing.h */; };
-		6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8A942320FF21EB00AA6434 /* SRGNetwork.framework */; };
 		6F6A0A012101BEB7004568BD /* RequestTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6A09FF2101BEB7004568BD /* RequestTestCase.m */; };
 		6F8030D321F99418003185E9 /* SRGBaseRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8030D121F99418003185E9 /* SRGBaseRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F8030D421F99418003185E9 /* SRGBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8030D221F99418003185E9 /* SRGBaseRequest.m */; };
@@ -43,18 +43,12 @@
 		6FE9DB8B219D5F0200BE1DD6 /* SRGRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6FE9DB8F219D5F0200BE1DD6 /* SRGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */; };
 		6FE9DB95219D5F0200BE1DD6 /* SRGRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */; };
-		6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
-		6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; };
-		6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
-		6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; };
-		6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
-		6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; };
-		6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FE9DBA5219D7C1700BE1DD6 /* SRGNetworkLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */; };
 		6FE9DBA921A2CE6D00BE1DD6 /* RequestQueueTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */; };
 		6FE9DBAD21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */; };
+		6FEDF72A231644DF00BEE8E1 /* libextobjc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0834598F2311F68900A6C5BA /* libextobjc.framework */; };
+		6FEDF72B231644F300BEE8E1 /* MAKVONotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */; };
+		6FEDF72C231644FE00BEE8E1 /* SRGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083459912311F68900A6C5BA /* SRGLogger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,22 +68,12 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		6FE9DB9A219D658600BE1DD6 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6FE9DBA3219D7AFB00BE1DD6 /* SRGLogger.framework in CopyFiles */,
-				6FE9DB9F219D79A500BE1DD6 /* MAKVONotificationCenter.framework in CopyFiles */,
-				6FE9DB9B219D659000BE1DD6 /* libextobjc.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		0834598A2311EC8700A6C5BA /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		0834598B2311EC9A00A6C5BA /* Tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
+		0834598F2311F68900A6C5BA /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/iOS/libextobjc.framework; sourceTree = "<group>"; };
+		083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
+		083459912311F68900A6C5BA /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
 		6F261DB221F8E4F2009C9F3A /* SRGNetworkParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRGNetworkParsers.h; sourceTree = "<group>"; };
 		6F261DB321F8E4F2009C9F3A /* SRGNetworkParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRGNetworkParsers.m; sourceTree = "<group>"; };
 		6F26A75F2153BD4D005B775C /* NSHTTPURLResponse_NetworkTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponse_NetworkTestCase.m; sourceTree = "<group>"; };
@@ -133,9 +117,6 @@
 		6FE9DB7D219D5F0100BE1DD6 /* SRGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGRequest.h; sourceTree = "<group>"; };
 		6FE9DB81219D5F0200BE1DD6 /* SRGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequest.m; sourceTree = "<group>"; };
 		6FE9DB87219D5F0200BE1DD6 /* SRGRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGRequestQueue.m; sourceTree = "<group>"; };
-		6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libextobjc.framework; path = Carthage/Build/iOS/libextobjc.framework; sourceTree = "<group>"; };
-		6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAKVONotificationCenter.framework; path = Carthage/Build/iOS/MAKVONotificationCenter.framework; sourceTree = "<group>"; };
-		6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SRGLogger.framework; path = Carthage/Build/iOS/SRGLogger.framework; sourceTree = "<group>"; };
 		6FE9DBA4219D7C1700BE1DD6 /* SRGNetworkLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGNetworkLogger.h; sourceTree = "<group>"; };
 		6FE9DBA821A2CE6D00BE1DD6 /* RequestQueueTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestQueueTestCase.m; sourceTree = "<group>"; };
 		6FE9DBAB21A2CEAD00BE1DD6 /* NetworkBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkBaseTestCase.m; sourceTree = "<group>"; };
@@ -147,10 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE9DBA2219D7AF500BE1DD6 /* SRGLogger.framework in Frameworks */,
-				6FE9DB9E219D799D00BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
-				6FE9DB99219D656D00BE1DD6 /* libextobjc.framework in Frameworks */,
-				6F6A09F72101BD11004568BD /* SRGNetwork.framework in Frameworks */,
+				083459A02311FCDF00A6C5BA /* SRGNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,9 +136,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE9DBA1219D7AE200BE1DD6 /* SRGLogger.framework in Frameworks */,
-				6FE9DB9D219D798400BE1DD6 /* MAKVONotificationCenter.framework in Frameworks */,
-				6FE9DB98219D654D00BE1DD6 /* libextobjc.framework in Frameworks */,
+				6FEDF72C231644FE00BEE8E1 /* SRGLogger.framework in Frameworks */,
+				6FEDF72B231644F300BEE8E1 /* MAKVONotificationCenter.framework in Frameworks */,
+				6FEDF72A231644DF00BEE8E1 /* libextobjc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +157,7 @@
 			children = (
 				6F6A09FE2101BEB7004568BD /* Sources */,
 				6F6A0A002101BEB7004568BD /* Info.plist */,
+				0834598B2311EC9A00A6C5BA /* Tests.xcconfig */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -222,6 +201,7 @@
 				6F8A943A2100566F00AA6434 /* Sources */,
 				6FCBFEEE210B564B006BC355 /* Resources */,
 				6F8A94422100566F00AA6434 /* Info.plist */,
+				0834598A2311EC8700A6C5BA /* Framework.xcconfig */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -282,9 +262,9 @@
 		6FE9DB96219D654D00BE1DD6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FE9DBA0219D7AE200BE1DD6 /* SRGLogger.framework */,
-				6FE9DB9C219D798400BE1DD6 /* MAKVONotificationCenter.framework */,
-				6FE9DB97219D654D00BE1DD6 /* libextobjc.framework */,
+				0834598F2311F68900A6C5BA /* libextobjc.framework */,
+				083459902311F68900A6C5BA /* MAKVONotificationCenter.framework */,
+				083459912311F68900A6C5BA /* SRGLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -336,7 +316,6 @@
 				6F6A09EE2101BD11004568BD /* Sources */,
 				6F6A09EF2101BD11004568BD /* Frameworks */,
 				6F6A09F02101BD11004568BD /* Resources */,
-				6FE9DB9A219D658600BE1DD6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -527,39 +506,39 @@
 /* Begin XCBuildConfiguration section */
 		6F6A09FB2101BD11004568BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		6F6A09FC2101BD11004568BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -622,8 +601,10 @@
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -679,14 +660,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
 		6F8A942C20FF21EB00AA6434 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -695,7 +679,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -704,8 +688,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -713,6 +695,7 @@
 		};
 		6F8A942D20FF21EB00AA6434 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -721,7 +704,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -730,8 +713,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -796,13 +777,16 @@
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = "Debug-static";
 		};
 		6F926BA6210F402E00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
@@ -812,8 +796,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -823,8 +807,6 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -832,20 +814,21 @@
 		};
 		6F926BA7210F402E00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-static";
 		};
@@ -901,14 +884,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MARKETING_VERSION = 1.0.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.${TARGET_NAME}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = "Release-static";
 		};
 		6F926BA9210F403300D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_CODE_COVERAGE = NO;
@@ -918,8 +904,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -929,8 +915,6 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.SRGNetwork;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -938,31 +922,32 @@
 		};
 		6F926BAA210F403300D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598B2311EC9A00A6C5BA /* Tests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)",
+					"$(PROJECT_DIR)/Carthage/Build/$(CARTHAGE_SUBPATH)/Static",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-static";
 		};
 		6F926BB3210F406D00D2E3D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -971,12 +956,12 @@
 		};
 		6F926BB4210F406D00D2E3D0 /* Debug-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -985,12 +970,12 @@
 		};
 		6F926BB5210F406D00D2E3D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -999,12 +984,12 @@
 		};
 		6F926BB6210F406D00D2E3D0 /* Release-static */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0834598A2311EC8700A6C5BA /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Framework/Resources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.srgssr.SRGNetwork-resources";
 				PRODUCT_NAME = SRGNetwork;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
