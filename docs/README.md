@@ -1,6 +1,6 @@
 [![SRG Network logo](README-images/logo.png)](https://github.com/SRGSSR/srgnetwork-ios)
 
-[![GitHub releases](https://img.shields.io/github/v/release/SRGSSR/srgnetwork-ios)](https://github.com/SRGSSR/srgnetwork-ios/releases) [![platform](https://img.shields.io/badge/platfom-ios%20%7C%20tvos%20%7C%20watchos-blue)](https://github.com/SRGSSR/srgnetwork-ios) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![GitHub license](https://img.shields.io/github/license/SRGSSR/srgnetwork-ios)](https://github.com/SRGSSR/srgnetwork-ios/blob/master/LICENSE) 
+[![GitHub releases](https://img.shields.io/github/v/release/SRGSSR/srgnetwork-ios)](https://github.com/SRGSSR/srgnetwork-ios/releases) [![platform](https://img.shields.io/badge/platfom-ios%20%7C%20tvos%20%7C%20watchos-blue)](https://github.com/SRGSSR/srgnetwork-ios) [![Build Status](https://travis-ci.org/SRGSSR/srgnetwork-ios.svg?branch=master)](https://travis-ci.org/SRGSSR/srgnetwork-ios/branches) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![GitHub license](https://img.shields.io/github/license/SRGSSR/srgnetwork-ios)](https://github.com/SRGSSR/srgnetwork-ios/blob/master/LICENSE)
 
 ## About
 
