@@ -1,5 +1,9 @@
 language: objective-c
 osx_image: xcode10.3
+cache:
+  bundler: true
+  directories:
+    - Carthage
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
