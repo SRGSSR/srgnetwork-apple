@@ -416,12 +416,12 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    [[[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(data);
         XCTAssertNotNil(response);
         XCTAssertNil(error);
         [expectation fulfill];
-    }] copy] resume];
+    }].copy resume];
     
     [self waitForExpectationsWithTimeout:10. handler:nil];
 }

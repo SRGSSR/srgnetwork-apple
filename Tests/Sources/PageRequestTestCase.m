@@ -33,7 +33,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -68,7 +68,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -91,7 +91,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -315,7 +315,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
@@ -326,7 +326,7 @@
         else {
             XCTFail(@"Only first two pages are expected");
         }
-    }] requestWithPageSize:2] copy];
+    }] requestWithPageSize:2].copy;
     [request resume];
     
     [self waitForExpectationsWithTimeout:30. handler:nil];

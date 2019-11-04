@@ -72,7 +72,7 @@ static NSMapTable<SRGRequestQueue *, NSHashTable<SRGBaseRequest *> *> *s_relatio
 
 - (NSArray<SRGBaseRequest *> *)requests
 {
-    return [[s_relationshipTable objectForKey:self] copy];
+    return [s_relationshipTable objectForKey:self].copy;
 }
 
 #pragma mark Options
