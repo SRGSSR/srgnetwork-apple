@@ -326,7 +326,8 @@
         else {
             XCTFail(@"Only first two pages are expected");
         }
-    }] requestWithPageSize:2].copy;
+    }] requestWithPageSize:2];
+    request = request.copy;
     [request resume];
     
     [self waitForExpectationsWithTimeout:30. handler:nil];
