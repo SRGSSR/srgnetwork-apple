@@ -243,7 +243,7 @@
     // Resumed requests are self-retained during their lifetime
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"Request finished"];
     
-    __block SRGRequest *request2;
+    __block SRGRequest *request2 = nil;
     @autoreleasepool {
         request2 = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             // Release the local strong reference
@@ -265,7 +265,7 @@
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
-    __block SRGRequest *request;
+    __block SRGRequest *request = nil;
     @autoreleasepool {
         request = [[SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             // Release the local strong reference
@@ -287,7 +287,8 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
     NSURL *URL = [NSURL URLWithString:@"https://httpbin.org/bytes/100"];
-    __block SRGRequest *request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGRequest *request = nil;
+    request = [SRGRequest dataRequestWithURLRequest:[NSURLRequest requestWithURL:URL] session:NSURLSession.sharedSession completionBlock:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // The request is considered running until after the completion block has been executed
         XCTAssertTrue(request.running);
         

@@ -30,7 +30,8 @@
     
     XCTestExpectation *requestCompletionExpectation = [self expectationWithDescription:@"Request completed"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
@@ -123,7 +124,8 @@
     XCTestExpectation *request1CompletionExpectation = [self expectationWithDescription:@"Request 1 completed"];
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
@@ -244,7 +246,8 @@
     
     XCTestExpectation *requestsFinishedExpectation = [self expectationWithDescription:@"Requests finished"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
@@ -287,7 +290,8 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests finished"];
     
     NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.anapioficeandfire.com/api/characters"]];
-    __block SRGFirstPageRequest *request1 = [SRGFirstPageRequest JSONArrayRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+    __block SRGFirstPageRequest *request1 = nil;
+    request1 = [SRGFirstPageRequest JSONArrayRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
         return [NSURLRequest requestWithURL:URLComponents.URL];
@@ -321,7 +325,8 @@
     
     XCTestExpectation *requestCompletionExpectation = [self expectationWithDescription:@"Request completed"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         
         if (! finished) {
@@ -357,7 +362,8 @@
     XCTestExpectation *request1CompletionExpectation = [self expectationWithDescription:@"Request 1 completed"];
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         
         if (! finished) {
@@ -407,7 +413,8 @@
     XCTestExpectation *request1CompletionExpectation = [self expectationWithDescription:@"Request 1 completed"];
     XCTestExpectation *request2CompletionExpectation = [self expectationWithDescription:@"Request 2 completed"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
@@ -457,7 +464,8 @@
     XCTestExpectation *queueStartedExpectation = [self expectationWithDescription:@"Queue started"];
     XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         XCTAssertTrue(NSThread.isMainThread);
         XCTAssertNil(error);
         
@@ -601,7 +609,8 @@
     XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
     XCTestExpectation *dataRequestFinishedExpectation = [self expectationWithDescription:@"Data request finished"];
     
-    __block SRGRequestQueue *requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         if (finished) {
             XCTAssertNotNil(error);
             [queueFinishedExpectation fulfill];
@@ -636,7 +645,8 @@
     XCTestExpectation *queueFinishedExpectation = [self expectationWithDescription:@"Queue finished"];
     XCTestExpectation *notFoundRequestFinishedExpectation = [self expectationWithDescription:@"404 request finished"];
     
-    __block SRGRequestQueue *requestQueue = [[[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+    __block SRGRequestQueue *requestQueue = nil;
+    requestQueue = [[[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
         if (finished) {
             XCTAssertNotNil(error);
             [queueFinishedExpectation fulfill];
