@@ -107,7 +107,8 @@ Once an `SRGFirstPageRequest` has been successfully executed, the paginator (if 
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-__block SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+__block SRGFirstPageRequest *firstRequest = nil;
+firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
     // See above
 } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
     // See above
