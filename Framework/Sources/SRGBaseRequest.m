@@ -8,8 +8,8 @@
 
 #import "NSBundle+SRGNetwork.h"
 #import "NSHTTPURLResponse+SRGNetwork.h"
-#import "SRGNetworkActivityManagement+Private.h"
 #import "SRGBaseRequest+Subclassing.h"
+#import "SRGNetworkActivityManagement+Private.h"
 #import "SRGNetworkError.h"
 
 @interface SRGBaseRequest ()
@@ -72,12 +72,14 @@
     if (running != _running) {
         _running = running;
         
+#if TARGET_OS_IOS
         if (running) {
             [SRGNetworkActivityManagement increaseNumberOfRunningRequests];
         }
         else {
             [SRGNetworkActivityManagement decreaseNumberOfRunningRequests];
         }
+#endif
     }
 }
 
@@ -85,7 +87,7 @@
 
 - (SRGBaseRequest *)requestWithOptions:(SRGRequestOptions)options
 {
-    SRGBaseRequest *request = [self copy];
+    SRGBaseRequest *request = self.copy;
     request.options = options;
     return request;
 }
@@ -125,12 +127,12 @@
             }
             else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorServerCertificateUntrusted) {
                 if ((self.options & SRGRequestOptionFriendlyWiFiMessagesDisabled) == 0) {
-                    NSMutableDictionary *userInfo = [error.userInfo mutableCopy];
+                    NSMutableDictionary *userInfo = error.userInfo.mutableCopy;
                     userInfo[NSLocalizedDescriptionKey] = SRGNetworkLocalizedString(@"You are likely connected to a public WiFi network with no Internet access", @"The error message when request a media or a media list on a public network with no Internet access (e.g. SBB)");
                     
                     NSError *publicWiFiError = [NSError errorWithDomain:error.domain
                                                                    code:error.code
-                                                               userInfo:[userInfo copy]];
+                                                               userInfo:userInfo.copy];
                     completionBlock(nil, response, publicWiFiError);
                     return;
                 }

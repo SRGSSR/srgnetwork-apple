@@ -33,7 +33,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -68,7 +68,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"limit" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -91,7 +91,7 @@
         if (size != SRGPageUnspecifiedSize) {
             [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
         }
-        URLComponents.queryItems = [queryItems copy];
+        URLComponents.queryItems = queryItems.copy;
         
         return [NSURLRequest requestWithURL:URLComponents.URL];
     } completionBlock:completionBlock];
@@ -162,7 +162,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Request finished"];
     
-    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertEqual(page.number, 0);
         XCTAssertEqual(page.size, 5);
         
@@ -185,7 +186,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self integrationLayerV1LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self integrationLayerV1LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
@@ -206,7 +208,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
@@ -227,7 +230,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self hummingbirdV4SportNewsFeedWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self hummingbirdV4SportNewsFeedWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
@@ -248,7 +252,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertEqual(JSONArray.count, 2);
         
         if (page.number == 0 && nextPage) {
@@ -291,7 +296,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self anAPIOfIceAndFireCharactersRandomAccessWithCompletionBlock:^(NSArray * _Nullable JSONArray, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         XCTAssertNotNil(JSONArray);
         XCTAssertNil(error);
         
@@ -315,7 +321,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             [[request requestWithPage:nextPage] resume];
         }
@@ -326,7 +333,7 @@
         else {
             XCTFail(@"Only first two pages are expected");
         }
-    }] requestWithPageSize:2] copy];
+    }] requestWithPageSize:2].copy;
     [request resume];
     
     [self waitForExpectationsWithTimeout:30. handler:nil];
@@ -350,7 +357,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
-    __block SRGFirstPageRequest *request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    __block SRGFirstPageRequest *request = nil;
+    request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             SRGPageRequest *nextRequest = [request requestWithPage:nextPage];
             XCTAssertEqual(nextRequest.options, SRGRequestOptionCancellationErrorsEnabled);

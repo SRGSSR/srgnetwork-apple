@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Automatic network activity management for requests (opt-in).
  */
+__TVOS_PROHIBITED __WATCHOS_PROHIBITED
 @interface SRGNetworkActivityManagement : NSObject
 
 /**

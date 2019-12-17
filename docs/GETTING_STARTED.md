@@ -107,7 +107,8 @@ Once an `SRGFirstPageRequest` has been successfully executed, the paginator (if 
 
 ```objective-c
 NSURLRequest *URLRequest = ...;
-__block SRGFirstPageRequest *firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
+__block SRGFirstPageRequest *firstRequest = nil;
+firstRequest = [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
     // See above
 } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
     // See above
@@ -368,7 +369,7 @@ This idea can be extended to larger subsystems, as queues can be passed around y
 
 For example, you could have a view controller manage a queue, provide it to table view cells it contains when they appear, so that they can themselves add requests to it. In this example, queue management and lifecycle remains at the view controller level (which can for example properly display a loading indicator when data is still being retrieved), while requests are added in a decentralized way.
 
-## Network activity management
+## Network activity management (iOS)
 
 SRG Network optionally provides a way to automatically manage your device network activity indicator depending on whether requests are running or not. Call `+[SRGNetworkActivityManagement enable]` early in your application lifecycle to enable this feature.
 
