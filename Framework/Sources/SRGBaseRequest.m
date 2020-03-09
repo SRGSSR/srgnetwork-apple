@@ -62,6 +62,7 @@
 
 - (void)dealloc
 {
+    self.running = NO;
     [self.sessionTask cancel];
 }
 
