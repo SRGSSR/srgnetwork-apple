@@ -80,7 +80,7 @@ Pagination is a way to retrieve results in pages of constrained size, e.g. 20 it
 * A sizer, which provides the recipe to turn the vanilla `NSURLRequest` as parameter to constraint it to a number of items per page.
 * A paginator, which provides the recipe to find the next page of content. How the location of a next page of content is received depends on the kind of service you are getting data from, usually:
     * Some services return the next link URL [in response headers](https://tools.ietf.org/html/rfc5988).
-    * Other services return the next link in somewhere the response body.
+    * Other services return the next link somewhere in the response body.
     * Other services offer random access to pages of content, which means the client can build the URL of a page directly, knowing its size and its number. Though a service might provide random access to pages of content, SRG Network pagination always requires you to start with the first page of content and iterate as required, though.
 
 Here is an example of a service for which pagination is specified with a `pageSize` parameter, while the next page of content is received in an optional `next` field found in JSON responses:
