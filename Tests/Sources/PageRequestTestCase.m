@@ -18,27 +18,6 @@
 
 #pragma mark Service examples
 
-- (SRGFirstPageRequest *)integrationLayerV1LatestVideosWithCompletionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
-{
-    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://il.srgssr.ch/integrationlayer/1.0/ue/rts/video/latestEpisodes.json"]];
-    return [SRGFirstPageRequest JSONDictionaryRequestWithURLRequest:URLRequest session:NSURLSession.sharedSession sizer:^NSURLRequest *(NSURLRequest * _Nonnull URLRequest, NSUInteger size) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue] ];
-        return [NSURLRequest requestWithURL:URLComponents.URL];
-    } paginator:^NSURLRequest * _Nullable(NSURLRequest * _Nonnull URLRequest, NSDictionary * _Nullable JSONDictionary, NSURLResponse * _Nullable response, NSUInteger size, NSUInteger number) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URLRequest.URL resolvingAgainstBaseURL:NO];
-        
-        NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray array];
-        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageNumber" value:@(number + 1).stringValue]];
-        if (size != SRGPageUnspecifiedSize) {
-            [queryItems addObject:[NSURLQueryItem queryItemWithName:@"pageSize" value:@(size).stringValue]];
-        }
-        URLComponents.queryItems = queryItems.copy;
-        
-        return [NSURLRequest requestWithURL:URLComponents.URL];
-    } completionBlock:completionBlock];
-}
-
 - (SRGFirstPageRequest *)integrationLayerV2LatestVideosWithCompletionBlock:(SRGJSONDictionaryPageCompletionBlock)completionBlock
 {
     NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://il.srgssr.ch/integrationlayer/2.0/rts/mediaList/video/latestEpisodes.json"]];
