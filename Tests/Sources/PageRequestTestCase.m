@@ -161,28 +161,6 @@
     [self waitForExpectationsWithTimeout:30. handler:nil];
 }
 
-- (void)testIntegrationLayerV1Pagination
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
-    
-    __block SRGFirstPageRequest *request = nil;
-    request = [[self integrationLayerV1LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (page.number == 0 && nextPage) {
-            [[request requestWithPage:nextPage] resume];
-        }
-        else if (page.number == 1) {
-            [expectation fulfill];
-            request = nil;
-        }
-        else {
-            XCTFail(@"Only first two pages are expected");
-        }
-    }] requestWithPageSize:2];
-    [request resume];
-    
-    [self waitForExpectationsWithTimeout:30. handler:nil];
-}
-
 - (void)testIntegrationLayerV2Pagination
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
