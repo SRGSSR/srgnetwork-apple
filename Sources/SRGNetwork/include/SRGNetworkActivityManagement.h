@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Automatic network activity management for requests (opt-in).
  */
-__TVOS_PROHIBITED __WATCHOS_PROHIBITED
 @interface SRGNetworkActivityManagement : NSObject
 
 /**
@@ -23,7 +22,7 @@ __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  *
  *  @discussion Any handler previously registered with `+enableWithHandler:` is replaced.
  */
-+ (void)enable NS_EXTENSION_UNAVAILABLE_IOS("Network activity indicator management is not available for extensions");
++ (void)enable API_UNAVAILABLE(tvos) NS_EXTENSION_UNAVAILABLE_IOS("Network activity indicator management is not available for extensions");
 
 /**
  *  Enable automatic network activity management with a custom handler. The handler is called when network activity
@@ -45,6 +44,16 @@ __TVOS_PROHIBITED __WATCHOS_PROHIBITED
  *              activity indicator management, the indicator is hidden as well.
  */
 + (void)disable;
+
+/**
+ *  Increase the number of running requests.
+ */
++ (void)increaseNumberOfRunningRequests;
+
+/**
+ *  Decrease the number of running requests.
+ */
++ (void)decreaseNumberOfRunningRequests;
 
 @end
 

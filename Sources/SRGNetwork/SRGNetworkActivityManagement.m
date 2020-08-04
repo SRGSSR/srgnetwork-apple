@@ -8,8 +8,6 @@
 
 @import UIKit;
 
-#if TARGET_OS_IOS
-
 static NSInteger s_numberOfRunningRequests = 0;
 static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
@@ -17,12 +15,16 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 
 #pragma mark Class methods
 
+#if TARGET_OS_IOS
+
 + (void)enable
 {
     [self enableWithHandler:^(BOOL active) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = active;
     }];
 }
+
+#endif
 
 + (void)enableWithHandler:(void (^)(BOOL))handler
 {
@@ -71,5 +73,3 @@ static void (^s_networkActivityManagementHandler)(BOOL) = nil;
 }
 
 @end
-
-#endif
