@@ -369,7 +369,7 @@ This idea can be extended to larger subsystems, as queues can be passed around y
 
 For example, you could have a view controller manage a queue, provide it to table view cells it contains when they appear, so that they can themselves add requests to it. In this example, queue management and lifecycle remains at the view controller level (which can for example properly display a loading indicator when data is still being retrieved), while requests are added in a decentralized way.
 
-## Network activity management (iOS)
+## Network activity management
 
 SRG Network optionally provides a way to automatically manage your device network activity indicator depending on whether requests are running or not. Call `+[SRGNetworkActivityManagement enable]` early in your application lifecycle to enable this feature.
 
