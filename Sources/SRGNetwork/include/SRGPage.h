@@ -32,10 +32,4 @@ static const NSUInteger SRGPageUnspecifiedSize = 0;
 
 @end
 
-@interface SRGPage (Unavailable)
-
-- (instancetype)init NS_UNAVAILABLE;
-
-@end
-
 NS_ASSUME_NONNULL_END
