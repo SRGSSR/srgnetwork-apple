@@ -315,7 +315,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Requests succeeded"];
     
     __block SRGFirstPageRequest *request = nil;
-    request = [[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    request = [[[self integrationLayerV2LatestVideosWithCompletionBlock:^(NSDictionary * _Nullable JSONDictionary, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (page.number == 0 && nextPage) {
             SRGPageRequest *nextRequest = [request requestWithPage:nextPage];
             XCTAssertEqual(nextRequest.options, SRGRequestOptionCancellationErrorsEnabled);
@@ -328,7 +328,7 @@
         else {
             XCTFail(@"Only first two pages are expected");
         }
-    }] requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
+    }] requestWithPageSize:2] requestWithOptions:SRGRequestOptionCancellationErrorsEnabled];
     [request resume];
     
     XCTAssertEqual(request.options, SRGRequestOptionCancellationErrorsEnabled);
